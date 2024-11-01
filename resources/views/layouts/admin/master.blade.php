@@ -37,7 +37,10 @@
 </head>
 
 <body id="page-top">
-    @yield('content')
+    <div id="wrapper">
+        @include('layouts.admin.sidebar')
+        @yield('content')
+    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('/') }}vendor/jquery/jquery.min.js"></script>

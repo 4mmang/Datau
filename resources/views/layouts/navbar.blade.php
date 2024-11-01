@@ -7,12 +7,13 @@
             <ul>
                 {{-- <li><input type="text" class="form-control ms-2 mr-2" name="" id=""></li> --}}
                 <li><a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">Beranda</a></li>
-                <li><a class="nav-link {{ Request::is('datasets') ? 'active' : '' }}" href="{{ url('datasets') }}">Datasets</a></li>
-                <li class="dropdown"><a href="#"><span>Kontribusi Dataset</span> <i
+                {{-- <li><a class="nav-link {{ Request::is('datasets') ? 'active' : '' }}" href="{{ url('datasets') }}">Datasets</a></li> --}}
+                <li class="dropdown"><a href="#"><span>Menu Utama</span> <i
                             class="bi bi-chevron-down"></i></a>
                     <ul>
+                        <li><a href="{{ url('datasets') }}">Temukan Dataset</a></li>
                         <li><a href="{{ url('donation') }}">Sumbang Dataset</a></li>
-                        <li><a href="{{ url('my/dataset') }}">Manajemen Dataset Saya</a></li>
+                        <li><a href="{{ url('my/dataset') }}">Dataset Saya</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="{{ url('about') }}">Tentang Kami</a></li>

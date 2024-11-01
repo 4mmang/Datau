@@ -16,7 +16,7 @@
                     <h4><i class="far fa-link"></i> Tautan Berguna</h4>
                     <ul>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{ url('/') }}">Beranda</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{{ url('datasets') }}">Datasets</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ url('datasets') }}">Temukan Dataset</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{ url('donation') }}">Sumbang Dataset</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{ url('about') }}">Tentang Kami</a></li>
                     </ul>
