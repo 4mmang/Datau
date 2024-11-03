@@ -17,7 +17,7 @@ class LoginGithubController extends Controller
     {
         try {
             $githubUser = Socialite::driver('github')->user();
-            $user = User::where('github_id', $githubUser->getId())->first();
+            $user = User::where('github_id', $githubUser->getId())->orWhere('email', $githubUser->getEmail())->first();
             if (!$user) {
                 $newUser = new User();
                 $newUser->full_name = $githubUser->getName();
@@ -33,11 +33,10 @@ class LoginGithubController extends Controller
                 return redirect()->intended('/');
             }
         } catch (\Throwable $th) {
-            // echo $th->getMessage();
             return redirect()
                 ->route('login')
                 ->withErrors([
-                    'message' => $th->getMessage(),
+                    'message' => 'Terjadi kesalahan, silahkan coba lagi!',
                 ]);
         }
     }
