@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ManageDatasetsController;
 use App\Http\Controllers\Admin\UserController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\LoginGithubController;
 use App\Http\Controllers\LoginGoogleController;
 use App\Http\Controllers\MyDatasetController;
 use App\Http\Controllers\RegistrationController;
+use App\Models\Article;
 use App\Models\Dataset;
 use App\Models\Download;
 use App\Models\SubjectArea;
@@ -26,48 +28,39 @@ Route::get('/', function () {
     foreach ($subjectAreas as $subjectArea) {
         $datasetCount = Dataset::where('id_subject_area', $subjectArea->id)->count();
         array_push($data, $datasetCount);
+    } 
+
+    $datasets = Dataset::where('status', 'valid')->get();
+    $countDownloads = [];
+    foreach ($datasets as $dataset) {
+        $downloads = Download::where('id_dataset', $dataset->id)->get();
+        foreach ($downloads as $download) {
+            $countDownloads[] = $dataset->id;
+        }
     }
-    // $data = [12, 19, 3, 5, 2, 3, 10, 12, 33, 5, 2];
-    // $biology = Dataset::where('', 'valid')->get();
-    // $countDownloads = [];
-    // foreach ($datasets as $dataset) {
-    //     $downloads = Download::where('id_dataset', $dataset->id)->get();
-    //     foreach ($downloads as $download) {
-    //         $countDownloads[] = $dataset->id;
-    //     }
-    // }
 
-    // // $count = max(array_count_values($countDownloads));
-
-    // $dataset = Dataset::where('status', 'valid')->latest()->first();
-
-    // $newDataset = true;
-    // if (empty($dataset)) {
-    //     $newDataset = false;
-    // }
+    $count = 0;
+    $popularDataset = null;
 
     // // Check if $countDownloads is not empty before using max
-    // if (!empty($countDownloads)) {
-    //     $count = max(array_count_values($countDownloads));
+    if (!empty($countDownloads)) {
+        $count = max(array_count_values($countDownloads));
 
-    //     // Menghitung berapa kali setiap nilai muncul dalam array
-    //     $counts = array_count_values($countDownloads);
+        // Menghitung berapa kali setiap nilai muncul dalam array
+        $counts = array_count_values($countDownloads);
 
-    //     // Menentukan nilai yang paling banyak muncul
-    //     $maxCount = max($counts);
+        // Menentukan nilai yang paling banyak muncul
+        $maxCount = max($counts);
 
-    //     // Mendapatkan nilai yang paling banyak muncul
-    //     $mostCommonValue = array_search($maxCount, $counts);
+        // Mendapatkan nilai yang paling banyak muncul
+        $mostCommonValue = array_search($maxCount, $counts);
 
-    //     $popularDataset = Dataset::findOrFail($mostCommonValue);
-    // } else {
-    //     // Handle the case when $countDownloads is empty
-    //     $count = 0;
-    //     $popularDataset = null;
-    // }
+        $popularDataset = Dataset::findOrFail($mostCommonValue);
+    }
 
+    $newArticles = Article::latest()->take(6)->get();
     // return view('welcome', compact(['dataset', 'countDownloads', 'popularDataset', 'newDataset']));
-    return view('welcome', compact(['subjectAreas', 'data']));
+    return view('welcome', compact(['subjectAreas', 'data', 'count', 'popularDataset', 'newArticles']));
 });
 
 Route::get('/email/verify', function () {
@@ -137,6 +130,8 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
 
     Route::get('admin/manage/users', [UserController::class, 'index']);
     Route::delete('admin/delete/user/{id}', [UserController::class, 'destroy']);
+
+    Route::resource('admin/manage/articles', ArticleController::class);
 });
 
 Route::get('forgot/password', function () {
@@ -162,3 +157,4 @@ Route::get('search/dataset/{key}', function ($key) {
 });
 
 Route::get('filter/{id}', [DatasetController::class, 'filter']);
+

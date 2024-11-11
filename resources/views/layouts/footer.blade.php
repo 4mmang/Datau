@@ -4,7 +4,7 @@
         <div class="container p-3">
             <div class="row">
                 <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3><i class="fad fa-database"></i> DATAU</h3>
+                    <h3><i class="fad fa-database"></i> PUSDATA UNSULBAR</h3>
                     <p>
                         Pusat Studi AI<br> Universitas Sulawesi Barat <br><br>
                         <strong>Phone:</strong> +62822 9076 2799<br>

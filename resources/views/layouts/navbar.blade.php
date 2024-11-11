@@ -1,14 +1,14 @@
 <!-- Start Header -->
 <header id="header" class="fixed-top" style="background-color: #38527E">
     <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto ms-2"><a href="{{ url('/') }}"><i class="fad fa-database"></i> Datau</a></h1>
+        <h1 class="logo me-auto ms-2"><a href="{{ url('/') }}"><i class="fad fa-database"></i> PusData Unsulbar</a></h1>
         <!-- start navbar -->
         <nav id="navbar" class="navbar p-4">
             <ul>
                 {{-- <li><input type="text" class="form-control ms-2 mr-2" name="" id=""></li> --}}
                 <li><a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">Beranda</a></li>
                 {{-- <li><a class="nav-link {{ Request::is('datasets') ? 'active' : '' }}" href="{{ url('datasets') }}">Datasets</a></li> --}}
-                <li class="dropdown"><a href="#"><span>Menu Utama</span> <i
+                <li class="dropdown"><a href="#"><span>Pusat Data</span> <i
                             class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="{{ url('datasets') }}">Temukan Dataset</a></li>

@@ -126,42 +126,72 @@
         <!-- start chart -->
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="col-md-8 mb-5">
-                    {{-- <div class="card p-3 shadow"> --}}
+                <div class="col-md-6 mb-5">
                     <div class="card-title">
                         {{-- <h2 class="text-center mt-2" style="color: #38527E">Statistik Jumlah Dataset</h2> --}}
                     </div>
                     <div class="card-body">
                         <canvas id="myBarChart" style="width: 100%; height: 400px;"></canvas>
                     </div>
-                    {{-- </div> --}}
                 </div>
-                <div class="col-md-4">
-                    <p class="fs-6">Mungkin Anda tertarik membaca artikel berikut.</p>
-                    <div class="card shadow">
-                        <a href="https://fasttext.cc/" target="_blank" style="text-decoration: none; color: #333;">
-                            <img src="https://picsum.photos/300/150" alt="FastText Thumbnail"
-                                style="width: 100%; height: auto;">
-                            <div class="card-body">
-                                <h4 class="mt-3">FastText</h4>
-                                <p class="small">
-                                    {{ Str::limit(
-                                        "Pustaka NLP efisien yang dikembangkan oleh Facebook AI Research untuk klasifikasi teks dan pembelajaran kata
-                                                                                                yang cepat.",
-                                        100,
-                                        '...',
-                                    ) }}
-                                </p>
+                @if (optional($popularDataset)->count() > 0)
+                    <div class="col-md-6 mb-3">
+                        <div class="card p-4 rounded-top-4 shadow-sm">
+                            <p class="fw-bold fs-3 text-center" style="color: #38527E"><i class="fad fa-database"></i>
+                                Dataset Populer</p>
+                            <hr style="margin-top: -0px">
+                            <div class="row align-items-center">
+                                <div class="col-md-2" id="img-dataset">
+                                    <i class="fad fa-database fa-4x" style="color: #38527E"></i>
+                                </div>
+                                <div class="col-md-10 mb-2">
+                                    <a href="{{ url('detail/dataset/' . optional($popularDataset)->id) }}">
+                                        <h5 class="text-capitalize" style="color: #38527E">
+                                            {{ optional($popularDataset)->name }}
+                                        </h5>
+                                    </a>
+                                    <p>{{ Str::limit(optional($popularDataset)->abstract, 40, '...') }}
+                                    </p>
+                                    <div class="input-group gap-5">
+                                        <a href="" class="nav-link"><i class="bi bi-download me-2"></i>
+                                            {{ $count }}
+                                        </a>
+                                        <a href="#" class="nav-link"><i
+                                                class="bi bi-building me-2"></i>{{ optional($popularDataset)->instances }}
+                                            Instances</a>
+                                        <a href="#" class="nav-link"><i
+                                                class="bi bi-table me-2"></i>{{ optional($popularDataset)->features }}
+                                            Features</a>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
-                    </div>
-                    {{-- <div class="card">
-                        <div class="card-body">
-                            <h3></h3>
                         </div>
-                    </div> --}}
-                </div>
+                    </div>
+                @endif
             </div>
+            @if ($newArticles->count() > 0)
+                <div class="row mt-3">
+                    <p class="fs-3 text-center mb-5">Mungkin Anda tertarik membaca artikel berikut.</p>
+                    @foreach ($newArticles as $article)
+                        <div class="col-md-4 mb-3">
+                            <div class="card shadow">
+                                <a href="https://fasttext.cc/" target="_blank" style="text-decoration: none; color: #333;">
+                                    <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 200px; overflow: hidden;">
+                                        <img src="{{ asset('storage/' . $article->cover) }}" alt="FastText Thumbnail" class="img-fluid"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="mt-3">{{ Str::limit($article->title, 30, '...') }}</h4>
+                                        <p class="small" style="overflow: hidden; text-overflow: ellipsis; white-space: normal;">
+                                            {!! limitHtml($article->description, 100) !!}
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
         <!-- end chart -->
     </main>

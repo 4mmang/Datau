@@ -127,8 +127,8 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0" style="color: #38527E"><a href="{{ url('admin/manage/datasets') }}"
-                            style="color: #38527E"><i class="fas fa-arrow-left mr-2"></i></a>Detail Dataset</h1>
+                    <p class="fs-2 mb-0" style="color: #38527E"><a href="{{ url('admin/manage/datasets') }}"
+                            style="color: #38527E"><i class="fas fa-arrow-left mr-2 fa-sm"></i></a>Detail Dataset</p>
                 </div>
 
                 <!-- Content Row -->
