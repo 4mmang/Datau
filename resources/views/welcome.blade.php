@@ -127,11 +127,13 @@
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6 mb-5">
-                    <div class="card-title">
-                        {{-- <h2 class="text-center mt-2" style="color: #38527E">Statistik Jumlah Dataset</h2> --}}
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myBarChart" style="width: 100%; height: 400px;"></canvas>
+                    <div class="card rounded-4">
+                        <div class="card-title">
+                            {{-- <h2 class="text-center mt-2" style="color: #38527E">Statistik Jumlah Dataset</h2> --}}
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myBarChart" style="width: 100%; height: 400px;"></canvas>
+                        </div>
                     </div>
                 </div>
                 @if (optional($popularDataset)->count() > 0)
@@ -176,13 +178,15 @@
                         <div class="col-md-4 mb-3">
                             <div class="card shadow">
                                 <a href="https://fasttext.cc/" target="_blank" style="text-decoration: none; color: #333;">
-                                    <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 200px; overflow: hidden;">
-                                        <img src="{{ asset('storage/' . $article->cover) }}" alt="FastText Thumbnail" class="img-fluid"
-                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    <div class="d-flex justify-content-center align-items-center"
+                                        style="width: 100%; height: 200px; overflow: hidden;">
+                                        <img src="{{ asset('storage/' . $article->cover) }}" alt="FastText Thumbnail"
+                                            class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
                                     </div>
                                     <div class="card-body">
                                         <h4 class="mt-3">{{ Str::limit($article->title, 30, '...') }}</h4>
-                                        <p class="small" style="overflow: hidden; text-overflow: ellipsis; white-space: normal;">
+                                        <p class="small"
+                                            style="overflow: hidden; text-overflow: ellipsis; white-space: normal;">
                                             {!! limitHtml($article->description, 100) !!}
                                         </p>
                                     </div>
