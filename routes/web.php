@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ManageDatasetsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ContributeDatasetController;
 use App\Http\Controllers\DatasetController;
 use App\Http\Controllers\DonationPaperController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginGithubController;
 use App\Http\Controllers\LoginGoogleController;
 use App\Http\Controllers\MyDatasetController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Models\Article;
 use App\Models\Dataset;
@@ -125,6 +127,9 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
     Route::get('admin/detail/dataset/{id}', [ManageDatasetsController::class, 'show']);
     Route::delete('admin/delete/dataset/{id}', [ManageDatasetsController::class, 'destroy']);
 
+    Route::get('admin/edit/dataset/{id}', [ManageDatasetsController::class, 'edit']);
+    Route::put('admin/update/dataset/{id}', [ManageDatasetsController::class, 'update']);
+
     Route::put('admin/validate/dataset/{id}', [ManageDatasetsController::class, 'valid']);
     Route::post('admin/invalid/dataset/{id}', [ManageDatasetsController::class, 'invalid']);
 
@@ -158,3 +163,7 @@ Route::get('search/dataset/{key}', function ($key) {
 
 Route::get('filter/{id}', [DatasetController::class, 'filter']);
 
+Route::get('admin/profile', [ProfileController::class, 'profileAdmin'])->middleware('auth')->name('profileAdmin');
+Route::get('profile', [ProfileController::class, 'profile'])->middleware('auth');
+
+Route::post('reset-password', [ChangePasswordController::class, 'changePassword'])->middleware('auth');

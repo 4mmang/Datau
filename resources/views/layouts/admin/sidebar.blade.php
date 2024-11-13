@@ -27,7 +27,7 @@
         menu
     </div>
     <li
-        class="nav-item {{ Request::is('admin/manage/datasets') || Request::is('admin/detail/dataset/*') ? 'active' : '' }}">
+        class="nav-item {{ Request::is('admin/manage/datasets') || Request::is('admin/*/dataset/*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('admin/manage/datasets') }}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Manage Datasets</span></a>

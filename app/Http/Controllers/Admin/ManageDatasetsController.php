@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AssociatedTask;
+use App\Models\Characteristic;
 use App\Models\Dataset;
 use App\Models\DatasetAssociatedTask;
 use App\Models\DatasetCharacteristic;
 use App\Models\DatasetFeatureType;
 use App\Models\Download;
+use App\Models\FeatureType;
 use App\Models\Paper;
+use App\Models\SubjectArea;
 use App\Models\UrlFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -147,6 +151,85 @@ class ManageDatasetsController extends Controller
             return response()->json([
                 'status' => 500,
                 'message' => $th->getMessage(),
+            ]);
+        }
+    }
+
+    public function edit($id)
+    {
+        $characteristics = Characteristic::all();
+        $subjectAreas = SubjectArea::all();
+        $associatedTasks = AssociatedTask::all();
+        $featureTypes = FeatureType::all();
+
+        $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->select('datasets.id as id_dataset', 'datasets.*', 'subject_areas.*')->find($id);
+        $datasetCharacteristics = DatasetCharacteristic::join('characteristics', 'characteristics.id', '=', 'dataset_characteristics.id_characteristic')->where('id_dataset', $id)->get();
+        $datasetFeatureTypes = DatasetFeatureType::join('feature_types', 'feature_types.id', '=', 'dataset_feature_types.id_feature_type')->where('id_dataset', $id)->get();
+        $datasetAssociatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')->where('id_dataset', $id)->get();
+        return view('admin.manage-datasets.edit', compact('characteristics', 'datasetCharacteristics', 'dataset', 'subjectAreas', 'associatedTasks', 'featureTypes', 'datasetFeatureTypes', 'datasetAssociatedTasks', 'id'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $dataset = Dataset::findOrFail($id);
+            $dataset->id_subject_area = $request->subjectArea;
+
+            $oldCharacteristic = DatasetCharacteristic::where('id_dataset', $id)->get();
+            if ($oldCharacteristic) {
+                foreach ($oldCharacteristic as $value) {
+                    $value->delete();
+                }
+            }
+            if ($request->characteristics) {
+                foreach ($request->characteristics as $characteristic) {
+                    $newCharacteristic = new DatasetCharacteristic();
+                    $newCharacteristic->id_dataset = $id;
+                    $newCharacteristic->id_characteristic = $characteristic;
+                    $newCharacteristic->save();
+                }
+            }
+
+            $oldAssociatedTasks = DatasetAssociatedTask::where('id_dataset', $id)->get();
+            if ($oldAssociatedTasks) {
+                foreach ($oldAssociatedTasks as $value) {
+                    $value->delete();
+                }
+            }
+            if ($request->associatedTasks) {
+                foreach ($request->associatedTasks as $associatedTask) {
+                    $newAssociatedTask = new DatasetAssociatedTask();
+                    $newAssociatedTask->id_dataset = $id;
+                    $newAssociatedTask->id_associated_task = $associatedTask;
+                    $newAssociatedTask->save();
+                }
+            }
+
+            $oldFeatureType = DatasetFeatureType::where('id_dataset', $id)->get();
+            if ($oldFeatureType) {
+                foreach ($oldFeatureType as $value) {
+                    $value->delete();
+                }
+            }
+            if ($request->featureTypes) {
+                foreach ($request->featureTypes as $featureType) {
+                    $newfeatureType = new DatasetFeatureType();
+                    $newfeatureType->id_dataset = $id;
+                    $newfeatureType->id_feature_type = $featureType;
+                    $newfeatureType->save();
+                }
+            }
+
+            DB::commit();
+            return back()->with([
+                'message' => 'Successfully updated dataset',
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th->getMessage());
+            return back()->withErrors([
+                'message' => 'There is an error',
             ]);
         }
     }
