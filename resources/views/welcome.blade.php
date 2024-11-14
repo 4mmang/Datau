@@ -177,7 +177,8 @@
                     @foreach ($newArticles as $article)
                         <div class="col-md-4 mb-3">
                             <div class="card shadow">
-                                <a href="https://fasttext.cc/" target="_blank" style="text-decoration: none; color: #333;">
+                                <a href="{{ url('article/' . $article->id) }}" target="_blank"
+                                    style="text-decoration: none; color: #333;">
                                     <div class="d-flex justify-content-center align-items-center"
                                         style="width: 100%; height: 200px; overflow: hidden;">
                                         <img src="{{ asset('storage/' . $article->cover) }}" alt="FastText Thumbnail"

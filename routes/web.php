@@ -139,6 +139,11 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
     Route::resource('admin/manage/articles', ArticleController::class);
 });
 
+Route::get('article/{id}', function($id){
+    $article = Article::findOrFail($id);
+    return view('article', compact('article'));
+});
+
 Route::get('forgot/password', function () {
     return view('auth.forgot-password');
 })->middleware('guest');
