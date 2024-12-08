@@ -26,7 +26,7 @@ class ManageDatasetsController extends Controller
     public function index()
     {
         $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'status', 'note')->get();
-        return view('admin.manage-datasets', compact(['datasets']));
+        return view('admin.manage-datasets.index', compact(['datasets']));
     }
 
     public function show($id)
@@ -64,7 +64,7 @@ class ManageDatasetsController extends Controller
             }
         }
 
-        return view('admin.detail-dataset', compact(['dataset', 'papers', 'id', 'data', 'files']));
+        return view('admin.manage-datasets.detail-dataset', compact(['dataset', 'papers', 'id', 'data', 'files']));
     }
 
     public function valid($id)

@@ -9,8 +9,8 @@
                         <div class="card-body">
                             <form action="{{ url('register/user') }}" method="post">
                                 @csrf
-                                <h4 class="fs-2" style="color: #38527E">Daftar</h4>
-                                <h5>Sudah punya akun? <a href="{{ url('login') }}">Masuk</a></h5>
+                                {{-- <h4 class="fs-2" style="color: #38527E">Daftar</h4> --}}
+                                <h5 class="small">Sudah punya akun? <a href="{{ url('login') }}">Masuk</a></h5>
                                 <div class="mb-3">
                                     <label for="Fullname" class="form-label">Nama Lengkap</label>
                                     <input type="text" value="{{ old('full_name') }}"

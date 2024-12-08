@@ -102,19 +102,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Content Row -->
-
-                <div class="row">
-
-                </div>
-
-                <!-- Content Row -->
-                <div class="row">
-
-                </div>
-
+                </div> 
             </div>
             <!-- /.container-fluid -->
 
@@ -125,7 +113,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2021</span>
+                    <span>Copyright &copy; Arman 2021</span>
                 </div>
             </div>
         </footer>

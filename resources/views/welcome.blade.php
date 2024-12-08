@@ -7,13 +7,13 @@
                 <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
                     <h1>Selamat Datang</h1>
-                    <h2 class="fs-5">Platform pengumpulan dataset, di mana setiap kontribusi Anda berdampak positif
+                    <h2 class="fs-5">Platform pengumpulan dataset Pusat Studi Artificial Intelligence, di mana setiap kontribusi Anda berdampak positif
                         terhadap kemajuan
                         penelitian dan
                         inovasi.</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="{{ url('datasets') }}" class="btn-get-started scrollto"><i class="fal fa-database"></i>
-                            Lihat
+                        <a href="{{ url('datasets') }}" class="btn-get-started scrollto"><i class="fal fa-search"></i>
+                            Temukan
                             Dataset</a>
                         <a href="{{ url('donation') }}" class="btn-get-started scrollto ms-3"><i
                                 class="fal fa-database"></i> Sumbang Dataset</a>
@@ -186,10 +186,10 @@
                                     </div>
                                     <div class="card-body">
                                         <h4 class="mt-3">{{ Str::limit($article->title, 30, '...') }}</h4>
-                                        <p class="small"
+                                        {{-- <p class="small"
                                             style="overflow: hidden; text-overflow: ellipsis; white-space: normal;">
                                             {!! limitHtml($article->description, 100) !!}
-                                        </p>
+                                        </p> --}}
                                     </div>
                                 </a>
                             </div>

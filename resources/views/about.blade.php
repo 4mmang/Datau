@@ -7,9 +7,9 @@
                 <div class="col-md-12">
                     <div class="">
                         <p class="fs-2" style="color: #38527E">Tentang Kami<span class="fw-bold"></span></p>
-                        <h5 class="text-start mt-5" style="color: gray;">
-                            DATAU adalah kumpulan dataset, teori domain, dan generator data yang digunakan oleh komunitas pembelajaran mesin
-                            untuk analisis empiris algoritma pembelajaran mesin.
+                        <h5 class="text-start mt-3" style="color: gray;">
+                            PUSDATA UNSULBAR merupakan platform kumpulan dataset yang digunakan oleh Pusat Studi Artificial Intelligence
+                            dalam dunia penelitian.
                         </h5>
                     </div>
                 </div>
