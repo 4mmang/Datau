@@ -3,15 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\Dataset;
+use App\Models\SubjectArea;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $countDataset = Dataset::all()->count();
         $countUser = User::where('role', 'user')->count();
-        return view('admin.dashboard', compact(['countDataset', 'countUser']));
+        $countArticle = Article::all()->count();
+
+        $subjectAreas = SubjectArea::all();
+        $data = [];
+        foreach ($subjectAreas as $subjectArea) {
+            $datasetCount = Dataset::where('id_subject_area', $subjectArea->id)->count();
+            array_push($data, $datasetCount);
+        }
+        return view('admin.dashboard', compact(['countDataset', 'countUser', 'countArticle', 'subjectAreas', 'data']));
     }
 }
