@@ -167,5 +167,5 @@
             btnSave.disabled = true
             btnSave.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i>Processing...';
         })
-    </script>z
+    </script>
 @endsection
