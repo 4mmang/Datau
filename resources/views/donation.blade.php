@@ -5,9 +5,8 @@
             <div class="container login-container p-3" style="margin-top: 10rem; margin-bottom: 3rem">
                 <div class="text-center">
                     <h1 class="fw-bold mb-4" style="color: #38527E"><i class="fad fa-database"></i> Formulir Donasi Dataset </h1>
-                    <h5 style="color: gray">Kami menawarkan kepada pengguna opsi untuk dataset mereka ke repositori kami.</h5>
-                    <h5 style="color: gray">Pengguna dapat menyediakan data tabular atau non-tabular yang akan tersedia untuk umum di repositori kami. Para
-                    donatur bebas mengedit dataset yang disumbangkan, tetapi pengeditan harus disetujui sebelum finalisasi.
+                    <h5 style="color: gray">Kami menawarkan kepada pengguna opsi untuk mengupload dataset mereka ke repositori kami.</h5>
+                    <h5 style="color: gray">Pengguna dapat menyediakan data tabular atau non-tabular yang akan tersedia untuk umum di repositori kami.
                 </div>
                 <form>
                     <div class="row justify-content-center mt-5">

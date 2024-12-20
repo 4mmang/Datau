@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::create([
-            'full_name' => 'Testing',
-            'email' => 'testing@example.com',
-            'role' => 'admin',
+            'full_name' => 'Testing Saja',
+            'email' => 'testingsaja@example.com',
+            'role' => 'user',
             'password' => Hash::make('12345678')
         ]);
         // $this->call([CharacteristicSeeder::class, AssociatedTaskSeeder::class, FeatureTypeSeeder::class, SubjectAreaSeeder::class]);

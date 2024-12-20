@@ -23,6 +23,21 @@ class UserController extends Controller
         return view('admin.manage-users', compact('users'));
     }
 
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->status = $request->status;
+        $user->update();
+        $message = 'User dinonaktifkan';
+        if ($request->status === 'on') {
+            $message = 'User diaktifkan kembali';
+        }
+        return back()->with([
+            'status' => 200,
+            'message' => $message,
+        ]);
+    }
+
     public function destroy($id)
     {
         DB::beginTransaction();

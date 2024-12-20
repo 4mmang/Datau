@@ -32,15 +32,17 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ url('my/dataset/edit/' . $dataset->id) }}"
-                                                    class="btn btn-sm btn-warning mb-1 @if ($dataset->status == 'pending') disabled @endif"><i
-                                                        class="bi bi-pen text-white fw-bold"></i></a>
                                                 <a href="{{ url('my/dataset/' . $dataset->id) }}"
                                                     class="btn btn-sm btn-primary mb-1"><i
                                                         class="bi bi-eye text-white fw-bold"></i></a>
-                                                <a href="#" onclick="deleteDataset({{ $dataset->id }})"
-                                                    class="btn btn-sm btn-danger mb-1"><i
-                                                        class="bi bi-trash text-white fw-bold"></i></a>
+                                                @if (Auth::user()->status === 'on')
+                                                    <a href="{{ url('my/dataset/edit/' . $dataset->id) }}"
+                                                        class="btn btn-sm btn-warning mb-1 @if ($dataset->status == 'pending') disabled @endif"><i
+                                                            class="bi bi-pen text-white fw-bold"></i></a>
+                                                    <a href="#" onclick="deleteDataset({{ $dataset->id }})"
+                                                        class="btn btn-sm btn-danger mb-1"><i
+                                                            class="bi bi-trash text-white fw-bold"></i></a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
