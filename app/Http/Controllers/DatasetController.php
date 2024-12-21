@@ -9,7 +9,6 @@ use App\Models\DatasetFeatureType;
 use App\Models\Download;
 use App\Models\Paper;
 use App\Models\SubjectArea;
-use Illuminate\Http\Request;
 
 class DatasetController extends Controller
 {
@@ -29,21 +28,17 @@ class DatasetController extends Controller
 
     public function show($id)
     {
-        $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->join('users', 'users.id', '=', 'datasets.id_user')->find($id);
-        $characteristics = DatasetCharacteristic::join('characteristics', 'characteristics.id', '=', 'dataset_characteristics.id_characteristic')
-            ->where('id_dataset', $id)
-            ->get();
-        $featureTypes = DatasetFeatureType::join('feature_types', 'feature_types.id', '=', 'dataset_feature_types.id_feature_type')
-            ->where('id_dataset', $id)
-            ->get();
-        $associatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')
-            ->where('id_dataset', $id)
-            ->get();
+        $dataset = Dataset::findOrFail($id);
+        // $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->join('users', 'users.id', '=', 'datasets.id_user')->find($id);
+        $characteristics = DatasetCharacteristic::join('characteristics', 'characteristics.id', '=', 'dataset_characteristics.id_characteristic')->where('id_dataset', $id)->get();
+        $featureTypes = DatasetFeatureType::join('feature_types', 'feature_types.id', '=', 'dataset_feature_types.id_feature_type')->where('id_dataset', $id)->get();
+        $associatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')->where('id_dataset', $id)->get();
         $papers = Paper::where('id_dataset', $id)->get();
         return view('dataset.show', compact(['dataset', 'characteristics', 'featureTypes', 'associatedTasks', 'papers', 'id']));
     }
 
-    public function filter($id){
+    public function filter($id)
+    {
         $datasets = Dataset::all();
         if ($id != 'all') {
             $datasets = Dataset::where('id_subject_area', $id)->get();
@@ -57,7 +52,7 @@ class DatasetController extends Controller
         }
         return response()->json([
             'datasets' => $datasets,
-            'countDownloads' => $countDownloads
+            'countDownloads' => $countDownloads,
         ]);
     }
 }

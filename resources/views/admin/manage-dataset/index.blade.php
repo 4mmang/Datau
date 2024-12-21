@@ -73,7 +73,7 @@
                                             <tr>
                                                 <td class="align-middle">{{ $loop->iteration }}</td>
                                                 <td class="align-middle text-capitalize">{{ $dataset->name }}</td>
-                                                <td class="align-middle">{{ $dataset->full_name }}</td>
+                                                <td class="align-middle">{{ $dataset->user->full_name }}</td>
                                                 <td class="align-middle"><span
                                                         class="badge bg-info text-white p-1">{{ $dataset->status }}</span>
                                                 </td>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
             <!-- /.container-fluid -->
 
@@ -195,12 +195,14 @@
                                 no++
                                 const status =
                                     `<span class="badge bg-info p-1">${dataset.status}</span>`
-                                const btn = `<a href="{{ url('admin/detail/dataset/') }}/${dataset.id}" class="btn btn-sm btn-primary" style="width: 1cm"><i
+                                const btn = `<a href="{{ url('admin/edit/dataset/') }}/${dataset.id}" class="ml-1 btn btn-warning btn-sm mb-1 text-center"
+                                    style="width: 1cm"><i class="fas fa-pen"></i></a>
+                                <a href="{{ url('admin/detail/dataset/') }}/${dataset.id}" class="btn btn-sm btn-primary" style="width: 1cm"><i
                                     class="fas fa-eye text-white fw-bold"></i></a>
                             <a href="#" onclick="deleteDataset(${dataset.id})" class="btn btn-sm btn-danger" style="width: 1cm"><i
                                     class="fas fa-trash text-white fw-bold"></i></a>`;
-                                table.row.add([no, dataset.name, dataset.full_name, status, dataset
-                                    .note, btn
+                                table.row.add([no, dataset.name, dataset.user.full_name, dataset.status,
+                                    dataset.note, btn
                                 ]);
                             });
                             table.draw();

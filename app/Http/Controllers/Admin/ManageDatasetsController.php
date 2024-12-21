@@ -23,13 +23,15 @@ class ManageDatasetsController extends Controller
 {
     public function index()
     {
-        $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
+        $datasets = Dataset::all();
+        // $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
         return view('admin.manage-dataset.index', compact(['datasets']));
     }
 
     public function show($id)
     {
-        $dataset = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.*', 'datasets.status')->findOrFail($id);
+        $dataset = Dataset::findOrFail($id);
+        // $dataset = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.*', 'datasets.status')->findOrFail($id);
         $papers = Paper::where('id_dataset', $id)->get();
 
         // Lokasi folder tempat dataset disimpan
@@ -114,7 +116,8 @@ class ManageDatasetsController extends Controller
             Storage::deleteDirectory('public/datasets/'.$id);
             
             DB::commit();
-            $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
+            $datasets = Dataset::with('user')->get();
+            // $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
             return response()->json([
                 'status' => 200,
                 'message' => 'Deleted successfully',
@@ -136,7 +139,8 @@ class ManageDatasetsController extends Controller
         $associatedTasks = AssociatedTask::all();
         $featureTypes = FeatureType::all();
 
-        $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->select('datasets.id as id_dataset', 'datasets.*', 'subject_areas.*')->find($id);
+        $dataset = Dataset::findOrFail($id);
+        // $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->select('datasets.id as id_dataset', 'datasets.*', 'subject_areas.*')->find($id);
         $datasetCharacteristics = DatasetCharacteristic::join('characteristics', 'characteristics.id', '=', 'dataset_characteristics.id_characteristic')->where('id_dataset', $id)->get();
         $datasetFeatureTypes = DatasetFeatureType::join('feature_types', 'feature_types.id', '=', 'dataset_feature_types.id_feature_type')->where('id_dataset', $id)->get();
         $datasetAssociatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')->where('id_dataset', $id)->get();
@@ -149,6 +153,7 @@ class ManageDatasetsController extends Controller
         try {
             $dataset = Dataset::findOrFail($id);
             $dataset->id_subject_area = $request->subjectArea;
+            $dataset->update();
 
             $oldCharacteristic = DatasetCharacteristic::where('id_dataset', $id)->get();
             if ($oldCharacteristic) {

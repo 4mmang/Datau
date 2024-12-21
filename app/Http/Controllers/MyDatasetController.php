@@ -29,7 +29,8 @@ class MyDatasetController extends Controller
 
     public function show($id)
     {
-        $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->find($id);
+        $dataset = Dataset::findOrFail($id);
+        // $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->find($id);
         $characteristics = DatasetCharacteristic::join('characteristics', 'characteristics.id', '=', 'dataset_characteristics.id_characteristic')->where('id_dataset', $id)->get();
         $featureTypes = DatasetFeatureType::join('feature_types', 'feature_types.id', '=', 'dataset_feature_types.id_feature_type')->where('id_dataset', $id)->get();
         $associatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')->where('id_dataset', $id)->get();
@@ -46,8 +47,8 @@ class MyDatasetController extends Controller
         $subjectAreas = SubjectArea::all();
         $associatedTasks = AssociatedTask::all();
         $featureTypes = FeatureType::all();
-
-        $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->select('datasets.id as id_dataset', 'datasets.*', 'subject_areas.*')->find($id);
+        // $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->select('datasets.id as id_dataset', 'datasets.*', 'subject_areas.*')->find($id);
+        $dataset = Dataset::findOrFail($id);
         $datasetCharacteristics = DatasetCharacteristic::join('characteristics', 'characteristics.id', '=', 'dataset_characteristics.id_characteristic')->where('id_dataset', $id)->get();
         $datasetFeatureTypes = DatasetFeatureType::join('feature_types', 'feature_types.id', '=', 'dataset_feature_types.id_feature_type')->where('id_dataset', $id)->get();
         $datasetAssociatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')->where('id_dataset', $id)->get();
@@ -180,8 +181,8 @@ class MyDatasetController extends Controller
             DB::rollBack();
             return response()->json([
                 'status' => 500,
-                // 'message' => $th->getMessage(),
-                'message' => 'There is an error',
+                'message' => $th->getMessage(),
+                // 'message' => 'There is an error',
             ]);
         }
     }

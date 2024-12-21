@@ -14,4 +14,8 @@ class Dataset extends Model
     public function user(){
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    public function subjectArea(){
+        return $this->belongsTo(SubjectArea::class, 'id_subject_area');
+    }
 }

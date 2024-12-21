@@ -429,8 +429,9 @@
 
             formData.append('_method', 'PUT')
             let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-            let idDataset = "{{ $dataset->id_dataset }}"
-            fetch('http://127.0.0.1:8000/my/dataset/update/' + idDataset, {
+            let idDataset = "{{ $dataset->id }}"
+            
+            fetch('/my/dataset/update/' + idDataset, {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken,

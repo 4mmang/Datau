@@ -67,7 +67,7 @@
                                         <h2 class="mt-3 text-capitalize" style="color: #38527E">{{ $dataset->name }}
                                         </h2>
                                     </a>
-                                    <p class="text-capitalize]" style="margin-bottom: 0px">{{ $dataset->full_name }}
+                                    <p class="text-capitalize]" style="margin-bottom: 0px">{{ $dataset->user->full_name }}
                                     </p>
                                     <span id="status" class="badge bg-info p-1 me-2">{{ $dataset->status }}</span><span
                                         class="text-danger">{{ $dataset->note }}</span>
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="col-md-3 ms-3">
                                     <h4>Subject Area</h4>
-                                    <p>Biology
+                                    <p>{{ $dataset->subjectArea->name_subject_area }}
                                     </p>
                                 </div>
                                 <div class="col-md-3 ms-3">

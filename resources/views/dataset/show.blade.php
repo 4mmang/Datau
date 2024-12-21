@@ -15,7 +15,7 @@
                                 <a href="{{ url('detail') }}">
                                     <h2 class="mt-3 text-capitalize" style="color: #38527E">{{ $dataset->name }}</h2>
                                 </a>
-                                <p>Disumbangkan oleh<span class="fw-bold"> {{ $dataset->full_name }}</span></p>
+                                <p>Disumbangkan oleh<span class="fw-bold"> {{ $dataset->user->full_name }}</span></p>
 
                             </div>
                             <div class="col-md-12">
@@ -40,7 +40,7 @@
                             <div class="col-md-3">
                                 <h4>Bidang Studi</h4>
                                 <p>
-                                    {{ $dataset->name_subject_area ?? '-' }}
+                                    {{ $dataset->subjectArea->name_subject_area ?? '-' }}
                                 </p>
                             </div>
                             <div class="col-md-3">
@@ -110,8 +110,8 @@
                         <div class="card-body">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 class="btn btn-sm p-2 text-white ps-3 pe-3 @guest
-                                    disabled
-                                @endguest" style="background-color: #38527E">Sumbangkan Paper</a>
+disabled @endguest"
+                                style="background-color: #38527E">Sumbangkan Paper</a>
                         </div>
                     </div>
                 </div>

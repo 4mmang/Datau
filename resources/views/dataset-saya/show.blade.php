@@ -45,7 +45,7 @@
                             <div class="col-md-3 ms-3">
                                 <h4>Bidang Studi</h4>
                                 <p>
-                                    {{ $dataset->name_subject_area ?? '-' }}
+                                    {{ $dataset->subjectArea->name_subject_area ?? '-' }}
                                 </p>
                             </div>
                             <div class="col-md-3 ms-3">
