@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('github_id')->nullable();
             $table->enum('role', ['admin', 'user']);
             $table->timestamp('email_verified_at')->nullable();
+            $table->enum('status', ['on', 'off'])->default('on');
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();

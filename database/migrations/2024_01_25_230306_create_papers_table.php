@@ -12,11 +12,11 @@ return new class extends Migration {
     {
         Schema::create('papers', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user');
-            $table->integer('id_dataset');
-            $table->string('title');
-            $table->string('url');
-            $table->text('description');
+            $table->integer('id_user')->nullable();
+            $table->integer('id_dataset')->nullable();
+            $table->string('title')->nullable();
+            $table->string('url')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

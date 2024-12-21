@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'user',
             'password' => Hash::make('12345678')
         ]);
+        
         // $this->call([CharacteristicSeeder::class, AssociatedTaskSeeder::class, FeatureTypeSeeder::class, SubjectAreaSeeder::class]);
     }
 }

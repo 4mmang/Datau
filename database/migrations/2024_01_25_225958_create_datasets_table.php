@@ -13,11 +13,11 @@ return new class extends Migration {
         Schema::create('datasets', function (Blueprint $table) {
             $table->id();
             $table->integer('id_user');
-            $table->integer('id_subject_area');
+            $table->integer('id_subject_area')->nullable();
             $table->string('name');
             $table->text('abstract');
-            $table->integer('instances');
-            $table->integer('features');
+            $table->integer('instances')->nullable();
+            $table->integer('features')->nullable();
             $table->text('information');
             $table->enum('status', ['pending', 'valid', 'invalid'])->default('pending');
             $table->string('note')->nullable();
