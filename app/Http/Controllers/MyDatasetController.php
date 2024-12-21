@@ -193,8 +193,8 @@ class MyDatasetController extends Controller
             [
                 'name' => ['required'],
                 'abstract' => ['required'],
-                'instances' => ['required', 'numeric'],
-                'features' => ['required', 'numeric'],
+                'instances' => ['nullable', 'numeric'],
+                'features' => ['nullable', 'numeric'],
                 'characteristics' => ['nullable'],
                 'subjectArea' => ['nullable'],
                 'associatedTasks' => ['nullable'],
@@ -254,9 +254,10 @@ class MyDatasetController extends Controller
 
             $urlFiles = UrlFile::where('id_dataset', $id)->get();
             foreach ($urlFiles as $urlFile) {
-                Storage::delete('public/' . $urlFile->url_file);
+                // Storage::delete('public/' . $urlFile->url_file);
                 $urlFile->delete();
             }
+            Storage::deleteDirectory('public/datasets/' . $id);
 
             DB::commit();
 

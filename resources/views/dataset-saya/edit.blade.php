@@ -156,11 +156,8 @@
                                             class="text-dark">{{ basename($file->url_file) }}</span><span
                                             class="p-2"><a href="#" data-idFile="{{ $file->id }}"
                                                 class="remove-file">
-                                                {{-- @if ($files->count() > 1)
-                                                <i id="idFileIcon-{{ $file->id }}"
-                                                    class="fas fa-trash-alt text-danger icon-file-remove"></i>
-                                                @endif --}}
-                                            </a></span>
+                                            </a>
+                                        </span>
                                     </li>
                                 @endforeach
                             </p>

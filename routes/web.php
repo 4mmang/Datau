@@ -24,9 +24,9 @@ use App\Models\SubjectArea;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
-
 
 Route::get('login', [AuthController::class, 'index'])
     ->name('login')
@@ -74,7 +74,9 @@ Route::get('datasets', [DatasetController::class, 'index']);
 Route::get('detail/dataset/{id}', [DatasetController::class, 'show']);
 Route::get('filter/{id}', [DatasetController::class, 'filter']);
 
-Route::get('donation', [ContributeDatasetController::class, 'index'])->middleware(['auth', 'verified'])->name('sumbang-dataset');
+Route::get('donation', [ContributeDatasetController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('sumbang-dataset');
 Route::post('more/info', [ContributeDatasetController::class, 'moreInfo'])->middleware(['auth', 'verified']);
 Route::post('donation/store', [ContributeDatasetController::class, 'store'])->middleware(['auth', 'verified']);
 Route::get('my/dataset', [MyDatasetController::class, 'index'])->middleware(['auth', 'verified']);
@@ -128,11 +130,16 @@ Route::get('search/dataset/{key}', function ($key) {
     return response()->json($datasets);
 });
 
-
 Route::get('admin/profile', [ProfileController::class, 'profileAdmin'])
     ->middleware('auth')
     ->name('profileAdmin');
 
-Route::get('profil', [ProfileController::class, 'profil'])->middleware('auth')->name('profil');
+Route::get('profil', [ProfileController::class, 'profil'])
+    ->middleware('auth')
+    ->name('profil');
 
 Route::post('reset-password', [ChangePasswordController::class, 'changePassword'])->middleware('auth');
+
+Route::get('/delete', function () {
+    Storage::deleteDirectory('public/datasets/43');
+});

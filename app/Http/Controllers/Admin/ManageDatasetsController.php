@@ -18,8 +18,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use League\Csv\Reader;
-use League\Csv\Statement;
 
 class ManageDatasetsController extends Controller
 {
@@ -31,40 +29,14 @@ class ManageDatasetsController extends Controller
 
     public function show($id)
     {
-        $dataset = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->findOrFail($id);
+        $dataset = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.*', 'datasets.status')->findOrFail($id);
         $papers = Paper::where('id_dataset', $id)->get();
-
-        $desiredRowCount = 6;
 
         // Lokasi folder tempat dataset disimpan
         $folderPath = 'public/datasets/' . $id;
         $files = Storage::files($folderPath);
-        $data = [];
 
-        foreach ($files as $file) {
-            // Periksa apakah file memiliki ekstensi .csv
-            if (pathinfo($file, PATHINFO_EXTENSION) === 'csv') {
-                $filePath = Storage::path($file);
-
-                // Buat instance dari Reader
-                $csv = Reader::createFromPath($filePath, 'r');
-                $stmt = (new Statement())->offset(0)->limit($desiredRowCount);
-
-                // Proses data CSV
-                $records = $stmt->process($csv);
-
-                // Baca header dari file CSV
-                $headers = $csv->fetchOne();
-
-                // Simpan data ke dalam array
-                $data[] = [
-                    'fileName' => basename($file),
-                    'records' => $records,
-                ];
-            }
-        }
-
-        return view('admin.manage-dataset.show', compact(['dataset', 'papers', 'id', 'data', 'files']));
+        return view('admin.manage-dataset.show', compact(['dataset', 'papers', 'id', 'files']));
     }
 
     public function valid($id)
@@ -136,9 +108,11 @@ class ManageDatasetsController extends Controller
 
             $urlFiles = UrlFile::where('id_dataset', $id)->get();
             foreach ($urlFiles as $urlFile) {
-                Storage::delete('public/' . $urlFile->url_file);
+                // Storage::delete('public/' . $urlFile->url_file);
                 $urlFile->delete();
             }
+            Storage::deleteDirectory('public/datasets/'.$id);
+            
             DB::commit();
             $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
             return response()->json([

@@ -146,7 +146,7 @@
                 </div>
                 <div class="row justify-content-center mt-3">
                     <div class="col-md-8">
-                        <p class="card-title fs-2 mb-1 text-start" style="color: #38527E;">File Dataset</p>
+                        <p class="card-title fs-2 mb-1 text-start" style="color: #38527E;">File Dataset <sup class="text-danger">*</sup></p>
                         <div class="card p-4">
                             <input type="file" multiple class="form-control" name="" id="file">
                         </div>
