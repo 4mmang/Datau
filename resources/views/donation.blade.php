@@ -4,9 +4,12 @@
         <main id="basic-info">
             <div class="container login-container p-3" style="margin-top: 10rem; margin-bottom: 3rem">
                 <div class="text-center">
-                    <h1 class="fw-bold mb-4" style="color: #38527E"><i class="fad fa-database"></i> Formulir Donasi Dataset </h1>
-                    <h5 style="color: gray">Kami menawarkan kepada pengguna opsi untuk mengupload dataset mereka ke repositori kami.</h5>
-                    <h5 style="color: gray">Pengguna dapat menyediakan data tabular atau non-tabular yang akan tersedia untuk umum di repositori kami.
+                    <h1 class="fw-bold mb-4" style="color: #38527E"><i class="fad fa-database"></i> Formulir Donasi Dataset
+                    </h1>
+                    <h5 style="color: gray">Kami menawarkan kepada pengguna opsi untuk mengupload dataset mereka ke
+                        repositori kami.</h5>
+                    <h5 style="color: gray">Pengguna dapat menyediakan data tabular atau non-tabular yang akan tersedia untuk
+                        umum di repositori kami.
                 </div>
                 <form>
                     <div class="row justify-content-center mt-5">
@@ -15,23 +18,27 @@
                             <div class="card p-4 rounded-3">
                                 <div class="card-body">
                                     <div class="mb-3 position-relative">
-                                        <label for="" class="form-label">Nama Dataset <sup class="text-danger">*</sup></label>
+                                        <label for="" class="form-label">Nama Dataset <sup
+                                                class="text-danger">*</sup></label>
                                         <input type="text" class="form-control" id="name" placeholder="">
                                         <div class="invalid-feedback">
+                                            Harap masukkan nama dataset!
                                         </div>
                                         <hr class="border-bottom">
                                     </div>
                                     <div class="mb-3 position-relative">
-                                        <label for="" class="form-label"><span class="fw-bold">Abstract</span> (Gars besar mengenai dataset) <sup class="text-danger">*</sup></label>
+                                        <label for="" class="form-label"><span class="">Abstract</span>
+                                            (Garis besar mengenai dataset) <sup class="text-danger">*</sup></label>
                                         <textarea name="" id="abstract" cols="30" class="form-control" rows="5"></textarea>
                                         <div class="invalid-feedback">
+                                            Harap masukkan abstract dataset!
                                         </div>
                                         {{-- <p style="color: gray">Maximum 1000 Characters.</p> --}}
                                         <hr class="border-bottom">
                                     </div>
                                     <div class="mb-3 position-relative">
                                         <label for="" class="form-label">Jumlah Baris dalam
-                                            Dataset <sup class="text-danger">*</sup></label>
+                                            Dataset <sup class="text-danger"></sup></label>
                                         <input type="number" class="form-control" name="instances" id="instances"
                                             placeholder="">
                                         <div class="invalid-feedback">
@@ -39,7 +46,8 @@
                                         <hr class="border-bottom">
                                     </div>
                                     <div class="mb-3 position-relative">
-                                        <label for="" class="form-label">Jumlah Fitur dalam Dataset <sup class="text-danger">*</sup></label>
+                                        <label for="" class="form-label">Jumlah Fitur dalam Dataset <sup
+                                                class="text-danger"></sup></label>
                                         <input type="number" class="form-control" id="features" placeholder="">
                                         <hr class="border-bottom">
                                     </div>
@@ -159,7 +167,8 @@
                 </div>
                 <div class="row justify-content-center mt-4">
                     <div class="col-md-8">
-                        <a href="#" class="btn btn-secondary fs-5" onclick="previous()" id="previous"><i class="fas fa-angle-double-left"></i> Sebelumnya</a>
+                        <a href="#" class="btn btn-secondary fs-5" onclick="previous()" id="previous"><i
+                                class="fas fa-angle-double-left"></i> Sebelumnya</a>
                         <button id="submit" onclick="submit()" type="button" class="btn fs-5 text-light"
                             style="background-color: #38527E"><i class="fas fa-save"></i> Sumbang</button>
                     </div>
@@ -171,7 +180,8 @@
                 <div class="row justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-4">
-                            Dataset yang Anda upload sedang diproses, Anda dapat menyumbangkan dataset baru setelah dataset yang Anda upload
+                            Dataset yang Anda upload sedang diproses, Anda dapat menyumbangkan dataset baru setelah dataset
+                            yang Anda upload
                             sebelumnya disetujui.
                             <p class="mt-2"><span class="badge bg-info">Status : pending</span></p>
                             <a href="{{ url('my/dataset') }}" class="btn text-white mt-3"
@@ -187,7 +197,8 @@
                 <div class="row justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-4">
-                            Dataset yang Anda upload sedang diproses, Anda dapat menyumbangkan dataset baru setelah dataset yang Anda upload
+                            Dataset yang Anda upload sedang diproses, Anda dapat menyumbangkan dataset baru setelah dataset
+                            yang Anda upload
                             sebelumnya
                             telah disetujui.
                             <p class="mt-2"><span class="badge bg-info">Status : pending</span></p>
@@ -275,40 +286,28 @@
                 .then(data => {
                     if (data.status == 422) {
                         document.getElementById('btnNext').disabled = false
-                        // Swal.fire({
-                        //     icon: "error",
-                        //     title: "Oops...",
-                        //     text: data.message,
-                        // });
-                        const errorKey = data.key;
+                        let index = 0
+                        data.key.forEach(element => {
+                            const errorKey = element;
 
-                        // Membuat ID dari kunci yang gagal validasi
-                        const errorElementId = `${errorKey}`;
+                            // Membuat ID dari kunci yang gagal validasi
+                            const errorElementId = `${errorKey}`;
 
-                        // Mengarahkan ke elemen dengan ID yang sesuai
-                        const errorElement = document.getElementById(errorElementId);
+                            // Mengarahkan ke elemen dengan ID yang sesuai
+                            const errorElement = document.getElementById(errorElementId);
 
-                        // Lakukan sesuatu dengan elemen yang bermasalah, misalnya menyoroti input
-                        if (errorElement) {
-                            // Menyoroti elemen yang bermasalah
-                            // errorElement.classList.add('error-highlight');
-                            errorElement.classList.add('is-invalid');
-                            // Mengarahkan halaman ke atas (animasi smooth)
-                            window.scrollTo({
-                                top: errorElement.getBoundingClientRect().top + window.scrollY - 170,
-                                behavior: 'smooth'
-                            });
-                        }
-
-                        // Mengambil elemen dengan class "invalid-feedback"
-                        const invalidFeedback = document.querySelector('.invalid-feedback');
-
-                        // Memeriksa apakah elemen ditemukan
-                        if (invalidFeedback) {
-                            // Mengubah isi (teks) dari elemen
-                            invalidFeedback.textContent =
-                                data.message;
-                        }
+                            // Lakukan sesuatu dengan elemen yang bermasalah, misalnya menyoroti input
+                            if (errorElement) {
+                                // Menyoroti elemen yang bermasalah
+                                errorElement.classList.add('is-invalid');
+                                // Mengarahkan halaman ke atas (animasi smooth)
+                                window.scrollTo({
+                                    top: errorElement.getBoundingClientRect().top + window.scrollY -
+                                        400,
+                                    behavior: 'smooth'
+                                });
+                            } 
+                        });
                     } else {
                         document.getElementById('basic-info').style.display = "none"
                         document.getElementById('more-info').style.display = "block"
@@ -320,7 +319,7 @@
                 });
         }
 
-        function previous(){
+        function previous() {
             document.getElementById('basic-info').style.display = "block"
             document.getElementById('more-info').style.display = "none"
             document.getElementById('btnNext').disabled = false

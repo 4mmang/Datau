@@ -3,7 +3,7 @@
     <main id="main">
         <div class="container login-container p-3" style="margin-top: 8rem; margin-bottom: 1rem">
             <div class="row justify-content-between">
-                <p class="fs-3 mb-4">Profil</p>
+                <p class="fs-2" style="color: #38527E">Profil Saya<span class="fw-bold"></span></p>
                 <div class="col-md-6">
                     <div class="card p-3 shadow-sm">
                         <div class="row justify-content-center">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card p-3 shadow-sm">
-                        <h4 class="text-center" style="color: #38527E">Change Password</h4>
+                        <h4 class="text-center" style="color: #38527E">Edit Password</h4>
                         @if ($errors->any())
                             <div class="alert alert-danger mt-3">
                                 <ul>
@@ -29,12 +29,12 @@
                         @endif
                         <form action="{{ url('reset-password') }}" id="form-reset-password" method="POST" class="mt-3">
                             @csrf
-                            <label for="password">New Password</label>
+                            <label for="password">Password Baru</label>
                             <input type="password" class="form-control" name="password" id="password">
-                            <label for="password_confirmation" class="mt-3">Confirm Password</label>
+                            <label for="password_confirmation" class="mt-3">Konfirmasi Password</label>
                             <input type="password" class="form-control" name="password_confirmation"
                                 id="password_confirmation">
-                            <button type="submit" id="btn-reset-password" class="btn form-control mt-4 text-white mb-3"
+                            <button type="submit" id="btn-reset-password" class="btn mt-4 text-white mb-3"
                                 style="background-color: #38527E">Change</button>
                         </form>
                     </div>

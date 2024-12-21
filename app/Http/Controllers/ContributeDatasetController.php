@@ -38,26 +38,26 @@ class ContributeDatasetController extends Controller
             [
                 'name' => ['required'],
                 'abstract' => ['required'],
-                'instances' => ['required', 'numeric'],
-                'features' => ['required', 'numeric'],
+                'instances' => ['nullable', 'numeric'],
+                'features' => ['nullable', 'numeric'],
                 'characteristics' => ['nullable'],
                 'subjectArea' => ['nullable'],
                 'associatedTasks' => ['nullable'],
                 'featureTypes' => ['nullable'],
             ],
             [
-                'name.required' => 'Harap masukkan nama dataset Anda',
-                'abstract.required' => 'Harap masukkan abstract dataset',
-                'instances.required' => 'Harap masukkan jumlah baris dalam dataset',
-                'features.required' => 'Harap masukkan jumlah fitur dalam dataset',
+                'name.required' => 'Harap masukkan nama dataset!',
+                'abstract.required' => 'Harap masukkan abstract dataset!',
             ],
         );
 
         if ($validator->fails()) {
             return response()->json([
                 'status' => 422,
-                'key' => $validator->errors()->keys()[0],
-                'message' => $validator->errors()->first(),
+                // 'key' => $validator->errors()->keys()[0],
+                'key' => $validator->errors()->keys(),
+                'message' => $validator->errors(),
+                // 'message' => $validator->errors()->first(),
             ]);
         }
 

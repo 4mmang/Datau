@@ -22,7 +22,7 @@
                             @if (Auth::user()->role == 'admin')
                                 <li><a href="{{ url('admin/dashboard') }}">Dashboard Admin</a></li>
                             @else
-                                <li><a href="{{ url('profile') }}">Profil</a></li>
+                                <li><a href="{{ url('profile') }}">Profil Saya</a></li>
                             @endif
                             <li><a href="{{ url('logout') }}">Keluar</a></li>
                         </ul>
