@@ -72,7 +72,9 @@
                                             <tr>
                                                 <td class="align-middle">{{ $loop->iteration }}</td>
                                                 <td class="align-middle">{{ $user->full_name }}</td>
-                                                <td class="align-middle"><span class="{{ $user->status === 'on' ? 'bg-info' : 'bg-secondary' }} text-white rounded-5 py-1 px-3 text-capitalize">{{ $user->status }}</span></td>
+                                                <td class="align-middle"><span
+                                                        class="{{ $user->status === 'on' ? 'bg-info' : 'bg-secondary' }} text-white rounded-5 py-1 px-3 text-capitalize">{{ $user->status }}</span>
+                                                </td>
                                                 <td class="align-middle">{{ $user->email }}</td>
                                                 <td class="align-middle items-center">
                                                     <form action="{{ url('admin/manage/user/' . $user->id) }}"
@@ -185,11 +187,18 @@
                             return response.json();
                         })
                         .then(data => {
-                            console.log(data);
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "The user has been successfully deleted",
-                                icon: "success"
+                                icon: "success",
+                                confirmButtonText: "OK",
+                                allowOutsideClick: false, // Tidak bisa ditutup dengan klik di luar
+                                allowEscapeKey: false // Tidak bisa ditutup dengan tombol Escape
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Reload halaman setelah tombol "OK" ditekan
+                                    window.location.reload();
+                                }
                             });
                         })
                         .catch(error => {

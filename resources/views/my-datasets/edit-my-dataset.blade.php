@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @if ($dataset->status != 'pending')
+    @if (optional($dataset)->status != 'pending')
         <main id="basic-info">
             <div class="container login-container p-3" style="margin-top: 10rem; margin-bottom: 3rem">
                 <div class="text-center">

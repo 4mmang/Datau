@@ -34,7 +34,10 @@ class MyDatasetController extends Controller
         $featureTypes = DatasetFeatureType::join('feature_types', 'feature_types.id', '=', 'dataset_feature_types.id_feature_type')->where('id_dataset', $id)->get();
         $associatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')->where('id_dataset', $id)->get();
         $papers = Paper::where('id_dataset', $id)->get();
-        return view('my-datasets.detail-my-dataset', compact(['dataset', 'characteristics', 'featureTypes', 'associatedTasks', 'papers']));
+        if ($dataset) {
+            return view('my-datasets.detail-my-dataset', compact(['dataset', 'characteristics', 'featureTypes', 'associatedTasks', 'papers']));
+        }
+        abort(404);
     }
 
     public function edit($id)
@@ -50,7 +53,10 @@ class MyDatasetController extends Controller
         $datasetAssociatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')->where('id_dataset', $id)->get();
         $files = UrlFile::where('id_dataset', $id)->get();
         $papers = Paper::where('id_dataset', $id)->get();
-        return view('my-datasets.edit-my-dataset', compact(['files', 'dataset', 'datasetCharacteristics', 'characteristics', 'featureTypes', 'datasetFeatureTypes', 'subjectAreas', 'datasetAssociatedTasks', 'associatedTasks', 'papers']));
+        if ($dataset) {
+            return view('my-datasets.edit-my-dataset', compact(['files', 'dataset', 'datasetCharacteristics', 'characteristics', 'featureTypes', 'datasetFeatureTypes', 'subjectAreas', 'datasetAssociatedTasks', 'associatedTasks', 'papers']));
+        }
+        abort(404);
     }
 
     public function update(Request $request, $id)

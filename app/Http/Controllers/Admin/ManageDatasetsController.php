@@ -140,7 +140,7 @@ class ManageDatasetsController extends Controller
                 $urlFile->delete();
             }
             DB::commit();
-            $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'status', 'note')->get();
+            $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
             return response()->json([
                 'status' => 200,
                 'message' => 'Deleted successfully',
