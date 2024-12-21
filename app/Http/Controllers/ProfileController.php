@@ -10,8 +10,8 @@ class ProfileController extends Controller
         return view('admin.profile');
     }
     
-    public function profile(){
-        return view('profile');
+    public function profil(){
+        return view('profil');
     }
 
 }

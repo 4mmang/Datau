@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ManageDatasetsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ContributeDatasetController;
 use App\Http\Controllers\DatasetController;
@@ -24,46 +25,18 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $subjectAreas = SubjectArea::all();
-    $data = [];
-    foreach ($subjectAreas as $subjectArea) {
-        $datasetCount = Dataset::where('id_subject_area', $subjectArea->id)->count();
-        array_push($data, $datasetCount);
-    } 
+Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 
-    $datasets = Dataset::where('status', 'valid')->get();
-    $countDownloads = [];
-    foreach ($datasets as $dataset) {
-        $downloads = Download::where('id_dataset', $dataset->id)->get();
-        foreach ($downloads as $download) {
-            $countDownloads[] = $dataset->id;
-        }
-    }
 
-    $count = 0;
-    $popularDataset = null;
+Route::get('login', [AuthController::class, 'index'])
+    ->name('login')
+    ->middleware('guest');
 
-    // // Check if $countDownloads is not empty before using max
-    if (!empty($countDownloads)) {
-        $count = max(array_count_values($countDownloads));
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::post('login/validation', [AuthController::class, 'validation']);
 
-        // Menghitung berapa kali setiap nilai muncul dalam array
-        $counts = array_count_values($countDownloads);
-
-        // Menentukan nilai yang paling banyak muncul
-        $maxCount = max($counts);
-
-        // Mendapatkan nilai yang paling banyak muncul
-        $mostCommonValue = array_search($maxCount, $counts);
-
-        $popularDataset = Dataset::findOrFail($mostCommonValue);
-    }
-
-    $newArticles = Article::latest()->take(6)->get();
-    // return view('welcome', compact(['dataset', 'countDownloads', 'popularDataset', 'newDataset']));
-    return view('beranda', compact(['subjectAreas', 'data', 'count', 'popularDataset', 'newArticles']));
-})->name('beranda');
+Route::get('register', [RegistrationController::class, 'index'])->middleware('guest');
+Route::post('register/user', [RegistrationController::class, 'store']);
 
 Route::get('/email/verify', function () {
     return view('verify-email');
@@ -98,19 +71,10 @@ Route::get('/auth/github/callback', [LoginGithubController::class, 'githubCallba
 Route::get('download/{id}', [DownloadController::class, 'download'])->middleware(['auth', 'verified']);
 
 Route::get('datasets', [DatasetController::class, 'index']);
-
 Route::get('detail/dataset/{id}', [DatasetController::class, 'show']);
+Route::get('filter/{id}', [DatasetController::class, 'filter']);
 
-Route::get('login', [AuthController::class, 'index'])
-    ->name('login')
-    ->middleware('guest');
-Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
-Route::post('login/validation', [AuthController::class, 'validation']);
-
-Route::get('register', [RegistrationController::class, 'index'])->middleware('guest');
-Route::post('register/user', [RegistrationController::class, 'store']);
-
-Route::get('donation', [ContributeDatasetController::class, 'index'])->middleware(['auth', 'verified']);
+Route::get('donation', [ContributeDatasetController::class, 'index'])->middleware(['auth', 'verified'])->name('sumbang-dataset');
 Route::post('more/info', [ContributeDatasetController::class, 'moreInfo'])->middleware(['auth', 'verified']);
 Route::post('donation/store', [ContributeDatasetController::class, 'store'])->middleware(['auth', 'verified']);
 Route::get('my/dataset', [MyDatasetController::class, 'index'])->middleware(['auth', 'verified']);
@@ -122,7 +86,7 @@ Route::delete('delete/my/dataset/{id}', [MyDatasetController::class, 'destroy'])
 Route::post('donation/paper', [DonationPaperController::class, 'store'])->middleware(['auth', 'verified']);
 
 Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
-    Route::get('admin/dashboard', [DashboardController::class, 'index']);
+    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('admin/manage/datasets', [ManageDatasetsController::class, 'index']);
     Route::get('admin/detail/dataset/{id}', [ManageDatasetsController::class, 'show']);
     Route::delete('admin/delete/dataset/{id}', [ManageDatasetsController::class, 'destroy']);
@@ -140,7 +104,7 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
     Route::resource('admin/manage/articles', ArticleController::class);
 });
 
-Route::get('article/{id}', function($id){
+Route::get('article/{id}', function ($id) {
     $article = Article::findOrFail($id);
     return view('article', compact('article'));
 });
@@ -164,9 +128,11 @@ Route::get('search/dataset/{key}', function ($key) {
     return response()->json($datasets);
 });
 
-Route::get('filter/{id}', [DatasetController::class, 'filter']);
 
-Route::get('admin/profile', [ProfileController::class, 'profileAdmin'])->middleware('auth')->name('profileAdmin');
-Route::get('profile', [ProfileController::class, 'profile'])->middleware('auth');
+Route::get('admin/profile', [ProfileController::class, 'profileAdmin'])
+    ->middleware('auth')
+    ->name('profileAdmin');
+
+Route::get('profil', [ProfileController::class, 'profil'])->middleware('auth')->name('profil');
 
 Route::post('reset-password', [ChangePasswordController::class, 'changePassword'])->middleware('auth');
