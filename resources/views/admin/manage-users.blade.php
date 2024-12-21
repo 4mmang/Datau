@@ -77,13 +77,13 @@
                                                 </td>
                                                 <td class="align-middle">{{ $user->email }}</td>
                                                 <td class="align-middle items-center">
-                                                    <form action="{{ url('admin/manage/user/' . $user->id) }}"
+                                                    <form action="{{ url('admin/manage/user/' . $user->id) }}" id="status-update-{{ $user->id }}"
                                                         method="post">
                                                         @csrf
                                                         @method('put')
                                                         <input type="hidden" name="status"
                                                             value="{{ $user->status === 'on' ? 'off' : 'on' }}">
-                                                        <button type="submit"
+                                                        <button type="submit" onclick="disableButtonStatus({{ $user->id }})" 
                                                             class="ml-1 btn btn-sm btn-success mb-1 text-center"
                                                             style="width: 1cm">{{ $user->status === 'on' ? 'off' : 'on' }}</button>
                                                     </form>
@@ -207,5 +207,14 @@
                 }
             });
         }
+    </script>
+
+    <script>
+        function disableButtonStatus(id) {
+                const button = document.querySelector(`#status-update-${id} button`);
+                button.disabled = true;
+                button.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+                document.querySelector(`#status-update-${id}`).submit();
+            }
     </script>
 @endsection
