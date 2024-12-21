@@ -28,7 +28,7 @@ class ContributeDatasetController extends Controller
         $myDataset = Dataset::where('id_user', Auth::user()->id)
             ->where('status', 'pending')
             ->first();
-        return view('donation', compact(['characteristics', 'subjectAreas', 'associatedTasks', 'featureTypes', 'myDataset']));
+        return view('dataset.create', compact(['characteristics', 'subjectAreas', 'associatedTasks', 'featureTypes', 'myDataset']));
     }
 
     public function moreInfo(Request $request)

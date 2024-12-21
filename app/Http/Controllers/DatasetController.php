@@ -24,7 +24,7 @@ class DatasetController extends Controller
             }
         }
         $subjectAreas = SubjectArea::all();
-        return view('datasets', compact('datasets', 'countDownloads', 'subjectAreas'));
+        return view('dataset.index', compact('datasets', 'countDownloads', 'subjectAreas'));
     }
 
     public function show($id)
@@ -40,7 +40,7 @@ class DatasetController extends Controller
             ->where('id_dataset', $id)
             ->get();
         $papers = Paper::where('id_dataset', $id)->get();
-        return view('detail', compact(['dataset', 'characteristics', 'featureTypes', 'associatedTasks', 'papers', 'id']));
+        return view('dataset.show', compact(['dataset', 'characteristics', 'featureTypes', 'associatedTasks', 'papers', 'id']));
     }
 
     public function filter($id){

@@ -24,7 +24,7 @@ class MyDatasetController extends Controller
     public function index()
     {
         $datasets = Dataset::where('id_user', Auth::user()->id)->get();
-        return view('my-datasets.index', compact('datasets'));
+        return view('dataset-saya.index', compact('datasets'));
     }
 
     public function show($id)
@@ -35,7 +35,7 @@ class MyDatasetController extends Controller
         $associatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')->where('id_dataset', $id)->get();
         $papers = Paper::where('id_dataset', $id)->get();
         if ($dataset) {
-            return view('my-datasets.detail-my-dataset', compact(['dataset', 'characteristics', 'featureTypes', 'associatedTasks', 'papers']));
+            return view('dataset-saya.show', compact(['dataset', 'characteristics', 'featureTypes', 'associatedTasks', 'papers']));
         }
         abort(404);
     }
@@ -54,7 +54,7 @@ class MyDatasetController extends Controller
         $files = UrlFile::where('id_dataset', $id)->get();
         $papers = Paper::where('id_dataset', $id)->get();
         if ($dataset) {
-            return view('my-datasets.edit-my-dataset', compact(['files', 'dataset', 'datasetCharacteristics', 'characteristics', 'featureTypes', 'datasetFeatureTypes', 'subjectAreas', 'datasetAssociatedTasks', 'associatedTasks', 'papers']));
+            return view('dataset-saya.edit', compact(['files', 'dataset', 'datasetCharacteristics', 'characteristics', 'featureTypes', 'datasetFeatureTypes', 'subjectAreas', 'datasetAssociatedTasks', 'associatedTasks', 'papers']));
         }
         abort(404);
     }

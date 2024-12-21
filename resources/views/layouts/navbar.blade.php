@@ -1,7 +1,7 @@
 <!-- Start Header -->
 <header id="header" class="fixed-top" style="background-color: #38527E">
     <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto ms-2"><a href="{{ url('/') }}"><i class="fad fa-database"></i> PusData Unsulbar</a></h1>
+        <h1 class="logo me-auto ms-2"><a href="{{ route('beranda') }}"><i class="fad fa-database"></i> PusData Unsulbar</a></h1>
         <!-- start navbar -->
         <nav id="navbar" class="navbar p-4">
             <ul>
@@ -14,7 +14,7 @@
                         <li><a href="{{ url('my/dataset') }}">Dataset Saya</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="{{ url('about') }}">Tentang Kami</a></li>
+                <li><a class="nav-link {{ Request::is('tentang-kami') ? 'active' : '' }}" href="{{ route('tentang-kami') }}">Tentang Kami</a></li>
                 @auth
                     <li class="dropdown"><a href="#"><span>{{ Auth::user()->email }}</span><i
                                 class="bi bi-chevron-down"></i></a>

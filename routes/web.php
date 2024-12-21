@@ -62,8 +62,8 @@ Route::get('/', function () {
 
     $newArticles = Article::latest()->take(6)->get();
     // return view('welcome', compact(['dataset', 'countDownloads', 'popularDataset', 'newDataset']));
-    return view('welcome', compact(['subjectAreas', 'data', 'count', 'popularDataset', 'newArticles']));
-});
+    return view('beranda', compact(['subjectAreas', 'data', 'count', 'popularDataset', 'newArticles']));
+})->name('beranda');
 
 Route::get('/email/verify', function () {
     return view('verify-email');
@@ -153,12 +153,9 @@ Route::post('send/code/verification', [ForgotPasswordController::class, 'sendCod
 Route::post('verify', [ForgotPasswordController::class, 'verify']);
 Route::post('reset/password', [ForgotPasswordController::class, 'resetPassword']);
 
-Route::get('contact/information', function () {
-    return view('contact-information');
-});
-Route::get('about', function () {
-    return view('about');
-});
+Route::get('/tentang-kami', function () {
+    return view('tentang-kami');
+})->name('tentang-kami');
 
 Route::get('search/dataset/{key}', function ($key) {
     $datasets = Dataset::where('name', 'like', '%' . $key . '%')

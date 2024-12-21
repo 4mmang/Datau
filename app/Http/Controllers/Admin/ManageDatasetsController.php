@@ -26,7 +26,7 @@ class ManageDatasetsController extends Controller
     public function index()
     {
         $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
-        return view('admin.manage-datasets.index', compact(['datasets']));
+        return view('admin.manage-dataset.index', compact(['datasets']));
     }
 
     public function show($id)
@@ -64,7 +64,7 @@ class ManageDatasetsController extends Controller
             }
         }
 
-        return view('admin.manage-datasets.detail-dataset', compact(['dataset', 'papers', 'id', 'data', 'files']));
+        return view('admin.manage-dataset.show', compact(['dataset', 'papers', 'id', 'data', 'files']));
     }
 
     public function valid($id)
@@ -166,7 +166,7 @@ class ManageDatasetsController extends Controller
         $datasetCharacteristics = DatasetCharacteristic::join('characteristics', 'characteristics.id', '=', 'dataset_characteristics.id_characteristic')->where('id_dataset', $id)->get();
         $datasetFeatureTypes = DatasetFeatureType::join('feature_types', 'feature_types.id', '=', 'dataset_feature_types.id_feature_type')->where('id_dataset', $id)->get();
         $datasetAssociatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')->where('id_dataset', $id)->get();
-        return view('admin.manage-datasets.edit', compact('characteristics', 'datasetCharacteristics', 'dataset', 'subjectAreas', 'associatedTasks', 'featureTypes', 'datasetFeatureTypes', 'datasetAssociatedTasks', 'id'));
+        return view('admin.manage-dataset.edit', compact('characteristics', 'datasetCharacteristics', 'dataset', 'subjectAreas', 'associatedTasks', 'featureTypes', 'datasetFeatureTypes', 'datasetAssociatedTasks', 'id'));
     }
 
     public function update(Request $request, $id)
