@@ -152,7 +152,9 @@ class ManageDatasetsController extends Controller
         DB::beginTransaction();
         try {
             $dataset = Dataset::findOrFail($id);
+            $dataset->abstract = $request->abstract ?? '-';
             $dataset->id_subject_area = $request->subjectArea;
+            $dataset->information = $request->information ?? '-';
             $dataset->update();
 
             $oldCharacteristic = DatasetCharacteristic::where('id_dataset', $id)->get();

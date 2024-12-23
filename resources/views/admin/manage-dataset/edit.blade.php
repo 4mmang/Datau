@@ -61,9 +61,13 @@
                     <!-- Content Row -->
                     <div class="row">
                         <p>Created by <span class="fw-bold">{{ $dataset->user->full_name }}</span></p>
-                        <p>{{ $dataset->abstract }}</p>
+
                         <div class="col-md-12">
-                            <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Dataset Characteristics</p>
+                            <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Abstract</p>
+                            <textarea name="abstract" class="form-control" id="abstract" cols="30" rows="5">{{ $dataset->abstract }}</textarea>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Dataset Characteristics</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="characteristics">
                                     @foreach ($characteristics as $characteristic)
@@ -81,7 +85,7 @@
                     </div>
 
                     <div class="col-md-12 mt-3">
-                        <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Subject Area</p>
+                        <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Subject Area</p>
                         <div class="card p-1 rounded-3">
                             <div class="card-body" id="subjectArea">
                                 @foreach ($subjectAreas as $subjectArea)
@@ -99,7 +103,7 @@
                     </div>
 
                     <div class="col-md-12 mt-3">
-                        <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Associated Task</p>
+                        <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Associated Task</p>
                         <div class="card p-1 rounded-3">
                             <div class="card-body" id="associatedTasks">
                                 @foreach ($associatedTasks as $associatedTask)
@@ -116,7 +120,7 @@
                     </div>
 
                     <div class="col-md-12 mt-3">
-                        <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Feature Types</p>
+                        <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Feature Types</p>
                         <div class="card p-1 rounded-3">
                             <div class="card-body" id="featureTypes">
                                 @foreach ($featureTypes as $featureType)
@@ -131,15 +135,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12 mt-3">
+                        <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Dataset Information</p>
+                        <textarea class="form-control" id="information" name="information" cols="30" rows="5">{!! $dataset->information !!}</textarea>
+                    </div>
                     <button type="submit" id="update" class="btn text-white mt-4 float-end mr-3"
                         style="background-color: #38527E"><i class="fas fa-save mr-1"></i>Update</button>
                 </form>
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- End of Main Content -->
-
+K
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">

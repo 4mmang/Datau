@@ -43,7 +43,7 @@ class DownloadController extends Controller
             // Kirimkan file zip sebagai tanggapan (response)
             return response()
                 ->download(storage_path($zipFileName))
-                ->deleteFileAfterSend(true);   
+                ->deleteFileAfterSend(true);
         } else {
             // Jika terjadi kesalahan saat membuat zip
             return response()->json(['error' => 'Gagal membuat file zip'], 500);

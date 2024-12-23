@@ -58,6 +58,22 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('/') }}js/sb-admin-2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+
+    <script>
+        $('#information').summernote({
+                placeholder: 'Masukkan informasi dataset',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link']],
+                ]
+            });
+    </script>
     @yield('scripts')
 </body>
 

@@ -14,7 +14,7 @@
                 <form>
                     <div class="row justify-content-center mt-5">
                         <div class="col-md-8">
-                            <p class="card-title fs-2 mb-2 text-start" style="color: #38527E; ">Info Dasar</p>
+                            <p class="card-title fs-4 mb-2 text-start" style="color: #38527E; ">Info Dasar</p>
                             <div class="card p-4 rounded-3">
                                 <div class="card-body">
                                     <div class="mb-3 position-relative">
@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="mb-3 position-relative">
                                         <label for="" class="form-label"><span class="">Abstract</span>
-                                            (Garis besar mengenai dataset) <sup class="text-danger">*</sup></label>
+                                            (Garis besar mengenai dataset) <sup class="text-danger"> </sup></label>
                                         <textarea name="" id="abstract" cols="30" class="form-control" rows="5"></textarea>
                                         <div class="invalid-feedback">
                                             Harap masukkan abstract dataset!
@@ -57,7 +57,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Karakteristik Dataset</p>
+                            <p class="card-title fs-4 text-start mb-2" style="color: #38527E;">Karakteristik Dataset</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="characteristics">
                                     @foreach ($characteristics as $characteristic)
@@ -74,7 +74,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Bidang Studi</p>
+                            <p class="card-title fs-4 text-start mb-2" style="color: #38527E;">Bidang Studi</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="subjectArea">
                                     @foreach ($subjectAreas as $subjectArea)
@@ -92,7 +92,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Tugas Terkait</p>
+                            <p class="card-title fs-4 text-start mb-2" style="color: #38527E;">Tugas Terkait</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="associatedTasks">
                                     @foreach ($associatedTasks as $associatedTask)
@@ -109,7 +109,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Jenis Fitur</p>
+                            <p class="card-title fs-4 text-start mb-2" style="color: #38527E;">Jenis Fitur</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="featureTypes">
                                     @foreach ($featureTypes as $featureType)
@@ -139,22 +139,25 @@
             <div class="container" style="margin-top: 6rem; margin-bottom: 3rem">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
-                        <p class="card-title fs-2 mt-5 mb-1 text-start" style="color: #38527E;">
+                        <p class="card-title fs-4 mt-5 mb-1 text-start" style="color: #38527E;">
                             Deskripsi Dataset</p>
                         <textarea name="information" id="information" cols="30" class="form-control" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="row justify-content-center mt-3">
                     <div class="col-md-8">
-                        <p class="card-title fs-2 mb-1 text-start" style="color: #38527E;">File Dataset <sup class="text-danger">*</sup></p>
+                        <p class="card-title fs-4 mb-1 text-start" style="color: #38527E;">File Dataset <sup class="text-danger">*</sup></p>
                         <div class="card p-4">
-                            <input type="file" multiple class="form-control" name="" id="file">
+                            <input type="file" multiple class="form-control" name="file" id="file">
+                            <div class="invalid-feedback">
+                                Harap masukkan file dataset Anda!
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row justify-content-center mt-3">
                     <div class="col-md-8">
-                        <p class="card-title fs-2 mb-1 text-start" style="color: #38527E;">Paper Yang Berhubungan</p>
+                        <p class="card-title fs-4 mb-1 text-start" style="color: #38527E;">Paper Yang Berhubungan</p>
                         <div class="card p-4">
                             <input type="text" placeholder="Judul paper" class="form-control mb-3" name="title"
                                 id="title">
@@ -162,6 +165,9 @@
                                 placeholder="Deskripsi"></textarea>
                             <input type="url" class="form-control" placeholder="Link paper" name="urlPaper"
                                 id="urlPaper">
+                                <div class="invalid-feedback">
+                                    Harap masukkan link akses paper!
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -347,8 +353,6 @@
             let urlPaper = document.getElementById('urlPaper').value
             formData.append('urlPaper', urlPaper)
 
-            console.log(urlPaper);
-
             let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
             fetch('/donation/store', {
                     method: 'POST',
@@ -365,11 +369,14 @@
                 })
                 .then(data => {
                     if (data.status == 422 || data.status == 500) {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: data.message,
-                        });
+                        // console.log(data.key);
+                        
+                        document.getElementById(`${data.key}`).classList.add('is-invalid')
+                        // Swal.fire({
+                        //     icon: "error",
+                        //     title: "Oops...",
+                        //     text: data.message,
+                        // });
                         document.getElementById('submit').disabled = false
                     } else {
                         Swal.fire({

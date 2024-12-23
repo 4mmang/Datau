@@ -37,17 +37,17 @@ class ContributeDatasetController extends Controller
             $request->all(),
             [
                 'name' => ['required'],
-                'abstract' => ['required'],
-                'instances' => ['nullable', 'numeric'],
-                'features' => ['nullable', 'numeric'],
-                'characteristics' => ['nullable'],
-                'subjectArea' => ['nullable'],
-                'associatedTasks' => ['nullable'],
-                'featureTypes' => ['nullable'],
+                // 'abstract' => ['required'],
+                // 'instances' => ['nullable', 'numeric'],
+                // 'features' => ['nullable', 'numeric'],
+                // 'characteristics' => ['nullable'],
+                // 'subjectArea' => ['nullable'],
+                // 'associatedTasks' => ['nullable'],
+                // 'featureTypes' => ['nullable'],
             ],
             [
                 'name.required' => 'Harap masukkan nama dataset!',
-                'abstract.required' => 'Harap masukkan abstract dataset!',
+                // 'abstract.required' => 'Harap masukkan abstract dataset!',
             ],
         );
 
@@ -56,8 +56,8 @@ class ContributeDatasetController extends Controller
                 'status' => 422,
                 // 'key' => $validator->errors()->keys()[0],
                 'key' => $validator->errors()->keys(),
-                'message' => $validator->errors(),
-                // 'message' => $validator->errors()->first(),
+                // 'message' => $validator->errors(),
+                'message' => $validator->errors()->first(),
             ]);
         }
 
@@ -72,11 +72,11 @@ class ContributeDatasetController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'information' => ['required'],
+                // 'information' => ['required'],
                 'files' => ['required'],
             ],
             [
-                'information.required' => 'Harap masukkan informasi dataset',
+                // 'information.required' => 'Harap masukkan informasi dataset',
                 'files.required' => 'Harap masukkan file dataset Anda',
             ],
         );
@@ -84,6 +84,7 @@ class ContributeDatasetController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => 422,
+                'key' => 'file',
                 'message' => $validator->errors()->first(),
             ]);
         }
@@ -93,10 +94,10 @@ class ContributeDatasetController extends Controller
             $dataset->id_user = Auth::user()->id;
             $dataset->id_subject_area = $request->subjectArea;
             $dataset->name = $request->name;
-            $dataset->abstract = $request->abstract;
+            $dataset->abstract = $request->abstract ?? '-';
             $dataset->instances = $request->instances;
             $dataset->features = $request->features;
-            $dataset->information = $request->information;
+            $dataset->information = $request->information ?? '-';
             $dataset->save();
 
             foreach ($request->file('files') as $file) {
@@ -138,6 +139,7 @@ class ContributeDatasetController extends Controller
                 if (!$request->url) {
                     return response()->json([
                         'status' => 422,
+                        'key' => 'urlPaper',
                         'message' => 'Harap isi link paper'
                     ]);
                 }
@@ -149,7 +151,6 @@ class ContributeDatasetController extends Controller
                 $paper->url = $request->urlPaper;
                 $paper->save();
             }
-
 
             DB::commit();
 
