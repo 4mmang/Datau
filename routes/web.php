@@ -19,8 +19,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Models\Article;
 use App\Models\Dataset;
-use App\Models\Download;
-use App\Models\SubjectArea;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -77,6 +75,7 @@ Route::get('filter/{id}', [DatasetController::class, 'filter']);
 Route::get('donation', [ContributeDatasetController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('sumbang-dataset');
+
 Route::post('more/info', [ContributeDatasetController::class, 'moreInfo'])->middleware(['auth', 'verified']);
 Route::post('donation/store', [ContributeDatasetController::class, 'store'])->middleware(['auth', 'verified']);
 Route::get('my/dataset', [MyDatasetController::class, 'index'])->middleware(['auth', 'verified']);
