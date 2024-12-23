@@ -12,7 +12,7 @@
                 <form>
                     <div class="row justify-content-center mt-5">
                         <div class="col-md-8">
-                            <p class="card-title fs-2 mb-2 text-start" style="color: #38527E; ">Basic
+                            <p class="card-title fs-6 mb-2 text-start" style="color: #38527E; ">Basic
                                 Info</p>
                             <div class="card p-4 rounded-3">
                                 <div class="card-body">
@@ -53,7 +53,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Dataset Characteristics</p>
+                            <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Dataset Characteristics</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="characteristics">
                                     @foreach ($characteristics as $characteristic)
@@ -71,7 +71,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Subject Area</p>
+                            <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Subject Area</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="subjectArea">
                                     @foreach ($subjectAreas as $subjectArea)
@@ -90,7 +90,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Associated Task</p>
+                            <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Associated Task</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="associatedTasks">
                                     @foreach ($associatedTasks as $associatedTask)
@@ -108,7 +108,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-2 text-start mb-2" style="color: #38527E;">Feature Types</p>
+                            <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Feature Types</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="featureTypes">
                                     @foreach ($featureTypes as $featureType)
@@ -139,14 +139,14 @@
             <div class="container" style="margin-top: 6rem; margin-bottom: 3rem">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
-                        <p class="card-title fs-2 mt-5 mb-1 text-start" style="color: #38527E;">
+                        <p class="card-title fs-6 mt-5 mb-1 text-start" style="color: #38527E;">
                             Dataset Information</p>
                         <textarea name="information" id="information" cols="30" class="form-control" rows="10">{!! $dataset->information !!}</textarea>
                     </div>
                 </div>
                 <div class="row justify-content-center mt-3">
                     <div class="col-md-8">
-                        <p class="card-title fs-2 mb-1 text-start" style="color: #38527E;">File Dataset</p>
+                        <p class="card-title fs-6 mb-1 text-start" style="color: #38527E;">File Dataset</p>
                         <div class="card p-4">
                             <input type="file" multiple class="form-control" name="" id="file">
                             <p class="mt-4"> Files:
@@ -166,7 +166,7 @@
                 </div>
                 <div class="row justify-content-center mt-3">
                     <div class="col-md-8">
-                        <p class="card-title fs-2 mb-1 text-start" style="color: #38527E;">Related Paper</p>
+                        <p class="card-title fs-6 mb-1 text-start" style="color: #38527E;">Related Paper</p>
                         <div class="card p-4">
                             <input type="text" placeholder="Title paper" class="form-control mb-3" name="title"
                                 id="title">
