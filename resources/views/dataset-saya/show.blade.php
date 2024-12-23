@@ -8,7 +8,7 @@
                                 class="bi bi-arrow-left-short fs-3 "></i></a>Detail Dataset Saya</p>
                     @if (optional($dataset)->status == 'invalid')
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>Dataset invalid!</strong> Please re-register your dataset.
+                            <strong>Dataset ditolak,</strong> Silahkan lakukan perbaikan sesuai dengan catatan yang diberikan!
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
