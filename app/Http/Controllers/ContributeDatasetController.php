@@ -92,7 +92,7 @@ class ContributeDatasetController extends Controller
         try {
             $dataset = new Dataset();
             $dataset->id_user = Auth::user()->id;
-            $dataset->id_subject_area = $request->subjectArea;
+            $dataset->id_subject_area = $request->subjectArea ?? 11;
             $dataset->name = $request->name;
             $dataset->abstract = $request->abstract ?? '-';
             $dataset->instances = $request->instances;
