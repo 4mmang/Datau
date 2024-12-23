@@ -7,7 +7,8 @@
                 <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
                     <h1>Selamat Datang</h1>
-                    <h2 class="fs-5">Platform pengumpulan dataset Pusat Studi Artificial Intelligence, di mana setiap kontribusi Anda berdampak positif
+                    <h2 class="fs-5">Platform pengumpulan dataset Pusat Studi Artificial Intelligence, di mana setiap
+                        kontribusi Anda berdampak positif
                         terhadap kemajuan
                         penelitian dan
                         inovasi.</h2>
@@ -24,7 +25,8 @@
                         <div class="col-md-5 text-center">
                             <div class="card p-4 animated">
                                 <center>
-                                    <img id="img-welcome" src="{{ asset('assets/img/Universitas_Sulawesi_Barat.jpg') }}" class="img-fluid" alt="">
+                                    <img id="img-welcome" src="{{ asset('assets/img/Universitas_Sulawesi_Barat.jpg') }}"
+                                        class="img-fluid" alt="">
                                 </center>
                             </div>
                         </div>
@@ -211,7 +213,8 @@
     <!-- End main -->
 @endsection
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('assets/js/chart.js') }}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
     <script>
         let subjectAreas = @json($subjectAreas).map(item => item.name_subject_area);
         let data = @json($data);

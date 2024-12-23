@@ -186,7 +186,8 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('assets/js/chart.js') }}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
     <script>
         let subjectAreas = @json($subjectAreas).map(item => item.name_subject_area);
         let data = @json($data);

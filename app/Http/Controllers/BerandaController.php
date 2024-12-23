@@ -33,19 +33,22 @@ class BerandaController extends Controller
 
         // // Check if $countDownloads is not empty before using max
         if (!empty($countDownloads)) {
-            $count = max(array_count_values($countDownloads));
+            // $count = max(array_count_values($countDownloads));
 
             // Menghitung berapa kali setiap nilai muncul dalam array
             $counts = array_count_values($countDownloads);
-
             // Menentukan nilai yang paling banyak muncul
             $maxCount = max($counts);
+            // echo $maxCount;
+            $count = $maxCount;
 
             // Mendapatkan nilai yang paling banyak muncul
             $mostCommonValue = array_search($maxCount, $counts);
 
             $popularDataset = Dataset::findOrFail($mostCommonValue);
         }
+
+        // dd($count);
 
         $newArticles = Article::latest()->take(6)->get();
         // return view('welcome', compact(['dataset', 'countDownloads', 'popularDataset', 'newDataset']));
