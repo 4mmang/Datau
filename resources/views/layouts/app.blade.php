@@ -70,7 +70,7 @@
     <script src="{{ asset('/') }}assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="{{ asset('/') }}assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="{{ asset('/') }}assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="{{ asset('/') }}assets/vendor/php-email-form/validate.js"></script>
+    {{-- <script src="{{ asset('/') }}assets/vendor/php-email-form/validate.js"></script> --}}
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
