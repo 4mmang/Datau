@@ -22,20 +22,24 @@ use App\Models\Dataset;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
+// beranda
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 
+// authentikasi
 Route::get('login', [AuthController::class, 'index'])
     ->name('login')
     ->middleware('guest');
-
-Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::post('login/validation', [AuthController::class, 'validation']);
 
+// fungsi logout
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+
+// registrasi
 Route::get('register', [RegistrationController::class, 'index'])->middleware('guest');
 Route::post('register/user', [RegistrationController::class, 'store']);
 
+// verifikasi email
 Route::get('/email/verify', function () {
     return view('verify-email');
 })
@@ -44,12 +48,10 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-
     return redirect()->intended('/');
 })
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
-
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
@@ -68,24 +70,30 @@ Route::get('/auth/github/callback', [LoginGithubController::class, 'githubCallba
 // download dataset
 Route::get('download/{id}', [DownloadController::class, 'download'])->middleware(['auth', 'verified']);
 
+// dataset
 Route::get('datasets', [DatasetController::class, 'index']);
 Route::get('detail/dataset/{id}', [DatasetController::class, 'show']);
 Route::get('filter/{id}', [DatasetController::class, 'filter']);
 
+// sumbang dataset
 Route::get('donation', [ContributeDatasetController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('sumbang-dataset');
-
 Route::post('more/info', [ContributeDatasetController::class, 'moreInfo'])->middleware(['auth', 'verified']);
 Route::post('donation/store', [ContributeDatasetController::class, 'store'])->middleware(['auth', 'verified']);
+
+// dataset saya
 Route::get('my/dataset', [MyDatasetController::class, 'index'])->middleware(['auth', 'verified']);
 Route::get('my/dataset/edit/{id}', [MyDatasetController::class, 'edit'])->middleware(['auth', 'verified']);
 Route::post('more/info/my/dataset', [MyDatasetController::class, 'moreInfo'])->middleware(['auth', 'verified']);
 Route::put('my/dataset/update/{id}', [MyDatasetController::class, 'update'])->middleware(['auth', 'verified']);
 Route::get('my/dataset/{id}', [MyDatasetController::class, 'show'])->middleware(['auth', 'verified']);
 Route::delete('delete/my/dataset/{id}', [MyDatasetController::class, 'destroy'])->middleware(['auth', 'verified']);
+
+// sumbang paper
 Route::post('donation/paper', [DonationPaperController::class, 'store'])->middleware(['auth', 'verified']);
 
+// admin
 Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('admin/manage/datasets', [ManageDatasetsController::class, 'index']);
@@ -105,23 +113,26 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
     Route::resource('admin/manage/articles', ArticleController::class);
 });
 
+// detail artikel
 Route::get('article/{id}', function ($id) {
     $article = Article::findOrFail($id);
     return view('article', compact('article'));
 });
 
+// reset password
 Route::get('forgot/password', function () {
     return view('auth.forgot-password');
 })->middleware('guest');
-
 Route::post('send/code/verification', [ForgotPasswordController::class, 'sendCodeVerification']);
 Route::post('verify', [ForgotPasswordController::class, 'verify']);
 Route::post('reset/password', [ForgotPasswordController::class, 'resetPassword']);
 
+// tentang kami
 Route::get('/tentang-kami', function () {
     return view('tentang-kami');
 })->name('tentang-kami');
 
+// pencarian dataset
 Route::get('search/dataset/{key}', function ($key) {
     $datasets = Dataset::where('name', 'like', '%' . $key . '%')
         ->where('status', 'valid')
@@ -129,16 +140,15 @@ Route::get('search/dataset/{key}', function ($key) {
     return response()->json($datasets);
 });
 
+// profil admin
 Route::get('admin/profile', [ProfileController::class, 'profileAdmin'])
     ->middleware('auth')
     ->name('profileAdmin');
 
+// profil user
 Route::get('profil', [ProfileController::class, 'profil'])
     ->middleware('auth')
     ->name('profil');
 
+// ganti password
 Route::post('reset-password', [ChangePasswordController::class, 'changePassword'])->middleware('auth');
-
-Route::get('/delete', function () {
-    Storage::deleteDirectory('public/datasets/43');
-});
