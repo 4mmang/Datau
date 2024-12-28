@@ -157,8 +157,7 @@
         </footer>
         <!-- End of Footer -->
     </div>
-    <!-- End of Content Wrapper --> 
-    
+    <!-- End of Content Wrapper -->
 @endsection
 @section('scripts')
     <script src="{{ asset('assets/js/chart.js') }}"></script>
@@ -205,7 +204,13 @@
                     y: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1, // Kenaikan 1 per langkah
+                            callback: function(value) {
+                                return Number.isInteger(value) ? value : null; // Hanya tampilkan bilangan bulat
+                            }
+                        }
                     }
                 }
             }

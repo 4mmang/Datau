@@ -110,7 +110,7 @@
                         <div class="card-body">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 class="btn btn-sm p-2 text-white ps-3 pe-3 @guest
-disabled @endguest"
+                                    disabled @endguest"
                                 style="background-color: #38527E">Sumbangkan Paper</a>
                         </div>
                     </div>
