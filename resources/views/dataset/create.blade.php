@@ -3,18 +3,22 @@
     @if (optional($myDataset)->count() < 1)
         <main id="basic-info">
             <div class="container login-container p-3" style="margin-top: 10rem; margin-bottom: 3rem">
-                <div class="text-center">
-                    <h1 class="fw-bold mb-4" style="color: #38527E"><i class="fad fa-database"></i> Formulir Donasi Dataset
-                    </h1>
-                    <h5 style="color: gray">Kami menawarkan kepada pengguna opsi untuk mengupload dataset mereka ke
-                        repositori kami.</h5>
-                    <h5 style="color: gray">Pengguna dapat menyediakan data tabular atau non-tabular yang akan tersedia untuk
-                        umum di repositori kami.
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="text-center">
+                            <h1 class="fw-bold mb-4" style="color: #38527E"><i class="fad fa-database"></i> Formulir Donasi Dataset
+                            </h1>
+                            <h5 style="color: gray">Kami menawarkan kepada pengguna opsi untuk mengupload dataset mereka ke
+                                repositori kami.</h5>
+                            <h5 style="color: gray">Pengguna dapat menyediakan data tabular atau non-tabular yang akan tersedia untuk
+                                umum di repositori kami.
+                        </div>
+                    </div>
                 </div>
                 <form>
                     <div class="row justify-content-center mt-5">
                         <div class="col-md-8">
-                            <p class="card-title fs-4 mb-2 text-start" style="color: #38527E; ">Info Dasar</p>
+                            <p class="card-title fs-5 mb-2 text-start" style="color: #38527E; ">Info Dasar</p>
                             <div class="card p-4 rounded-3">
                                 <div class="card-body">
                                     <div class="mb-3 position-relative">
@@ -40,7 +44,7 @@
                                         <label for="" class="form-label">Jumlah Baris dalam
                                             Dataset <sup class="text-danger"></sup></label>
                                         <input type="number" class="form-control" name="instances" id="instances"
-                                            placeholder="">
+                                            >
                                         <div class="invalid-feedback">
                                         </div>
                                         <hr class="border-bottom">
@@ -48,7 +52,7 @@
                                     <div class="mb-3 position-relative">
                                         <label for="" class="form-label">Jumlah Fitur dalam Dataset <sup
                                                 class="text-danger"></sup></label>
-                                        <input type="number" class="form-control" id="features" placeholder="">
+                                        <input type="number" class="form-control" id="features" >
                                         <hr class="border-bottom">
                                     </div>
                                 </div>
@@ -57,7 +61,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-4 text-start mb-2" style="color: #38527E;">Karakteristik Dataset</p>
+                            <p class="card-title fs-5 text-start mb-2" style="color: #38527E;">Karakteristik Dataset</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="characteristics">
                                     @foreach ($characteristics as $characteristic)
@@ -74,7 +78,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-4 text-start mb-2" style="color: #38527E;">Bidang Studi</p>
+                            <p class="card-title fs-5 text-start mb-2" style="color: #38527E;">Bidang Studi</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="subjectArea">
                                     @foreach ($subjectAreas as $subjectArea)
@@ -92,7 +96,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-4 text-start mb-2" style="color: #38527E;">Tugas Terkait</p>
+                            <p class="card-title fs-5 text-start mb-2" style="color: #38527E;">Tugas Terkait</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="associatedTasks">
                                     @foreach ($associatedTasks as $associatedTask)
@@ -109,7 +113,7 @@
                     </div>
                     <div class="row justify-content-center mt-3">
                         <div class="col-md-8">
-                            <p class="card-title fs-4 text-start mb-2" style="color: #38527E;">Jenis Fitur</p>
+                            <p class="card-title fs-5 text-start mb-2" style="color: #38527E;">Jenis Fitur</p>
                             <div class="card p-1 rounded-3">
                                 <div class="card-body" id="featureTypes">
                                     @foreach ($featureTypes as $featureType)
@@ -139,14 +143,14 @@
             <div class="container" style="margin-top: 6rem; margin-bottom: 3rem">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
-                        <p class="card-title fs-4 mt-5 mb-1 text-start" style="color: #38527E;">
+                        <p class="card-title fs-5 mt-5 mb-1 text-start" style="color: #38527E;">
                             Deskripsi Dataset</p>
                         <textarea name="information" id="information" cols="30" class="form-control" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="row justify-content-center mt-3">
                     <div class="col-md-8">
-                        <p class="card-title fs-4 mb-1 text-start" style="color: #38527E;">File Dataset <sup class="text-danger">*</sup></p>
+                        <p class="card-title fs-5 mb-1 text-start" style="color: #38527E;">File Dataset <sup class="text-danger">*</sup></p>
                         <div class="card p-4">
                             <input type="file" multiple class="form-control" name="file" id="file">
                             <div class="invalid-feedback">
@@ -157,7 +161,7 @@
                 </div>
                 <div class="row justify-content-center mt-3">
                     <div class="col-md-8">
-                        <p class="card-title fs-4 mb-1 text-start" style="color: #38527E;">Paper Yang Berhubungan</p>
+                        <p class="card-title fs-5 mb-1 text-start" style="color: #38527E;">Paper Yang Berhubungan</p>
                         <div class="card p-4">
                             <input type="text" placeholder="Judul paper" class="form-control mb-3" name="title"
                                 id="title">

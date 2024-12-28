@@ -3,11 +3,13 @@
     @if (optional($dataset)->status != 'pending')
         <main id="basic-info">
             <div class="container login-container p-3" style="margin-top: 10rem; margin-bottom: 3rem">
-                <div class="text-center">
-                    <h1 class="fw-bold mb-4" style="color: #38527E"><i class="fad fa-database"></i> Edit Dataset </h1>
-                    <h5 style="color: gray">Donators are free to edit their donated datasets, but edits must be approved
-                        before
-                        finalizing. </h5>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="text-center">
+                            <h1 class="fw-bold mb-4" style="color: #38527E"><i class="fad fa-database"></i> Edit Dataset </h1>
+                            <h5 style="color: gray">Para donatur bebas mengedit kumpulan data yang disumbangkannya, tetapi pengeditan harus disetujui sebelum diselesaikan.</h5>
+                        </div>
+                    </div>
                 </div>
                 <form>
                     <div class="row justify-content-center mt-5">
@@ -35,7 +37,7 @@
                                     <div class="mb-3 position-relative">
                                         <label for="" class="form-label">Number of Instances (Rows) in
                                             Dataset</label>
-                                        <input type="number" value="{{ $dataset->instances ?? 0 }}" class="form-control"
+                                        <input type="number" value="{{ $dataset->instances }}" class="form-control"
                                             name="instances" id="instances" placeholder="">
                                         <div class="invalid-feedback">
                                         </div>
@@ -43,7 +45,7 @@
                                     </div>
                                     <div class="mb-3 position-relative">
                                         <label for="" class="form-label">Number of Features in Dataset</label>
-                                        <input type="number" class="form-control" value="{{ $dataset->features ?? 0 }}"
+                                        <input type="number" class="form-control" value="{{ $dataset->features }}"
                                             id="features" placeholder="">
                                         <hr class="border-bottom">
                                     </div>

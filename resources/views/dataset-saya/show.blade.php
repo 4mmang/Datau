@@ -21,7 +21,7 @@
                                 <a href="{{ url('detail') }}">
                                     <h2 class="mt-3 text-capitalize" style="color: #38527E">{{ $dataset->name }}</h2>
                                 </a>
-                                <p><span class="badge bg-info p-1 me-2">{{ $dataset->status }}</span></span><span
+                                <p><span class="badge bg-info p-1 me-2 px-2">{{ $dataset->status }}</span><span
                                         class="text-danger">{{ $dataset->note }}</span></p>
 
                             </div>
@@ -76,13 +76,12 @@
                             </div>
                             <div class="col-md-3 ms-3">
                                 <h4># Jumlah Baris</h4>
-                                <p>{{ $dataset->instances }}</p>
+                                <p>{{ $dataset->instances ?? '-' }}</p>
                             </div>
                             <div class="col-md-3 ms-3">
                                 <h4># Jumlah Fitur</h4>
-                                <p>{{ $dataset->features }}</p>
+                                <p>{{ $dataset->features ?? '-' }}</p>
                             </div>
-
                         </div>
                     </div>
                 </div>
