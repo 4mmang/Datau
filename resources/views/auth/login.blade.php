@@ -9,7 +9,7 @@
                             <form action="{{ url('login/validation') }}" method="post">
                                 @csrf
                                 {{-- <h4 class="fs-2" style="color: #38527E">Masuk</h4> --}}
-                                <h5 class="small">Belum punya akun? <a href="{{ url('register') }}">Daftar</a></h5>
+                                <h5 class="lg">Belum punya akun? <a href="{{ url('register') }}" style="color: #38527E">Daftar</a></h5>
                                 @error('message')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -40,7 +40,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <a class="small" href="{{ url('forgot/password') }}">Lupa Password?</a>
+                                    <a class="small" href="{{ url('forgot/password') }}" style="color: #38527E">Lupa Password?</a>
                                 </div>
                                 <button type="submit" class="btn  w-100" style="background-color: #38527E">
                                     <h5 class="text-light mt-2"><i class="fal fa-sign-in"></i> Masuk</h5>

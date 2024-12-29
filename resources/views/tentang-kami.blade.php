@@ -8,7 +8,7 @@
                     <div class="">
                         <p class="fs-2" style="color: #38527E">Tentang Kami<span class="fw-bold"></span></p>
                         <h5 class="text-start mt-3" style="color: gray;">
-                            PUSDATA UNSULBAR merupakan platform kumpulan dataset yang digunakan oleh Pusat Studi Artificial Intelligence
+                            PUSDATA UNSULBAR merupakan platform pengumpulan data yang disediakan oleh Pusat Studi Artificial Intelligence
                             dalam dunia penelitian.
                         </h5>
                     </div>
