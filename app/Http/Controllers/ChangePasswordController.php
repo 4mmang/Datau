@@ -20,7 +20,7 @@ class ChangePasswordController extends Controller
         $profile->save();
 
         return back()->with([
-            'message' => 'Sucessfully updated password',
+            'message' => 'Password berhasil diperbaharui',
         ]);
     }
 }

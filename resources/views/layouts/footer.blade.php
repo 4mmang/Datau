@@ -11,7 +11,7 @@
                              <span class="fw-bold">Telepon</span>: +62822 9076 2799<br>
                         </p>
                         <p>
-                             <span class="fw-bold">Email</span>: ammangdeveloper@gmail.com<br>
+                             <span class="fw-bold">Email</span>: pusatstudiai@gmail.com<br>
                         </p>
                     </p>
                 </div>
@@ -19,19 +19,12 @@
                 <div class="col-lg-4 col-md-6 footer-links">
                     <h4><i class="far fa-link"></i> Tautan Berguna</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{{ url('/') }}">Beranda</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{{ url('datasets') }}">Temukan Dataset</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{{ url('donation') }}">Sumbang Dataset</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{{ url('about') }}">Tentang Kami</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('beranda') }}">Beranda</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('dataset.index') }}">Temukan Dataset</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('dataset.create') }}">Sumbang Dataset</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('tentang-kami') }}">Tentang Kami</a></li>
                     </ul>
-                </div>
-
-                {{-- <div class="col-lg-3 col-md-6 footer-links">
-                    <h4><i class="far fa-wreath"></i> Layanan Kami</h4>
-                    <ul> 
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                    </ul>
-                </div> --}}
+                </div> 
 
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4><i class="far fa-share-alt"></i> Sosial Media</h4>
