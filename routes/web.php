@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KelolaDatasetController;
 use App\Http\Controllers\Admin\ManageDatasetsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ValidasiDatasetController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\ChangePasswordController;
@@ -14,7 +16,6 @@ use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginGithubController;
 use App\Http\Controllers\LoginGoogleController;
-use App\Http\Controllers\MyDatasetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Models\Article;
@@ -71,47 +72,40 @@ Route::get('/auth/github/callback', [LoginGithubController::class, 'githubCallba
 Route::get('download/{id}', [DownloadController::class, 'download'])->middleware(['auth', 'verified']);
 
 // dataset
-Route::get('datasets', [DatasetController::class, 'index']);
-Route::get('detail/dataset/{id}', [DatasetController::class, 'show']);
-Route::get('filter/{id}', [DatasetController::class, 'filter']);
+Route::prefix('/dataset')
+    ->as('dataset.')
+    ->group(function () {
+        Route::get('/', [DatasetController::class, 'index'])->name('index');
+        Route::get('detail/dataset/{id}', [DatasetController::class, 'show'])->name('show');
+        Route::get('filter/{id}', [DatasetController::class, 'filter'])->name('filter');
 
-// sumbang dataset
-Route::get('donation', [ContributeDatasetController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('sumbang-dataset');
-Route::post('more/info', [ContributeDatasetController::class, 'moreInfo'])->middleware(['auth', 'verified']);
-Route::post('donation/store', [ContributeDatasetController::class, 'store'])->middleware(['auth', 'verified']);
-
-// dataset saya
-Route::get('my/dataset', [MyDatasetController::class, 'index'])->middleware(['auth', 'verified']);
-Route::get('my/dataset/edit/{id}', [MyDatasetController::class, 'edit'])->middleware(['auth', 'verified']);
-Route::post('more/info/my/dataset', [MyDatasetController::class, 'moreInfo'])->middleware(['auth', 'verified']);
-Route::put('my/dataset/update/{id}', [MyDatasetController::class, 'update'])->middleware(['auth', 'verified']);
-Route::get('my/dataset/{id}', [MyDatasetController::class, 'show'])->middleware(['auth', 'verified']);
-Route::delete('delete/my/dataset/{id}', [MyDatasetController::class, 'destroy'])->middleware(['auth', 'verified']);
+        Route::group(['middleware' => ['auth', 'verified']], function () {
+            Route::get('/create', [ContributeDatasetController::class, 'create'])->name('create');
+            Route::post('/store', [ContributeDatasetController::class, 'store'])->name('store');
+        });
+    });
 
 // sumbang paper
 Route::post('donation/paper', [DonationPaperController::class, 'store'])->middleware(['auth', 'verified']);
 
 // admin
-Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
-    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('admin/manage/datasets', [ManageDatasetsController::class, 'index']);
-    Route::get('admin/detail/dataset/{id}', [ManageDatasetsController::class, 'show']);
-    Route::delete('admin/delete/dataset/{id}', [ManageDatasetsController::class, 'destroy']);
+Route::prefix('/admin')
+    ->as('admin.')
+    ->group(function () {
+        Route::group(['middleware' => ['auth', 'verified']], function () {
+            Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+            Route::resource('/dataset', KelolaDatasetController::class);
+        });
 
-    Route::get('admin/edit/dataset/{id}', [ManageDatasetsController::class, 'edit']);
-    Route::put('admin/update/dataset/{id}', [ManageDatasetsController::class, 'update']);
-
-    Route::put('admin/validate/dataset/{id}', [ManageDatasetsController::class, 'valid']);
-    Route::post('admin/invalid/dataset/{id}', [ManageDatasetsController::class, 'invalid']);
-
-    Route::get('admin/manage/users', [UserController::class, 'index']);
-    Route::put('admin/manage/user/{id}', [UserController::class, 'update']);
-    Route::delete('admin/delete/user/{id}', [UserController::class, 'destroy']);
-
-    Route::resource('admin/manage/articles', ArticleController::class);
-});
+        Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
+            Route::put('/validate/dataset/{id}', [ValidasiDatasetController::class, 'valid']);
+            Route::post('/invalid/dataset/{id}', [ValidasiDatasetController::class, 'invalid']);
+            Route::get('/manage/users', [UserController::class, 'index']);
+            Route::put('/manage/user/{id}', [UserController::class, 'update']);
+            Route::delete('/delete/user/{id}', [UserController::class, 'destroy']);
+            Route::resource('/manage/articles', ArticleController::class);
+        });
+    });
 
 // detail artikel
 Route::get('article/{id}', function ($id) {

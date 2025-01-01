@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::create([
-            'full_name' => 'Testing Saja',
-            'email' => 'testingsaja@example.com',
+            'full_name' => 'Arman',
+            'email' => 'arman@example.com',
             'role' => 'user',
-            'password' => Hash::make('12345678')
+            'password' => Hash::make('1234')
         ]);
         
         // $this->call([CharacteristicSeeder::class, AssociatedTaskSeeder::class, FeatureTypeSeeder::class, SubjectAreaSeeder::class]);

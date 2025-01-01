@@ -50,17 +50,17 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between">
-                    <p class="fs-2 mb-0" style="color: #38527E"> <a href="{{ url('admin/manage/datasets') }}"><i
+                    <p class="fs-2 mb-0" style="color: #38527E"> <a href="{{ route('admin.dataset.index') }}"><i
                                 class="fas fa-arrow-left fa-sm mr-1" style="color: #38527E"></i></a>Edit Dataset <span
                             class="fw-bold">"{{ $dataset->name }}"</span></p>
                 </div>
 
-                <form action="{{ url('admin/update/dataset/' . $id) }}" method="post" id="form-update">
+                <form action="{{ route('admin.dataset.update', $id) }}" method="post" id="form-update">
                     @csrf
                     @method('put')
                     <!-- Content Row -->
                     <div class="row">
-                        <p>Created by <span class="fw-bold">{{ $dataset->user->full_name }}</span></p>
+                        <p>Dibuat oleh : <span class="fw-bold">{{ $dataset->user->full_name }}</span></p>
 
                         <div class="col-md-12">
                             <p class="card-title fs-6 text-start mb-2" style="color: #38527E;">Abstract</p>
@@ -146,7 +146,7 @@
             <!-- /.container-fluid -->
         </div>
         <!-- End of Main Content -->
-K
+
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
@@ -158,7 +158,7 @@ K
         <!-- End of Footer -->
 
     </div>
-    <!-- End of Content Wrapper --> 
+    <!-- End of Content Wrapper -->
     @if (session('message'))
         <script>
             Swal.fire({

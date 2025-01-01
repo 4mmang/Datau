@@ -41,8 +41,10 @@
                                                 <h5 class="text-capitalize" style="color: #38527E">{{ $dataset->name }}
                                                 </h5>
                                             </a>
+                                            @if ($dataset->abstract)
                                             <p>{{ Str::limit($dataset->abstract, 100, '...') }}
                                             </p>
+                                            @endif
                                             <div class="input-group gap-5">
                                                 <a href="" class="nav-link"><i class="bi bi-download me-2"></i>
                                                     @php
@@ -58,10 +60,10 @@
                                                     {{ $count }}
                                                 </a>
                                                 <a href="#" class="nav-link"><i
-                                                        class="bi bi-building me-2"></i>{{ $dataset->instances }}
+                                                        class="bi bi-building me-2"></i>{{ $dataset->instances ?? '- ' }}
                                                     Jumlah baris</a>
                                                 <a href="#" class="nav-link"><i
-                                                        class="bi bi-table me-2"></i>{{ $dataset->features }}
+                                                        class="bi bi-table me-2"></i>{{ $dataset->features ?? '- ' }}
                                                     Jumlah fitur</a>
                                             </div>
                                         </div>

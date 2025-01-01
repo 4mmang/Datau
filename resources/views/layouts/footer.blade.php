@@ -53,7 +53,7 @@
 </footer>
 <!-- End Footer -->
 
-<div id="preloader"></div>
+{{-- <div id="preloader"></div> --}}
 <a href="#" style="background-color: #38527E" class="back-to-top border-white border d-flex align-items-center justify-content-center">
     <i class="bi bi-arrow-up-short"></i>
 </a>

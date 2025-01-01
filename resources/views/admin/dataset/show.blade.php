@@ -49,7 +49,7 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <p class="fs-2 mb-0" style="color: #38527E"><a href="{{ url('admin/manage/datasets') }}"
+                    <p class="fs-2 mb-0" style="color: #38527E"><a href="{{ route('admin.dataset.index') }}"
                             style="color: #38527E"><i class="fas fa-arrow-left mr-2 fa-sm"></i></a>Detail Dataset</p>
                 </div>
 
@@ -68,7 +68,7 @@
                                         <h2 class="mt-3 text-capitalize" style="color: #38527E">{{ $dataset->name }}
                                         </h2>
                                     </a>
-                                    <p class="text-capitalize]" style="margin-bottom: 0px">{{ $dataset->user->full_name }}
+                                    <p class="text-capitalize]" style="margin-bottom: 0px">Dibuat oleh : {{ $dataset->user->full_name }}
                                     </p>
                                     <span id="status" class="badge bg-info p-1 me-2">{{ $dataset->status }}</span><span
                                         class="text-danger">{{ $dataset->note }}</span>
@@ -146,12 +146,12 @@
                             </div>
                         </div>
                     </div>
-                    @if ($dataset->status == 'pending')
-                        <div class="col-md-3 mt-3" id="btnValidate">
-                            <a href="#" onclick="valid({{ $id }})" class="btn btn-success btn-sm mt-2"><i
-                                    class="fas fa-check mr-1"></i>Approve</a>
-                            <button data-toggle="modal" data-target="#modalInvalid" class="btn btn-danger btn-sm mt-2"><i
-                                    class="fas fa-times mr-1"></i>Reject</button>
+                    @if ($dataset->status == 'pending' && Auth::user()->role === 'admin')
+                        <div class="col-md-12 text-end mt-3 " id="btnValidate">
+                            <a href="#" onclick="valid({{ $id }})" class="btn btn-success mt-2 px-3"><i
+                                    class="fas fa-check mr-1"></i>Setujui</a>
+                            <button data-toggle="modal" data-target="#modalInvalid" class="btn px-3 btn-danger mt-2"><i
+                                    class="fas fa-times mr-1"></i>Tolak</button>
                         </div>
                     @endif
                 </div>

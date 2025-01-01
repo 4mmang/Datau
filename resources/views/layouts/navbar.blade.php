@@ -8,24 +8,19 @@
             <ul>
                 <li><a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">Beranda</a>
                 </li>
-                <li class="dropdown"><a href="#"><span>Pusat Data</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a class="{{ Request::is('dataset*') ? 'active' : '' }}" href="#"><span>Pusat Data</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="{{ url('datasets') }}">Temukan Dataset</a></li>
-                        <li><a href="{{ route('sumbang-dataset') }}">Sumbang Dataset</a></li>
-                        <li><a href="{{ url('my/dataset') }}">Dataset Saya</a></li>
+                        <li><a href="{{ route('dataset.index') }}" class="{{ Request::is('dataset') ? 'text-primary' : '' }}">Temukan Dataset</a></li>
+                        <li><a href="{{ route('dataset.create') }}" class="{{ Request::is('dataset/create') ? 'text-primary' : '' }}">Sumbang Dataset</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-link {{ Request::is('tentang-kami') ? 'active' : '' }}"
                         href="{{ route('tentang-kami') }}">Tentang Kami</a></li>
                 @auth
-                    <li class="dropdown"><a href="#"><span>{{ Auth::user()->email }}</span><i
+                    <li class="dropdown"><a href="#"><span>{{ Auth::user()->full_name }}</span><i
                                 class="bi bi-chevron-down"></i></a>
                         <ul>
-                            @if (Auth::user()->role == 'admin')
-                                <li><a href="{{ route('admin.dashboard') }}">Dashboard Admin</a></li>
-                            @else
-                                <li><a href="{{ route('profil') }}">Profil Saya</a></li>
-                            @endif
+                            <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li><a href="{{ url('logout') }}">Keluar</a></li>
                         </ul>
                     </li>

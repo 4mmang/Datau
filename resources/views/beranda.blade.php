@@ -7,11 +7,11 @@
                 <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
                     <h1>Selamat Datang</h1>
-                    <h2 class="fs-5">Platform pengumpulan dataset Pusat Studi Artificial Intelligence, di mana setiap
+                    <h2 class="fs-5">Platform pengumpulan data Pusat Studi Artificial Intelligence Universitas Sulawesi Barat, di mana setiap
                         kontribusi Anda berdampak positif
                         terhadap kemajuan
                         penelitian dan
-                        inovasi.</h2>
+                        pengembangan teknologi.</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
                         <a href="{{ url('datasets') }}" class="btn-get-started scrollto"><i class="fal fa-search"></i>
                             Temukan
@@ -88,17 +88,18 @@
                 @endif
             </div>
             @if ($newArticles->count() > 0)
-                <div class="row mt-3">
+                <div class="row mt-3 justify-content-center">
                     <p class="fs-3 text-center mb-5">Mungkin Anda tertarik membaca artikel berikut.</p>
                     @foreach ($newArticles as $article)
                         <div class="col-md-4 mb-3">
-                            <div class="card shadow">
+                            <div class="card shadow pt-3">
                                 <a href="{{ url('article/' . $article->id) }}" target="_blank"
                                     style="text-decoration: none; color: #333;">
                                     <div class="d-flex justify-content-center align-items-center"
                                         style="width: 100%; height: 200px; overflow: hidden;">
                                         <img src="{{ asset('storage/' . $article->cover) }}" alt="FastText Thumbnail"
-                                            class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                                            class="img-fluid">
+                                            {{-- style="width: 100%; height: 100%; object-fit: cover;" --}}
                                     </div>
                                     <div class="card-body">
                                         <h4 class="mt-3">{{ Str::limit($article->title, 30, '...') }}</h4>

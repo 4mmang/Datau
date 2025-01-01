@@ -52,7 +52,7 @@
         $('#information').summernote({
             placeholder: 'Masukkan informasi dataset',
             tabsize: 2,
-            height: 120,
+            height: 135,
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
@@ -78,6 +78,24 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('/') }}assets/js/main.js"></script>
     <script src="{{ asset('fontawesome/js/all.min.js') }}"></script>
+    @if (session('message'))
+        <script>
+            Swal.fire({
+                title: "Bagus!",
+                text: "{{ session('message') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
+    @if ($errors->has('error'))
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "{{ $errors->first('error') }}",
+            });
+        </script>
+    @endif
     @yield('scripts')
 
 </body>

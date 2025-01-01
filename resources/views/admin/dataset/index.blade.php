@@ -49,7 +49,7 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <p class="fs-2 mb-0" style="color: #38527E">Manage Datasets</p>
+                    <p class="fs-2 mb-0" style="color: #38527E">Kelola Dataset</p>
                 </div>
 
                 <!-- Content Row -->
@@ -85,10 +85,10 @@
                                                     @endif
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a href="{{ url('admin/edit/dataset/' . $dataset->id) }}"
+                                                    <a href="{{ route('admin.dataset.edit', $dataset->id) }}"
                                                         class="ml-1 btn btn-warning btn-sm mb-1 text-center"
                                                         style="width: 1cm"><i class="fas fa-pen"></i></a>
-                                                    <a href="{{ url('admin/detail/dataset/' . $dataset->id) }}"
+                                                    <a href="{{ route('admin.dataset.show', $dataset->id) }}"
                                                         class="ml-1 btn btn-primary btn-sm mb-1 text-center"
                                                         style="width: 1cm"><i class="fas fa-eye"></i></a>
                                                     <a href="#" onclick="deleteDataset({{ $dataset->id }})"
@@ -120,7 +120,7 @@
         <!-- End of Footer -->
 
     </div>
-    <!-- End of Content Wrapper --> 
+    <!-- End of Content Wrapper -->
 @endsection
 @section('scripts')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -146,7 +146,7 @@
                 if (result.isConfirmed) {
                     let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-                    fetch('/admin/delete/dataset/' + id, {
+                    fetch('/admin/dataset/' + id, {
                             method: 'DELETE',
                             headers: {
                                 'X-CSRF-TOKEN': csrfToken,

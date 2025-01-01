@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item {{ Request::is('admin/dashboard') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('admin/dashboard') }}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -26,24 +26,24 @@
     <div class="sidebar-heading">
         menu
     </div>
-    <li
-        class="nav-item {{ Request::is('admin/manage/datasets') || Request::is('admin/*/dataset/*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('admin/manage/datasets') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Manage Datasets</span></a>
+    <li class="nav-item {{ Request::is('admin/dataset*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.dataset.index') }}">
+            <i class="fas fa-fw fa-database"></i>
+            <span>Dataset</span></a>
     </li>
+    @if (Auth::user()->role == 'admin')
+        <li class="nav-item {{ Request::is('admin/manage/users') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('admin/manage/users') }}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Manage Users</span></a>
+        </li>
 
-    <li class="nav-item {{ Request::is('admin/manage/users') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('admin/manage/users') }}">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Manage Users</span></a>
-    </li>
-
-    <li class="nav-item {{ Request::is('admin/manage/articles*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('admin/manage/articles') }}">
-            <i class="fas fa-fw fa-file-alt"></i>
-            <span>Manage Articles</span></a>
-    </li>
+        <li class="nav-item {{ Request::is('admin/manage/articles*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('admin/manage/articles') }}">
+                <i class="fas fa-fw fa-file-alt"></i>
+                <span>Manage Articles</span></a>
+        </li>
+    @endif
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

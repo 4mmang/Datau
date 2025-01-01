@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\AssociatedTask;
 use App\Models\Characteristic;
 use App\Models\Dataset;
@@ -14,23 +15,32 @@ use App\Models\FeatureType;
 use App\Models\Paper;
 use App\Models\SubjectArea;
 use App\Models\UrlFile;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 
-class ManageDatasetsController extends Controller
+class KelolaDatasetController extends Controller
 {
     public function index()
     {
         $datasets = Dataset::all();
+        $user = Auth::user();
+        if ($user->role != 'admin') {
+            $datasets = Dataset::where('id_user', $user->id)->get();
+        }
         // $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
-        return view('admin.manage-dataset.index', compact(['datasets']));
+        return view('admin.dataset.index', compact(['datasets']));
     }
 
     public function show($id)
     {
+        $user = Auth::user();
         $dataset = Dataset::findOrFail($id);
+        if ($user->role != 'admin') {
+            $dataset = Dataset::where('id', $id)
+                ->where('id_user', $user->id)
+                ->firstOrFail();
+        }
         // $dataset = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.*', 'datasets.status')->findOrFail($id);
         $papers = Paper::where('id_dataset', $id)->get();
 
@@ -38,48 +48,21 @@ class ManageDatasetsController extends Controller
         $folderPath = 'public/datasets/' . $id;
         $files = Storage::files($folderPath);
 
-        return view('admin.manage-dataset.show', compact(['dataset', 'papers', 'id', 'files']));
-    }
-
-    public function valid($id)
-    {
-        $dataset = Dataset::findOrFail($id);
-        $dataset->status = 'valid';
-        $dataset->note = '-';
-        $dataset->update();
-        return response()->json([
-            'message' => 'success',
-        ]);
-    }
-
-    public function invalid(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'note' => ['required'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 422,
-                'message' => $validator->errors()->first(),
-            ]);
-        }
-
-        $dataset = Dataset::findOrFail($id);
-        $dataset->status = 'invalid';
-        $dataset->note = $request->note;
-        $dataset->update();
-        return response()->json([
-            'status' => 200,
-            'message' => 'invalid',
-        ]);
+        return view('admin.dataset.show', compact(['dataset', 'papers', 'id', 'files']));
     }
 
     public function destroy($id)
     {
         DB::beginTransaction();
         try {
+            $user = Auth::user();
             $dataset = Dataset::findOrFail($id);
+            if ($user->role != 'admin') {
+                $dataset = Dataset::where('id', $id)
+                    ->where('id_user', $user->id)
+                    ->firstOrFail();
+            }
+
             $id = $dataset->id;
             $dataset->delete();
 
@@ -113,8 +96,8 @@ class ManageDatasetsController extends Controller
                 // Storage::delete('public/' . $urlFile->url_file);
                 $urlFile->delete();
             }
-            Storage::deleteDirectory('public/datasets/'.$id);
-            
+            Storage::deleteDirectory('public/datasets/' . $id);
+
             DB::commit();
             $datasets = Dataset::with('user')->get();
             // $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
@@ -139,19 +122,31 @@ class ManageDatasetsController extends Controller
         $associatedTasks = AssociatedTask::all();
         $featureTypes = FeatureType::all();
 
+        $user = Auth::user();
         $dataset = Dataset::findOrFail($id);
+        if ($user->role != 'admin') {
+            $dataset = Dataset::where('id', $id)
+                ->where('id_user', $user->id)
+                ->firstOrFail();
+        }
         // $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->select('datasets.id as id_dataset', 'datasets.*', 'subject_areas.*')->find($id);
         $datasetCharacteristics = DatasetCharacteristic::join('characteristics', 'characteristics.id', '=', 'dataset_characteristics.id_characteristic')->where('id_dataset', $id)->get();
         $datasetFeatureTypes = DatasetFeatureType::join('feature_types', 'feature_types.id', '=', 'dataset_feature_types.id_feature_type')->where('id_dataset', $id)->get();
         $datasetAssociatedTasks = DatasetAssociatedTask::join('associated_tasks', 'associated_tasks.id', '=', 'dataset_associated_tasks.id_associated_task')->where('id_dataset', $id)->get();
-        return view('admin.manage-dataset.edit', compact('characteristics', 'datasetCharacteristics', 'dataset', 'subjectAreas', 'associatedTasks', 'featureTypes', 'datasetFeatureTypes', 'datasetAssociatedTasks', 'id'));
+        return view('admin.dataset.edit', compact('characteristics', 'datasetCharacteristics', 'dataset', 'subjectAreas', 'associatedTasks', 'featureTypes', 'datasetFeatureTypes', 'datasetAssociatedTasks', 'id'));
     }
 
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
         try {
+            $user = Auth::user();
             $dataset = Dataset::findOrFail($id);
+            if ($user->role != 'admin') {
+                $dataset = Dataset::where('id', $id)
+                    ->where('id_user', $user->id)
+                    ->firstOrFail();
+            }
             $dataset->abstract = $request->abstract ?? '-';
             $dataset->id_subject_area = $request->subjectArea;
             $dataset->information = $request->information ?? '-';
