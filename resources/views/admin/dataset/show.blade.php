@@ -155,21 +155,21 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Note!</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Catatan!</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" placeholder="Enter notes" class="form-control" id="note">
+                    <input type="text" placeholder="Masukkan catatan" class="form-control" id="note">
                     <div style="display: none" id="noteRequired" class="invalid-feedback">
-                        The note field is required.
+                        Harap masukkan catatan penolakan
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" id="invalid" onclick="invalid({{ $id }})" class="btn text-white"
-                        style="background-color: #38527E">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" id="invalid" onclick="invalid({{ $id }})" class="btn btn-danger text-white"
+                        >Ya, Tolak</button>
                 </div>
             </div>
         </div>
@@ -179,13 +179,13 @@
     <script>
         function valid(id) {
             Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                title: "Apakah Anda yakin?",
+                text: "Anda tidak dapat mengembalikannya!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, approve it!"
+                confirmButtonText: "Ya, setujui!"
             }).then((result) => {
                 if (result.isConfirmed) {
                     let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
@@ -208,8 +208,8 @@
                             document.getElementById('btnValidate').style.display = "none"
                             document.getElementById('status').innerHTML = "valid"
                             Swal.fire({
-                                title: "Validated!",
-                                text: "Success",
+                                title: "Bagus",
+                                text: "Dataset berhasil disetujui",
                                 icon: "success"
                             });
                         })

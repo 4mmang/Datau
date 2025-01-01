@@ -29,7 +29,7 @@
                                         <td class="align-middle">{{ $loop->iteration }}</td>
                                         <td class="align-middle">{{ $user->full_name }}</td>
                                         <td class="align-middle"><span
-                                                class="{{ $user->status === 'on' ? 'bg-info' : 'bg-secondary' }} text-white rounded-5 py-1 px-3 text-capitalize">{{ $user->status }}</span>
+                                                class="{{ $user->status === 'on' ? 'bg-info' : 'bg-secondary' }} text-white rounded-5 py-1 px-3 text-capitalize">{{ $user->status === 'on' ? 'Aktif' : 'Tidak Aktif' }}</span>
                                         </td>
                                         <td class="align-middle">{{ $user->email }}</td>
                                         <td class="align-middle items-center">
@@ -40,8 +40,11 @@
                                                 <input type="hidden" name="status"
                                                     value="{{ $user->status === 'on' ? 'off' : 'on' }}">
                                                 <button type="submit" onclick="disableButtonStatus({{ $user->id }})"
-                                                    class="ml-1 btn btn-sm btn-success mb-1 text-center"
-                                                    style="width: 1cm">{{ $user->status === 'on' ? 'off' : 'on' }}</button>
+                                                    class="ml-1 btn btn-sm {{ $user->status === 'on' ? 'btn-danger' : 'btn-success' }}  mb-1 text-center"
+                                                    style="width: 1cm">
+                                                    <i class="fas fa-power-off"></i>
+                                                    {{-- {{ $user->status === 'on' ? 'off' : 'on' }} --}}
+                                                    </button>
                                             </form>
                                             <a href="#" onclick="deleteUser({{ $user->id }})"
                                                 class="ml-1 btn btn-sm btn-danger mb-1 text-center" style="width: 1cm"><i
