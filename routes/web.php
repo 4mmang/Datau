@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KelolaDatasetController;
 use App\Http\Controllers\Admin\ManageDatasetsController;
+use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ValidasiDatasetController;
 use App\Http\Controllers\AuthController;
@@ -96,7 +97,7 @@ Route::prefix('/admin')
         Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
             Route::resource('/dataset', KelolaDatasetController::class);
-            Route::get('/profil', [ProfileController::class, 'profil'])
+            Route::get('/profil', [ProfilController::class, 'index'])
             ->name('profil');
         });
 
