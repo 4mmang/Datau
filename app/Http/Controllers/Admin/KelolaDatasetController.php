@@ -28,20 +28,18 @@ class KelolaDatasetController extends Controller
         if ($user->role != 'admin') {
             $datasets = Dataset::where('id_user', $user->id)->get();
         }
-        // $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
         return view('admin.dataset.index', compact(['datasets']));
     }
 
     public function show($id)
     {
         $user = Auth::user();
-        $dataset = Dataset::findOrFail($id);
+        $dataset = Dataset::with('featuresType.feature', 'characteristics.characteristic', 'associatedTask.associated')->findOrFail($id);
         if ($user->role != 'admin') {
             $dataset = Dataset::where('id', $id)
                 ->where('id_user', $user->id)
                 ->firstOrFail();
         }
-        // $dataset = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.*', 'datasets.status')->findOrFail($id);
         $papers = Paper::where('id_dataset', $id)->get();
 
         // Lokasi folder tempat dataset disimpan

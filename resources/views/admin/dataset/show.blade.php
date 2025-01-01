@@ -34,7 +34,18 @@
                         </div>
                         <div class="col-md-3 ms-3">
                             <h4>Dataset Characteristics</h4>
-                            <p>Tabular</p>
+                            <p>
+                                @if ($dataset->characteristics->count() > 0)
+                                    @foreach ($dataset->characteristics as $characteristic)
+                                        {{ $characteristic->characteristic->name_characteristic }}
+                                        @if (!$loop->last)
+                                            ,
+                                        @endif
+                                    @endforeach
+                                @else
+                                    -
+                                @endif
+                            </p>
                         </div>
                         <div class="col-md-3 ms-3">
                             <h4>Subject Area</h4>
@@ -43,19 +54,41 @@
                         </div>
                         <div class="col-md-3 ms-3">
                             <h4>Associated Tasks</h4>
-                            <p>Classification</p>
+                            <p>
+                                @if ($dataset->associatedTask->count() > 0)
+                                    @foreach ($dataset->associatedTask as $associated)
+                                        {{ $associated->associated->name_associated_task }}
+                                        @if (!$loop->last)
+                                            ,
+                                        @endif
+                                    @endforeach
+                                @else
+                                    -
+                                @endif
+                            </p>
                         </div>
                         <div class="col-md-3 ms-3">
                             <h4>Feature Type</h4>
-                            <p>Real</p>
+                            <p>
+                                @if ($dataset->featuresType->count() > 0)
+                                    @foreach ($dataset->featuresType as $featureType)
+                                        {{ $featureType->feature->name_feature_type }}
+                                        @if (!$loop->last)
+                                            ,
+                                        @endif
+                                    @endforeach
+                                @else
+                                    -
+                                @endif
+                            </p>
                         </div>
                         <div class="col-md-3 ms-3">
                             <h4># Instances</h4>
-                            <p>150</p>
+                            <p>{{ $dataset->instances ?? '-' }}</p>
                         </div>
                         <div class="col-md-3 ms-3">
                             <h4># Features</h4>
-                            <p>4</p>
+                            <p>{{ $dataset->features ?? '-' }}</p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +109,8 @@
                         <p class="fs-2 mt-2" style="color: #38527E">Dataset Files</p>
                     </div>
                     <div class="card-body">
-                        <p><a href="{{ url('download/' . $id) }}" style="color: #38527E; text-decoration: none">Download</a>
+                        <p><a href="{{ url('download/' . $id) }}"
+                                style="color: #38527E; text-decoration: none">Download</a>
                             to review</p>
                         @foreach ($files as $file)
                             <li>

@@ -17,11 +17,11 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
-                                    <th class="text-center">Name Dataset</th>
+                                    <th class="text-center">Nama Dataset</th>
                                     <th class="text-center">Creator</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Note</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center">Catatan</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

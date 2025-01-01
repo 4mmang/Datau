@@ -10,4 +10,8 @@ class DatasetFeatureType extends Model
     use HasFactory;
     protected $table = 'dataset_feature_types';
     protected $guarded = [];
+
+    public function feature(){
+        return $this->belongsTo(FeatureType::class, 'id_feature_type');
+    }
 }
