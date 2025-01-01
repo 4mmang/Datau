@@ -7,15 +7,12 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ArticleController extends Controller
+class ArtikelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $articles = Article::all();
-        return view('admin.articles.index', compact('articles'));
+        return view('admin.artikel.index', compact('articles'));
     }
 
     /**
@@ -23,7 +20,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.articles.create');
+        return view('admin.artikel.create');
     }
 
     /**
@@ -64,7 +61,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::findOrFail($id);
-        return view('admin.articles.edit', compact('article'));
+        return view('admin.artikel.edit', compact('article'));
     }
 
     /**

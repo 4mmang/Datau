@@ -46,11 +46,22 @@
 <body id="page-top">
     <div id="wrapper">
         @include('layouts.admin.sidebar')
-        @yield('content')
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                @include('layouts.admin.navbar')
+                @yield('content')
+            </div>
+            <!-- End of Main Content -->
+            @include('layouts.admin.footer')
+        </div>
+        <!-- End of Content Wrapper -->
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-        
+
         <!-- Logout Modal-->
         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -83,18 +94,18 @@
 
     <script>
         $('#information').summernote({
-                placeholder: 'Masukkan informasi dataset',
-                tabsize: 2,
-                height: 120,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                ]
-            });
+            placeholder: 'Masukkan informasi dataset',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link']],
+            ]
+        });
     </script>
     @yield('scripts')
 </body>

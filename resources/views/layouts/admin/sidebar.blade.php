@@ -32,16 +32,15 @@
             <span>Dataset</span></a>
     </li>
     @if (Auth::user()->role == 'admin')
-        <li class="nav-item {{ Request::is('admin/manage/users') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('admin/manage/users') }}">
+    <li class="nav-item {{ Request::is('admin/artikel*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.artikel.index') }}">
+            <i class="fas fa-fw fa-file-alt"></i>
+            <span>Artikel</span></a>
+    </li>
+        <li class="nav-item {{ Request::is('admin/user') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('admin.user.index') }}">
                 <i class="fas fa-fw fa-users"></i>
-                <span>Manage Users</span></a>
-        </li>
-
-        <li class="nav-item {{ Request::is('admin/manage/articles*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('admin/manage/articles') }}">
-                <i class="fas fa-fw fa-file-alt"></i>
-                <span>Manage Articles</span></a>
+                <span>Users</span></a>
         </li>
     @endif
 

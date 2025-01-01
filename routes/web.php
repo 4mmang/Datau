@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KelolaDatasetController;
 use App\Http\Controllers\Admin\ManageDatasetsController;
@@ -86,7 +87,7 @@ Route::prefix('/dataset')
     });
 
 // sumbang paper
-Route::post('donation/paper', [DonationPaperController::class, 'store'])->middleware(['auth', 'verified']);
+Route::post('donation/paper', [DonationPaperController::class, 'store'])->middleware(['auth', 'verified'])->name('upload-paper');
 
 // admin
 Route::prefix('/admin')
@@ -95,15 +96,16 @@ Route::prefix('/admin')
         Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
             Route::resource('/dataset', KelolaDatasetController::class);
+            Route::get('/profil', [ProfileController::class, 'profil'])
+            ->name('profil');
         });
+
 
         Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function () {
             Route::put('/validate/dataset/{id}', [ValidasiDatasetController::class, 'valid']);
             Route::post('/invalid/dataset/{id}', [ValidasiDatasetController::class, 'invalid']);
-            Route::get('/manage/users', [UserController::class, 'index']);
-            Route::put('/manage/user/{id}', [UserController::class, 'update']);
-            Route::delete('/delete/user/{id}', [UserController::class, 'destroy']);
-            Route::resource('/manage/articles', ArticleController::class);
+            Route::resource('/user', UserController::class);
+            Route::resource('/artikel', ArtikelController::class);
         });
     });
 
@@ -135,14 +137,8 @@ Route::get('search/dataset/{key}', function ($key) {
 });
 
 // profil admin
-Route::get('admin/profile', [ProfileController::class, 'profileAdmin'])
-    ->middleware('auth')
-    ->name('profileAdmin');
 
-// profil user
-Route::get('profil', [ProfileController::class, 'profil'])
-    ->middleware('auth')
-    ->name('profil');
+
 
 // ganti password
 Route::post('reset-password', [ChangePasswordController::class, 'changePassword'])->middleware('auth');
