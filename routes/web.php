@@ -35,7 +35,7 @@ Route::get('login', [AuthController::class, 'index'])
     ->middleware('guest');
 Route::post('login/validation', [AuthController::class, 'validation']);
 
-// fungsi logout
+// logout
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 
 // registrasi
