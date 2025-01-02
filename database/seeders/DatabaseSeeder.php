@@ -22,7 +22,14 @@ class DatabaseSeeder extends Seeder
             'role' => 'user',
             'password' => Hash::make('1234')
         ]);
+
+        \App\Models\User::create([
+            'full_name' => 'Admin',
+            'email' => 'admin@example.com',
+            'role' => 'admin',
+            'password' => Hash::make('1234')
+        ]);
         
-        // $this->call([CharacteristicSeeder::class, AssociatedTaskSeeder::class, FeatureTypeSeeder::class, SubjectAreaSeeder::class]);
+        $this->call([CharacteristicSeeder::class, AssociatedTaskSeeder::class, FeatureTypeSeeder::class, SubjectAreaSeeder::class]);
     }
 }
