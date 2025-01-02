@@ -151,9 +151,12 @@ class KelolaDatasetController extends Controller
                     ->where('id_user', $user->id)
                     ->firstOrFail();
             }
-            $dataset->abstract = $request->abstract ?? '-';
+            $dataset->name = $request->name;
+            $dataset->abstract = $request->abstract;
+            $dataset->instances = $request->instances;
+            $dataset->features = $request->features;
             $dataset->id_subject_area = $request->subjectArea;
-            $dataset->information = $request->information ?? '-';
+            $dataset->information = $request->information;
             $dataset->update();
 
             $oldCharacteristic = DatasetCharacteristic::where('id_dataset', $id)->get();
@@ -203,7 +206,7 @@ class KelolaDatasetController extends Controller
 
             DB::commit();
             return back()->with([
-                'message' => 'Successfully updated dataset',
+                'message' => 'Dataset Anda berhasil diupdate.',
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();

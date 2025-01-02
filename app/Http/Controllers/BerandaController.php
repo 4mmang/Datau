@@ -15,7 +15,7 @@ class BerandaController extends Controller
         $subjectAreas = SubjectArea::all();
         $data = [];
         foreach ($subjectAreas as $subjectArea) {
-            $datasetCount = Dataset::where('id_subject_area', $subjectArea->id)->count();
+            $datasetCount = Dataset::where('id_subject_area', $subjectArea->id)->where('status', 'valid')->count();
             array_push($data, $datasetCount);
         }
 

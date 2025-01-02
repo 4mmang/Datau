@@ -74,7 +74,7 @@
                             <div class="col-md-4">
                                 <p>Dataset tidak tersedia,
                                     <span>
-                                        <a href="{{ url('donation') }}" style="color: #38527E"> Sumbang Dataset
+                                        <a href="{{ route('dataset.create') }}" style="color: #38527E"> Sumbang Dataset
                                         </a>
                                     </span>
                                 </p>

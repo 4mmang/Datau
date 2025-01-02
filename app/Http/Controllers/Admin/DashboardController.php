@@ -8,6 +8,7 @@ use App\Models\Dataset;
 use App\Models\SubjectArea;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -20,7 +21,11 @@ class DashboardController extends Controller
         $subjectAreas = SubjectArea::all();
         $data = [];
         foreach ($subjectAreas as $subjectArea) {
-            $datasetCount = Dataset::where('id_subject_area', $subjectArea->id)->count();
+            if (Auth::user()->role != 'admin') {
+                $datasetCount = Dataset::where('id_subject_area', $subjectArea->id)->where('id_user', Auth::user()->id)->count();
+            }else{
+                $datasetCount = Dataset::where('id_subject_area', $subjectArea->id)->count();
+            }
             array_push($data, $datasetCount);
         }
         return view('admin.dashboard', compact(['countDataset', 'countUser', 'countArticle', 'subjectAreas', 'data']));
