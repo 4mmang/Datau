@@ -37,7 +37,7 @@
                                             <i class="fad fa-database fa-4x" style="color: #38527E"></i>
                                         </div>
                                         <div class="col-md-11 mb-2">
-                                            <a href="{{ url('detail/dataset/' . $dataset->id) }}">
+                                            <a href="{{ route('dataset.show' , $dataset->id) }}">
                                                 <h5 class="text-capitalize" style="color: #38527E">{{ $dataset->name }}
                                                 </h5>
                                             </a>
@@ -93,21 +93,7 @@
 @section('scripts')
     <script>
         let searchResults = document.getElementById('search-results');
-        // let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
         let search = document.getElementById('searching')
-        // search.addEventListener('input', function() {
-        //     fetch('cari/data/' + search.value)
-        //         .then(response => {
-        //             return response.json()
-        //         })
-        //         .then(data => {
-        //             console.log(data);
-        //         })
-        //         .catch(e => {
-        //             console.log(e);
-        //         })
-        // })
-        // let formData = new FormData();
         search.addEventListener('input', function() {
             // formData.append('name', search.value);
             fetch('search/dataset/' + search.value)

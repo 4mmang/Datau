@@ -77,14 +77,14 @@ Route::get('download/{id}', [DownloadController::class, 'download'])->middleware
 Route::prefix('/dataset')
     ->as('dataset.')
     ->group(function () {
-        Route::get('/', [DatasetController::class, 'index'])->name('index');
-        Route::get('detail/dataset/{id}', [DatasetController::class, 'show'])->name('show');
-        Route::get('filter/{id}', [DatasetController::class, 'filter'])->name('filter');
-
         Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('/create', [ContributeDatasetController::class, 'create'])->name('create');
             Route::post('/store', [ContributeDatasetController::class, 'store'])->name('store');
         });
+        Route::get('/', [DatasetController::class, 'index'])->name('index');
+        Route::get('/{id}', [DatasetController::class, 'show'])->name('show');
+        Route::get('filter/{id}', [DatasetController::class, 'filter'])->name('filter');
+        
     });
 
 // sumbang paper

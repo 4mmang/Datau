@@ -17,10 +17,10 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
-                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Nama</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Email</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,11 +70,7 @@
         </script>
     @endif
 @endsection
-@section('scripts')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-
+@section('scripts') 
     <script>
         $(document).ready(function() {
             $('#datasets').DataTable();

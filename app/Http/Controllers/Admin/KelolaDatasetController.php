@@ -115,12 +115,15 @@ class KelolaDatasetController extends Controller
 
     public function edit($id)
     {
+        $user = Auth::user();
+        if ($user->status === 'off') {
+            return redirect()->route('admin.dataset.index');
+        }
         $characteristics = Characteristic::all();
         $subjectAreas = SubjectArea::all();
         $associatedTasks = AssociatedTask::all();
         $featureTypes = FeatureType::all();
 
-        $user = Auth::user();
         $dataset = Dataset::findOrFail($id);
         if ($user->role != 'admin') {
             $dataset = Dataset::where('id', $id)
@@ -139,6 +142,9 @@ class KelolaDatasetController extends Controller
         DB::beginTransaction();
         try {
             $user = Auth::user();
+            if ($user->status === 'off') {
+                return redirect()->route('admin.dataset.index');
+            }
             $dataset = Dataset::findOrFail($id);
             if ($user->role != 'admin') {
                 $dataset = Dataset::where('id', $id)

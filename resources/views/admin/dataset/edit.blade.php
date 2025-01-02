@@ -97,15 +97,7 @@
         </form>
     </div>
     <!-- /.container-fluid -->
-    @if (session('message'))
-        <script>
-            Swal.fire({
-                title: "Good job!",
-                text: `{{ session('message') }}`,
-                icon: "success"
-            });
-        </script>
-    @endif
+    
 @endsection
 @section('scripts')
     <script>

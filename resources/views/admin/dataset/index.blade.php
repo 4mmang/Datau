@@ -41,15 +41,17 @@
                                             @endif
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('admin.dataset.edit', $dataset->id) }}"
-                                                class="ml-1 btn btn-warning btn-sm mb-1 text-center" style="width: 1cm"><i
-                                                    class="fas fa-pen"></i></a>
                                             <a href="{{ route('admin.dataset.show', $dataset->id) }}"
                                                 class="ml-1 btn btn-primary btn-sm mb-1 text-center" style="width: 1cm"><i
-                                                    class="fas fa-eye"></i></a>
+                                                class="fas fa-eye"></i></a>
+                                                @if (Auth::user()->status ==='on')
+                                                <a href="{{ route('admin.dataset.edit', $dataset->id) }}"
+                                                    class="ml-1 btn btn-warning btn-sm mb-1 text-center" style="width: 1cm"><i
+                                                        class="fas fa-pen"></i></a>
                                             <a href="#" onclick="deleteDataset({{ $dataset->id }})"
                                                 class="ml-1 btn btn-sm btn-danger mb-1 text-center" style="width: 1cm"><i
                                                     class="fas fa-trash"></i></a>
+                                                @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -62,11 +64,7 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
-@section('scripts')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-
+@section('scripts') 
     <script>
         $(document).ready(function() {
             $('#datasets').DataTable();
@@ -75,13 +73,13 @@
     <script>
         function deleteDataset(id) {
             Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                title: "Apakah Anda yakin?",
+                text: "Anda tidak dapat mengembalikannya!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
+                confirmButtonText: "Ya, hapus!"
             }).then((result) => {
                 if (result.isConfirmed) {
                     let csrfToken = document.querySelector('meta[name="csrf-token"]').content;
@@ -134,24 +132,24 @@
             });
         }
 
-        function confirmReject() {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, reject it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Rejected!",
-                        text: "Your file has been rejected.",
-                        icon: "success"
-                    });
-                }
-            });
-        }
+        // function confirmReject() {
+        //     Swal.fire({
+        //         title: "Apakah Anda yakin?",
+        //         text: "Anda tidak dapat mengembalikannya!",
+        //         icon: "warning",
+        //         showCancelButton: true,
+        //         confirmButtonColor: "#3085d6",
+        //         cancelButtonColor: "#d33",
+        //         confirmButtonText: "Ya, tolak!"
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             Swal.fire({
+        //                 title: "Dotolak!",
+        //                 text: "Your file has been rejected.",
+        //                 icon: "success"
+        //             });
+        //         }
+        //     });
+        // }
     </script>
 @endsection

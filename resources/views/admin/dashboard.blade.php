@@ -8,6 +8,7 @@
         </div>
         <!-- Content Row -->
         <div class="row">
+            @if (Auth::user()->role === 'admin')
             <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -24,7 +25,6 @@
                     </div>
                 </div>
             </div>
-            @if (Auth::user()->role === 'admin')
             <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
@@ -62,7 +62,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6 mb-5">
+            <div class="col-md-12 mb-5">
                 <div class="card rounded-4 shadow-lg">
                     <div class="card-body">
                         <canvas id="myBarChart" style="width: 100%; height: 400px;"></canvas>

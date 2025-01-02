@@ -4,9 +4,9 @@
         <div class="container p-3" style="margin-top: 9rem">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="mb-4 fs-2" style="color: #38527E"><a style="color: #38527E" href="{{ url('datasets') }}">
-                            <i class="bi bi-arrow-left-short fs-3 "></i></a>Detail Dataset</p>
-                    <div class="card p-5">
+                    <p class="mb-4 fs-2" style="color: #38527E"><a style="color: #38527E" href="{{ route('dataset.index') }}">
+                            <i class="bi bi-arrow-left-short fs-2"></i></a>Detail Dataset</p>
+                    <div class="card p-5 ">
                         <div class="row align-items-center" style="margin-top:-27px">
                             <div class="col-md-1" id="img-dataset">
                                 <i class="fad fa-database fa-4x" style="color: #38527E"></i>
@@ -15,7 +15,7 @@
                                 <a href="{{ url('detail') }}">
                                     <h2 class="mt-3 text-capitalize" style="color: #38527E">{{ $dataset->name }}</h2>
                                 </a>
-                                <p>Disumbangkan oleh<span class="fw-bold"> {{ $dataset->user->full_name }}</span></p>
+                                <p>Dibuat oleh : <span class="fw-bold"> {{ $dataset->user->full_name }}</span></p>
 
                             </div>
                             <div class="col-md-12">
@@ -71,11 +71,11 @@
                             </div>
                             <div class="col-md-3">
                                 <h4># Jumlah Baris</h4>
-                                <p>{{ $dataset->instances }}</p>
+                                <p>{{ $dataset->instances ?? '-' }}</p>
                             </div>
                             <div class="col-md-3">
                                 <h4># Jumlah Fitur</h4>
-                                <p>{{ $dataset->features }}</p>
+                                <p>{{ $dataset->features ?? '-' }}</p>
                             </div>
 
                         </div>
@@ -111,7 +111,7 @@
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 class="btn btn-sm p-2 text-white ps-3 pe-3 @guest
                                     disabled @endguest"
-                                style="background-color: #38527E">Sumbangkan Paper</a>
+                                style="background-color: #38527E"><i class="fas fa-upload"></i> Upload Paper</a>
                         </div>
                     </div>
                 </div>
@@ -141,25 +141,25 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <p class="modal-title fs-3" style="color: #38527E" id="exampleModalLabel">Donation Paper</p>
+                    <p class="modal-title fs-3" style="color: #38527E" id="exampleModalLabel">Tambahkan Paper</p>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" placeholder="Title paper" class="form-control" name="title" id="title">
+                    <input type="text" placeholder="Judul" class="form-control" name="title" id="title">
                     <div class="invalid-feedback">
-                        The title field is required.
+                        Harap masukkan judul paper!
                     </div>
-                    <input type="url" class="form-control mt-3" placeholder="Link paper" name="url" id="url">
+                    <input type="url" class="form-control mt-3" placeholder="Link akses" name="url" id="url">
                     <div class="invalid-feedback">
-                        The url field is required.
+                        Harap masukkan link akses paper!
                     </div>
                     <textarea name="description" id="description" cols="30" class="form-control mt-3" rows="5"
-                        placeholder="Description"></textarea>
+                        placeholder="Deskripsi"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="button" onclick="donate()" id="donate" class="btn text-white"
-                        style="background-color: #38527E">Donate</button>
+                        style="background-color: #38527E"><i class="fas fa-upload"></i> Upload</button>
                 </div>
             </div>
         </div>
@@ -204,9 +204,10 @@
                     } else {
                         document.getElementById('exampleModal').style.display = "none"
                         Swal.fire({
-                            title: "Good job!",
-                            text: "You have contributed a paper to this dataset.",
-                            icon: "success"
+                            title: "Terimakasih!",
+                            text: "Anda berhasil mengupload paper kedalam dataset ini.",
+                            icon: "success",
+                            allowOutsideClick: false
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 location.reload()
