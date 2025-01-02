@@ -29,6 +29,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'password' => Hash::make('1234')
         ]);
+
+        \App\Models\User::create([
+            'full_name' => 'Arman Umar',
+            'email' => 'ammangdeveloper@gmail.com',
+            'role' => 'user',
+            'password' => Hash::make('1234')
+        ]);
         
         $this->call([CharacteristicSeeder::class, AssociatedTaskSeeder::class, FeatureTypeSeeder::class, SubjectAreaSeeder::class]);
     }
