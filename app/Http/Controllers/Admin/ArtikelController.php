@@ -43,21 +43,10 @@ class ArtikelController extends Controller
         ]);
 
         return back()->with([
-            'message' => 'Successfully added article',
+            'message' => 'Artikel baru berhasil ditambahkan!',
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $article = Article::findOrFail($id);
@@ -85,7 +74,7 @@ class ArtikelController extends Controller
 
         $article->save();
         return back()->with([
-            'message' => 'Successfully updated the article',
+            'message' => 'Data Artikel berhasil diupdate',
         ]);
     }
 
@@ -98,7 +87,7 @@ class ArtikelController extends Controller
         Storage::delete('public/' . $article->cover);
         $article->delete();
         return back()->with([
-            'message' => 'Successfully deleted article',
+            'message' => 'Artikel berhasil dihapus',
         ]);
     }
 }

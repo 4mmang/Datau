@@ -49,20 +49,9 @@
             </div>
         </div>
     </div>
-    <!-- /.container-fluid -->
-    @if (session('message'))
-        <script>
-            Swal.fire({
-                title: "Good job!",
-                text: "{{ session('message') }}",
-                icon: "success"
-            });
-        </script>
-    @endif
+    <!-- /.container-fluid --> 
 @endsection
 @section('scripts')
-    
-
     <script>
         $(document).ready(function() {
             $('#datasets').DataTable();

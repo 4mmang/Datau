@@ -16,15 +16,15 @@
                         enctype="multipart/form-data">
                         @csrf
                         @method('put')
-                        <label for="title">Title<sup class="text-danger">*</sup></label>
+                        <label for="title">Judul<sup class="text-danger">*</sup></label>
                         <input type="text" class="form-control" name="title" value="{{ $article->title }}" id="title"
                             required>
     
-                        <label for="cover" class="mt-3">Cover<sup class="text-danger">*</sup></label>
+                        <label for="cover" class="mt-3">Sampul<sup class="text-danger"></sup></label>
                         <input type="file" class="form-control" name="cover" id="cover">
     
-                        <label for="description" class="mt-3">Description<sup class="text-danger">*</sup></label>
-                        <textarea name="description" id="description" cols="30" rows="10"
+                        <label for="description" class="mt-3">Deskripsi<sup class="text-danger">*</sup></label>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="10"
                             required>{!! $article->description !!}</textarea>
                         <a href="{{ route('admin.artikel.index') }}" class="btn btn-danger float-end mt-3 ml-2">Kembali</a>
                         <button id="save" type="submit" style="background-color: #38527E"
@@ -35,16 +35,7 @@
             </div>
         </div> 
     </div>
-    <!-- /.container-fluid -->
-    @if (session('message'))
-        <script>
-            Swal.fire({
-                title: "Good job!",
-                text: "{{ session('message') }}",
-                icon: "success"
-            });
-        </script>
-    @endif
+    <!-- /.container-fluid --> 
 @endsection
 @section('scripts')
     <script>

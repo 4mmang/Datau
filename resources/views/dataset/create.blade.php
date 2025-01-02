@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @if (optional($myDataset)->count() < 1)
-        <main id="basic-info">
+        <main>
             <div class="container p-3" style="margin-top: 10rem; margin-bottom: 3rem">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
@@ -171,41 +170,6 @@
                 </form>
             </div>
         </main>
-        <main id="pending" style="display: none">
-            <div class="container login-container p-3" style="margin-top: 10rem; margin-bottom: 3rem">
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
-                        <div class="card p-4">
-                            Dataset yang Anda upload sedang diproses, Anda dapat menyumbangkan dataset baru setelah dataset
-                            yang Anda upload
-                            sebelumnya disetujui.
-                            <p class="mt-2"><span class="badge bg-info">Status : pending</span></p>
-                            <a href="{{ route('admin.dataset.index') }}" class="btn text-white mt-3"
-                                style="background-color: #38527E; max-width: 10rem;">Lihat Dataset Saya</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    @else
-        <main id="pending">
-            <div class="container login-container p-3" style="margin-top: 10rem; margin-bottom: 3rem">
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
-                        <div class="card p-4">
-                            Dataset yang Anda upload sedang diproses, Anda dapat menyumbangkan dataset baru setelah dataset
-                            yang Anda upload
-                            sebelumnya
-                            telah disetujui.
-                            <p class="mt-2"><span class="badge bg-info">Status : pending</span></p>
-                            <a href="{{ route('admin.dataset.index') }}" class="btn text-white mt-1"
-                                style="background-color: #38527E; max-width: 12rem;">Lihat Dataset Saya</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    @endif
 @endsection
 @section('scripts')
     <script>

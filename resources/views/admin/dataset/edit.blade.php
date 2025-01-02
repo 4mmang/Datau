@@ -47,7 +47,7 @@
                                 </div>
                             @endforeach
                         </div>
-                    </div> 
+                    </div>
 
                     <p class="card-title fs-6 text-start mb-2 mt-3" style="color: #38527E;">Subject Area</p>
                     <div class="card p-1 rounded-3">
@@ -93,9 +93,10 @@
                             @endforeach
                         </div>
                     </div>
-                </div> 
-            </div> 
-            <a href="{{ route('admin.dataset.index') }}" class="btn btn-danger float-end mt-4"><i class="fas fa-arrow-left"></i> Kembali</a>
+                </div>
+            </div>
+            <a href="{{ route('admin.dataset.index') }}" class="btn btn-danger float-end mt-4"><i
+                    class="fas fa-arrow-left"></i> Kembali</a>
             <button type="submit" id="update" class="btn text-white mt-4 float-end mr-2"
                 style="background-color: #38527E"><i class="fas fa-save mr-1"></i>Update</button>
         </form>
@@ -103,6 +104,21 @@
     <!-- /.container-fluid -->
 @endsection
 @section('scripts')
+    <script>
+        $('#information').summernote({
+            placeholder: 'Masukkan informasi dataset',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link']],
+            ]
+        });
+    </script>
     <script>
         let form = document.getElementById('form-update')
         form.addEventListener('submit', function() {

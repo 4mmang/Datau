@@ -15,14 +15,14 @@
                     <form id="new-article" action="{{ route('admin.artikel.store') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
-                        <label for="title">Title<sup class="text-danger">*</sup></label>
+                        <label for="title">Judul<sup class="text-danger">*</sup></label>
                         <input type="text" class="form-control" name="title" id="title" required>
     
-                        <label for="cover" class="mt-3">Cover<sup class="text-danger">*</sup></label>
+                        <label for="cover" class="mt-3">Sampul<sup class="text-danger">*</sup></label>
                         <input type="file" class="form-control" name="cover" id="cover" required>
     
-                        <label for="description" class="mt-3">Description<sup class="text-danger">*</sup></label>
-                        <textarea name="description" id="description" cols="30" rows="10" required></textarea>
+                        <label for="description" class="mt-3">Deskripsi<sup class="text-danger">*</sup></label>
+                        <textarea name="description" id="description" cols="30" rows="10" class="form-control" required></textarea>
                         <a href="{{ route('admin.artikel.index') }}" class="btn btn-danger float-end mt-3 ml-2">Kembali</a>
                         <button id="save" type="submit" style="background-color: #38527E"
                             class="btn text-white mt-3 float-end px-4"><i class="fas fa-save mr-1"></i>

@@ -20,13 +20,21 @@ class ContributeDatasetController extends Controller
 {
     public function create()
     {
+        if (Auth::user()->status != 'on') {
+            return view('info.akun-off');
+        }
+        $myDataset = Dataset::where('id_user', Auth::user()->id)
+            ->where('status', 'pending')
+            ->first();
+
+        if (optional($myDataset)->count() > 0) {
+            return view('info.pending-dataset');
+        }
+
         $characteristics = Characteristic::all();
         $subjectAreas = SubjectArea::all();
         $associatedTasks = AssociatedTask::all();
         $featureTypes = FeatureType::all();
-        $myDataset = Dataset::where('id_user', Auth::user()->id)
-            ->where('status', 'pending')
-            ->first();
         return view('dataset.create', compact(['characteristics', 'subjectAreas', 'associatedTasks', 'featureTypes', 'myDataset']));
     }
 
