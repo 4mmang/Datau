@@ -37,13 +37,13 @@
                                             <i class="fad fa-database fa-4x" style="color: #38527E"></i>
                                         </div>
                                         <div class="col-md-11 mb-2">
-                                            <a href="{{ route('dataset.show' , $dataset->id) }}">
+                                            <a href="{{ route('dataset.show', $dataset->id) }}">
                                                 <h5 class="text-capitalize" style="color: #38527E">{{ $dataset->name }}
                                                 </h5>
                                             </a>
                                             @if ($dataset->abstract)
-                                            <p>{{ Str::limit($dataset->abstract, 100, '...') }}
-                                            </p>
+                                                <p>{{ Str::limit($dataset->abstract, 100, '...') }}
+                                                </p>
                                             @endif
                                             <div class="input-group gap-5">
                                                 <a href="" class="nav-link"><i class="bi bi-download me-2"></i>
@@ -138,7 +138,7 @@
     <script>
         let filter = document.getElementById('filter')
         filter.addEventListener('change', function() {
-            fetch('filter/' + filter.value)
+            fetch('dataset/filter/' + filter.value)
                 .then(response => response.json())
                 .then(data => {
                     let datasets = document.getElementById('datasets')
@@ -163,7 +163,7 @@
                                                     <h5 class="text-capitalize" style="color: #38527E">${element.name}
                                                     </h5>
                                                 </a>
-                                                <p>${element.abstract.length > 100 ? element.abstract.substring(0, 100) + '...' : element.abstract}
+                                                <p>${element.abstract && element.abstract.length > 100 ? element.abstract.substring(0, 100) + '...' : element.abstract || ''}
                                                 </p>
                                                 <div class="input-group gap-5">
                                                     <a href="" class="nav-link"><i class="bi bi-download me-2"></i>
