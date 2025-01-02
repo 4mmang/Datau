@@ -15,10 +15,10 @@ return new class extends Migration {
             $table->integer('id_user');
             $table->integer('id_subject_area')->nullable();
             $table->string('name');
-            $table->text('abstract');
+            $table->text('abstract')->nullable();
             $table->integer('instances')->nullable();
             $table->integer('features')->nullable();
-            $table->text('information');
+            $table->text('information')->nullable();
             $table->enum('status', ['pending', 'valid', 'invalid'])->default('pending');
             $table->string('note')->nullable();
             $table->timestamps();
