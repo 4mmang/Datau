@@ -64,7 +64,7 @@
                                     <i class="fad fa-database fa-4x" style="color: #38527E"></i>
                                 </div>
                                 <div class="col-md-10 mb-2">
-                                    <a href="{{ url('detail/dataset/' . optional($popularDataset)->id) }}">
+                                    <a href="{{ url('dataset/' . optional($popularDataset)->id) }}">
                                         <h5 class="text-capitalize" style="color: #38527E">
                                             {{ optional($popularDataset)->name }}
                                         </h5>
@@ -75,12 +75,15 @@
                                         <a href="" class="nav-link"><i class="bi bi-download me-2"></i>
                                             {{ $count }}
                                         </a>
-                                        <a href="#" class="nav-link"><i
+                                        <a href="#" class="nav-link"><i class="far fa-laptop-code me-2"></i>Bidang Studi : {{
+                                            $popularDataset->subjectArea->name_subject_area }}
+                                        </a>
+                                        {{-- <a href="#" class="nav-link"><i
                                                 class="bi bi-building me-2"></i>{{ optional($popularDataset)->instances }}
                                             Jumlah Baris</a>
                                         <a href="#" class="nav-link"><i
                                                 class="bi bi-table me-2"></i>{{ optional($popularDataset)->features }}
-                                            Jumlah Fitur</a>
+                                            Jumlah Fitur</a> --}}
                                     </div>
                                 </div>
                             </div>

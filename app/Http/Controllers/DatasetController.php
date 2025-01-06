@@ -39,9 +39,11 @@ class DatasetController extends Controller
 
     public function filter($id)
     {
-        $datasets = Dataset::all();
+        // $datasets = Dataset::with('subjectArea')->all();
+        $datasets = Dataset::with('subjectArea')->get();
+
         if ($id != 'all') {
-            $datasets = Dataset::where('id_subject_area', $id)->get();
+            $datasets = Dataset::with('subjectArea')->where('id_subject_area', $id)->get();
         }
         $countDownloads = [];
         foreach ($datasets as $dataset) {

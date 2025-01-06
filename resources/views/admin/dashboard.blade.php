@@ -31,7 +31,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2 ms-3">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Users</div>
+                                    Total User</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $countUser }}</div>
                             </div>
                             <div class="col-auto mr-3">
@@ -48,7 +48,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2 ms-3">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Articles</div>
+                                    Total Artikel</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $countArticle }}</div>
                             </div>
                             <div class="col-auto mr-3">

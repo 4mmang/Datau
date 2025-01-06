@@ -141,6 +141,8 @@
             fetch('dataset/filter/' + filter.value)
                 .then(response => response.json())
                 .then(data => {
+                    // console.log(data);
+                    
                     let datasets = document.getElementById('datasets')
                     datasets.innerHTML = ''
                     if (data.datasets.length > 0) {
@@ -169,10 +171,8 @@
                                                     <a href="" class="nav-link"><i class="bi bi-download me-2"></i>
                                                         ${count}
                                                     </a>
-                                                    <a href="#" class="nav-link"><i class="bi bi-building me-2"></i>${element.instances}
-                                                        Jumlah baris</a>
-                                                    <a href="#" class="nav-link"><i class="bi bi-table me-2"></i>${element.features}
-                                                        Jumlah fitur</a>
+                                                    <a href="#" class="nav-link"><i class="far fa-laptop-code me-2"></i>Bidang Studi : ${element.subject_area.name_subject_area}
+                                                    </a> 
                                                 </div>
                                             </div>
                                         </div>
