@@ -1893,12 +1893,3 @@ color: grey;
 font-size: 14px;
 }
 
-#img-dataset {
-            display: none;
-        }
-
-        @media (min-width: 1200px) {
-            #img-dataset {
-                display: block;
-            }
-        } 

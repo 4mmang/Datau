@@ -36,7 +36,7 @@ Route::get('login', [AuthController::class, 'index'])
 Route::post('login/validation', [AuthController::class, 'validation']);
 
 // logout
-Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 // registrasi
 Route::get('register', [RegistrationController::class, 'index'])->middleware('guest');
