@@ -110,8 +110,8 @@
                     </div>
                     <div class="card-body">
                         <p><a href="{{ url('download/' . $id) }}"
-                                style="color: #38527E; text-decoration: none">Download</a>
-                            to review</p>
+                                style="color: #38527E; text-decoration: none">Unduh</a>
+                            untuk mereview</p>
                         @foreach ($files as $file)
                             <li>
                                 {{ basename($file) }}
