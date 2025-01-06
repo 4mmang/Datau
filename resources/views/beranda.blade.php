@@ -92,17 +92,15 @@
                     <p class="fs-3 text-center mb-5">Mungkin Anda tertarik membaca artikel berikut.</p>
                     @foreach ($newArticles as $article)
                         <div class="col-md-4 mb-3">
-                            <div class="card shadow pt-3">
+                            <div class="card shadow">
                                 <a href="{{ url('article/' . $article->id) }}" target="_blank"
                                     style="text-decoration: none; color: #333;">
-                                    <div class="d-flex justify-content-center align-items-center"
-                                        style="width: 100%; height: 200px; overflow: hidden;">
-                                        <img src="{{ asset('storage/' . $article->cover) }}" alt="FastText Thumbnail"
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <img src="{{ asset('storage/' . $article->cover) }}" alt=""
                                             class="img-fluid">
-                                            {{-- style="width: 100%; height: 100%; object-fit: cover;" --}}
                                     </div>
                                     <div class="card-body">
-                                        <h4 class="mt-3">{{ Str::limit($article->title, 30, '...') }}</h4>
+                                        <h5 class="mt-3">{{ Str::limit($article->title, 30, '...') }}</h5>
                                         {{-- <p class="small"
                                             style="overflow: hidden; text-overflow: ellipsis; white-space: normal;">
                                             {!! limitHtml($article->description, 100) !!}
