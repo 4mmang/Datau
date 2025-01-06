@@ -1,7 +1,7 @@
 <!-- Start Header -->
 <header id="header" class="fixed-top" style="background-color: #38527E">
     <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto ms-2"><a href="{{ route('beranda') }}"><i class="fad fa-database"></i> PusData Unsulbar</a>
+        <h1 class="logo me-auto ms-2"><a href="{{ route('beranda') }}"><i class="fad fa-database"></i> PusData</a>
         </h1>
         <!-- start navbar -->
         <nav id="navbar" class="navbar p-4">

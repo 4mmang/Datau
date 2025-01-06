@@ -20,7 +20,7 @@
                                 class="fal fa-database"></i> Sumbang Dataset</a>
                     </div>
                 </div>
-                <div class="col-lg-6 order-1 order-lg-2 hero-img mt-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="col-lg-6 order-1 order-lg-2 hero-img mt-4 mb-3" data-aos="zoom-in" data-aos-delay="200">
                     <div class="row justify-content-center">
                         <div class="col-md-5 text-center">
                             <div class="card p-4 animated">
