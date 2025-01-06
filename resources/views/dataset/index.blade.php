@@ -115,7 +115,7 @@
                             data.forEach(element => {
                                 searchResults.innerHTML +=
                                     `
-                                <a href="detail/dataset/${element.id}" class="dropdown-item">${element.name}</a>
+                                <a href="dataset/${element.id}" class="dropdown-item">${element.name}</a>
                                 `
                             });
                         } else {
@@ -159,7 +159,7 @@
                                                 <i class="fad fa-database fa-4x" style="color: #38527E"></i>
                                             </div>
                                             <div class="col-md-11 mb-2">
-                                                <a href="detail/dataset/${element.id}">
+                                                <a href="dataset/${element.id}">
                                                     <h5 class="text-capitalize" style="color: #38527E">${element.name}
                                                     </h5>
                                                 </a>
@@ -185,7 +185,7 @@
                             <div class="col-md-4">
                                 <p>Dataset tidak tersedia,
                                     <span>
-                                        <a href="{{ url('donation') }}" style="color: #38527E"> Sumbang Dataset
+                                        <a href="{{ route('dataset.create') }}" style="color: #38527E"> Sumbang Dataset
                                         </a>
                                     </span>
                                 </p>

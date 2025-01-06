@@ -37,7 +37,6 @@ class ContributeDatasetController extends Controller
         return view('dataset.create', compact(['characteristics', 'subjectAreas', 'associatedTasks', 'featureTypes', 'myDataset']));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
@@ -65,43 +64,38 @@ class ContributeDatasetController extends Controller
                 $urlFiles->save();
             }
 
-            foreach (str_split($request->characteristics) as $characteristic) {
-                if ($characteristic != ',') {
-                    $newCharacteristic = new DatasetCharacteristic();
-                    $newCharacteristic->id_dataset = $dataset->id;
-                    $newCharacteristic->id_characteristic = $characteristic;
-                    $newCharacteristic->save();
-                }
+            foreach ($request->characteristics as $characteristic) {
+                $newCharacteristic = new DatasetCharacteristic();
+                $newCharacteristic->id_dataset = $dataset->id;
+                $newCharacteristic->id_characteristic = $characteristic;
+                $newCharacteristic->save();
             }
 
-            foreach (str_split($request->associatedTasks) as $associatedTasks) {
-                if ($associatedTasks != ',') {
-                    $newAssociatedTasks = new DatasetAssociatedTask();
-                    $newAssociatedTasks->id_dataset = $dataset->id;
-                    $newAssociatedTasks->id_associated_task = $associatedTasks;
-                    $newAssociatedTasks->save();
-                }
+            foreach ($request->associatedTasks as $associatedTasks) {
+                $newAssociatedTasks = new DatasetAssociatedTask();
+                $newAssociatedTasks->id_dataset = $dataset->id;
+                $newAssociatedTasks->id_associated_task = $associatedTasks;
+                $newAssociatedTasks->save();
             }
 
-            foreach (str_split($request->featureTypes) as $featureType) {
-                if ($featureType != ',') {
-                    $newfeatureType = new DatasetFeatureType();
-                    $newfeatureType->id_dataset = $dataset->id;
-                    $newfeatureType->id_feature_type = $featureType;
-                    $newfeatureType->save();
-                }
+            foreach ($request->featureTypes as $featureType) {
+                $newfeatureType = new DatasetFeatureType();
+                $newfeatureType->id_dataset = $dataset->id;
+                $newfeatureType->id_feature_type = $featureType;
+                $newfeatureType->save();
             }
 
             DB::commit();
 
             return back()->with([
-                'message' => 'Dataset berhasil ditambahkan'
+                'message' => 'Dataset berhasil ditambahkan',
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors([
-                'error' => 'Terjadi kesalahan'
+                // 'error' => 'Terjadi kesalahan'
+                'error' => $th->getMessage(),
             ]);
         }
-    } 
+    }
 }

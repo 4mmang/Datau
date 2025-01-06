@@ -51,7 +51,7 @@
                                                 <label for="" class="form-label"><span
                                                         class="">Abstract</span>
                                                     (Garis besar mengenai dataset) <sup class="text-danger"> </sup></label>
-                                                <textarea name="" id="abstract" cols="30" class="form-control" rows="5"></textarea>
+                                                <textarea name="abstract" id="abstract" cols="30" class="form-control" rows="5"></textarea>
                                                 <div class="invalid-feedback">
                                                     Harap masukkan abstract dataset!
                                                 </div>
@@ -93,7 +93,7 @@
                                                 <div class="form-check d-flex align-items-center">
                                                     <label class="form-check-label"
                                                         for="flexCheckDefault">{{ $characteristic->name_characteristic }}</label>
-                                                    <input class="form-check-input ms-auto characteristic" type="checkbox"
+                                                    <input name="characteristics[]" class="form-check-input ms-auto characteristic" type="checkbox"
                                                         value="{{ $characteristic->id }}" style="border-color: #38527E;">
                                                 </div>
                                             @endforeach
@@ -129,7 +129,7 @@
                                                 <div class="form-check d-flex align-items-center">
                                                     <label class="form-check-label"
                                                         for="flexCheckDefault">{{ $associatedTask->name_associated_task }}</label>
-                                                    <input class="form-check-input ms-auto associatedTasks"
+                                                    <input name="associatedTasks[]" class="form-check-input ms-auto associatedTasks"
                                                         type="checkbox" value="{{ $associatedTask->id }}"
                                                         style="border-color: #38527E;">
                                                 </div>
@@ -147,7 +147,7 @@
                                                 <div class="form-check d-flex align-items-center">
                                                     <label class="form-check-label"
                                                         for="flexCheckDefault">{{ $featureType->name_feature_type }}</label>
-                                                    <input class="form-check-input ms-auto featureTypes" type="checkbox"
+                                                    <input name="featureTypes[]" class="form-check-input ms-auto featureTypes" type="checkbox"
                                                         value="{{ $featureType->id }}" style="border-color: #38527E;">
                                                 </div>
                                             @endforeach

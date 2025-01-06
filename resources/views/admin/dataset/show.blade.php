@@ -33,7 +33,7 @@
                             <p>{{ $dataset->abstract }}</p>
                         </div>
                         <div class="col-md-3 ms-3">
-                            <h4>Dataset Characteristics</h4>
+                            <h4>Karakteristik</h4>
                             <p>
                                 @if ($dataset->characteristics->count() > 0)
                                     @foreach ($dataset->characteristics as $characteristic)
@@ -48,12 +48,12 @@
                             </p>
                         </div>
                         <div class="col-md-3 ms-3">
-                            <h4>Subject Area</h4>
+                            <h4>Bidang Studi</h4>
                             <p>{{ $dataset->subjectArea->name_subject_area ?? '-' }}
                             </p>
                         </div>
                         <div class="col-md-3 ms-3">
-                            <h4>Associated Tasks</h4>
+                            <h4>Tugas Terkait</h4>
                             <p>
                                 @if ($dataset->associatedTask->count() > 0)
                                     @foreach ($dataset->associatedTask as $associated)
@@ -68,7 +68,7 @@
                             </p>
                         </div>
                         <div class="col-md-3 ms-3">
-                            <h4>Feature Type</h4>
+                            <h4>Jenis Fitur</h4>
                             <p>
                                 @if ($dataset->featuresType->count() > 0)
                                     @foreach ($dataset->featuresType as $featureType)
@@ -83,11 +83,11 @@
                             </p>
                         </div>
                         <div class="col-md-3 ms-3">
-                            <h4># Instances</h4>
+                            <h4>Jumlah Baris</h4>
                             <p>{{ $dataset->instances ?? '-' }}</p>
                         </div>
                         <div class="col-md-3 ms-3">
-                            <h4># Features</h4>
+                            <h4>Jumlah Fitur</h4>
                             <p>{{ $dataset->features ?? '-' }}</p>
                         </div>
                     </div>
@@ -100,13 +100,13 @@
             <div class="col-md-12">
                 <div class="card p-4">
                     <div class="card-header">
-                        <p class="fs-2 mt-2" style="color: #38527E">Dataset Information</p>
+                        <p class="fs-2 mt-2" style="color: #38527E">Informasi Dataset</p>
                     </div>
                     <div class="card-body">
                         {!! $dataset->information !!}
                     </div>
                     <div class="card-header">
-                        <p class="fs-2 mt-2" style="color: #38527E">Dataset Files</p>
+                        <p class="fs-2 mt-2" style="color: #38527E">File Dataset</p>
                     </div>
                     <div class="card-body">
                         <p><a href="{{ url('download/' . $id) }}"
@@ -123,15 +123,17 @@
             <div class="col-md-12 mt-3">
                 <div class="card p-4">
                     <div class="card-header mt-2">
-                        <p class="fs-2" style="color: #38527E">Related Papers</p>
+                        <p class="fs-2" style="color: #38527E">Paper Yang Berhubungan</p>
                     </div>
                     <div class="card-body">
-                        @foreach ($papers as $paper)
+                        @forelse ($papers as $paper)
                             <p class="fs-5"><a class="nav-link" target="_blank" href="{{ url('' . $paper->url) }}"
                                     style="color: #38527E">{{ $paper->title }}</a>
                             </p>
                             <p style="margin-top: -17px">{{ $paper->description ?? '-' }}</p>
-                        @endforeach
+                        @empty
+                        <p class="mt-3">Belum ada paper</p>
+                        @endforelse
                     </div>
                 </div>
             </div>
