@@ -4,7 +4,7 @@
         <div class="container p-3">
             <div class="row">
                 <div class="col-lg-5 col-md-6 footer-contact">
-                    <h3><i class="fad fa-database"></i> PUSDATA UNSULBAR</h3>
+                    <h3><i class="fad fa-database"></i> PUSDATA</h3>
                     <p>
                         Pusat Studi Artificial Intelligence<br> Universitas Sulawesi Barat <br><br>
                         <p>
