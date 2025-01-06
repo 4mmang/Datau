@@ -9,7 +9,7 @@
 
                         <div class="col-md-6">
                             <input type="text" class="form-control p-3 rounded-4" autocomplete="off" id="searching"
-                                placeholder="Cari">
+                                placeholder="Masukkan kata kunci">
                             <div class="dropdown mt-2">
                                 <div class="dropdown-menu p-2" id="search-results">
                                     @foreach ($datasets as $dataset)
@@ -46,7 +46,7 @@
                                                 </p>
                                             @endif
                                             <div class="input-group gap-5">
-                                                <a href="" class="nav-link"><i class="bi bi-download me-2"></i>
+                                                <a href="" class="nav-link"><i class="far fa-download me-2"></i>
                                                     @php
                                                         $count = 0;
                                                     @endphp
@@ -60,11 +60,11 @@
                                                     {{ $count }}
                                                 </a>
                                                 <a href="#" class="nav-link"><i
-                                                        class="bi bi-building me-2"></i>{{ $dataset->instances ?? '- ' }}
-                                                    Jumlah baris</a>
-                                                <a href="#" class="nav-link"><i
+                                                        class="far fa-laptop-code me-2"></i>Bidang Studi : {{ $dataset->subjectArea->name_subject_area ?? '- ' }}
+                                                    </a>
+                                                {{-- <a href="#" class="nav-link"><i
                                                         class="bi bi-table me-2"></i>{{ $dataset->features ?? '- ' }}
-                                                    Jumlah fitur</a>
+                                                    Jumlah Fitur</a> --}}
                                             </div>
                                         </div>
                                     </div>

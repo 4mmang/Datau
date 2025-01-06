@@ -1,9 +1,13 @@
-#img-dataset {
-            display: none;
-        }
+.text-navy{
+    color: #38527E;
+}
 
-        @media (min-width: 1200px) {
-            #img-dataset {
-                display: block;
-            }
-        } 
+#img-dataset {
+    display: none;
+}
+
+@media (min-width: 1200px) {
+    #img-dataset {
+        display: block;
+    }
+} 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <main id="main">
-        <div class="container p-3" style="margin-top: 9rem">
+        <div class="container p-3" style="margin-top: 8rem">
             <div class="row">
                 <div class="col-md-12">
                     <p class="mb-4 fs-2" style="color: #38527E"><a style="color: #38527E" href="{{ route('dataset.index') }}">
@@ -70,11 +70,11 @@
                                 </p>
                             </div>
                             <div class="col-md-3">
-                                <h4># Jumlah Baris</h4>
+                                <h4>Jumlah Baris</h4>
                                 <p>{{ $dataset->instances ?? '-' }}</p>
                             </div>
                             <div class="col-md-3">
-                                <h4># Jumlah Fitur</h4>
+                                <h4>Jumlah Fitur</h4>
                                 <p>{{ $dataset->features ?? '-' }}</p>
                             </div>
 
@@ -115,26 +115,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            {{-- <div class="row mt-3">
-                <div class="col-md-12">
-                    <div class="card p-4">
-                        <div class="card-header">
-                            <h4 style="color: #38527E"><i class="fal fa-star"></i> Reviews</h4>
-                        </div>
-                        <div class="card-body">
-                        <div class="input-group gap-3 fs-2">
-                            <p class="" style="color: #38527E">5</p>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+            </div> 
         </div>
     </main>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

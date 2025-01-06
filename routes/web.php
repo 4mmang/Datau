@@ -1,24 +1,22 @@
 <?php
 
-use App\Http\Controllers\Admin\ArticleController;
-use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KelolaArtikelController;
 use App\Http\Controllers\Admin\KelolaDatasetController;
-use App\Http\Controllers\Admin\ManageDatasetsController;
 use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ValidasiDatasetController;
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ContributeDatasetController;
+use App\Http\Controllers\PaperController;
 use App\Http\Controllers\DatasetController;
-use App\Http\Controllers\DonationPaperController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginGithubController;
 use App\Http\Controllers\LoginGoogleController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Models\Article;
 use App\Models\Dataset;
@@ -88,7 +86,7 @@ Route::prefix('/dataset')
     });
 
 // sumbang paper
-Route::post('donation/paper', [DonationPaperController::class, 'store'])->middleware(['auth', 'verified'])->name('upload-paper');
+Route::post('donation/paper', [PaperController::class, 'store'])->middleware(['auth', 'verified'])->name('upload-paper');
 
 // admin
 Route::prefix('/admin')
@@ -106,15 +104,12 @@ Route::prefix('/admin')
             Route::put('/validate/dataset/{id}', [ValidasiDatasetController::class, 'valid']);
             Route::post('/invalid/dataset/{id}', [ValidasiDatasetController::class, 'invalid']);
             Route::resource('/user', UserController::class);
-            Route::resource('/artikel', ArtikelController::class);
+            Route::resource('/artikel', KelolaArtikelController::class);
         });
     });
 
 // detail artikel
-Route::get('article/{id}', function ($id) {
-    $article = Article::findOrFail($id);
-    return view('article', compact('article'));
-});
+Route::resource('/artikel', ArtikelController::class);
 
 // reset password
 Route::get('forgot/password', function () {

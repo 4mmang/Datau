@@ -7,7 +7,7 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ArtikelController extends Controller
+class KelolaArtikelController extends Controller
 {
     public function index()
     {

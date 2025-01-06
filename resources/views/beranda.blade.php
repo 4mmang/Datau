@@ -7,16 +7,17 @@
                 <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
                     <h1>Selamat Datang</h1>
-                    <h2 class="fs-5">Platform pengumpulan data Pusat Studi Artificial Intelligence Universitas Sulawesi Barat, di mana setiap
+                    <h2 class="fs-5">Platform pengumpulan data Pusat Studi Artificial Intelligence Universitas Sulawesi
+                        Barat, di mana setiap
                         kontribusi Anda berdampak positif
                         terhadap kemajuan
                         penelitian dan
                         pengembangan teknologi.</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="{{ url('datasets') }}" class="btn-get-started scrollto"><i class="fal fa-search"></i>
+                        <a href="{{ route('dataset.index') }}" class="btn-get-started scrollto"><i class="fal fa-search"></i>
                             Temukan
                             Dataset</a>
-                        <a href="{{ url('donation') }}" class="btn-get-started scrollto ms-3"><i
+                        <a href="{{ route('dataset.create') }}" class="btn-get-started scrollto ms-3"><i
                                 class="fal fa-database"></i> Sumbang Dataset</a>
                     </div>
                 </div>
@@ -76,10 +77,10 @@
                                         </a>
                                         <a href="#" class="nav-link"><i
                                                 class="bi bi-building me-2"></i>{{ optional($popularDataset)->instances }}
-                                            Instances</a>
+                                            Jumlah Baris</a>
                                         <a href="#" class="nav-link"><i
                                                 class="bi bi-table me-2"></i>{{ optional($popularDataset)->features }}
-                                            Features</a>
+                                            Jumlah Fitur</a>
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +94,7 @@
                     @foreach ($newArticles as $article)
                         <div class="col-md-4 mb-3">
                             <div class="card shadow">
-                                <a href="{{ url('article/' . $article->id) }}" target="_blank"
+                                <a href="{{ route('artikel.show' , $article->id) }}" target="_blank"
                                     style="text-decoration: none; color: #333;">
                                     <div class="d-flex justify-content-center align-items-center">
                                         <img src="{{ asset('storage/' . $article->cover) }}" alt=""
@@ -130,23 +131,33 @@
             data: {
                 labels: subjectAreas,
                 datasets: [{
-                    label: 'Jumlah Data',
+                    label: 'Total Data',
                     data: data,
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
+                        '#ff0000',
+                        '#ffa500',
+                        '#ffff00',
+                        '#00ff00',
+                        '#0000ff',
+                        '#800080',
+                        '#ff00ff',
+                        '#800000',
+                        '#808000',
+                        '#00ffff',
+                        '#000080'
                     ],
                     borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
+                        '#ff0000',
+                        '#ffa500',
+                        '#ffff00',
+                        '#00ff00',
+                        '#0000ff',
+                        '#800080',
+                        '#ff00ff',
+                        '#800000',
+                        '#808000',
+                        '#00ffff',
+                        '#000080'
                     ],
                     borderWidth: 1
                 }]
@@ -155,7 +166,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Statistik Jumlah Dataset'
+                        text: 'Statistik Total Dataset Berdasarkan Bidang Studi'
                     },
                 },
                 scales: {

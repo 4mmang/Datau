@@ -9,7 +9,6 @@ use App\Models\DatasetAssociatedTask;
 use App\Models\DatasetCharacteristic;
 use App\Models\DatasetFeatureType;
 use App\Models\FeatureType;
-use App\Models\Paper;
 use App\Models\SubjectArea;
 use App\Models\UrlFile;
 use Illuminate\Http\Request;

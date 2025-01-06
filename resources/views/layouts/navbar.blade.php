@@ -14,17 +14,21 @@
                         <li><a href="{{ route('dataset.create') }}" class="{{ Request::is('dataset/create') ? 'text-primary' : '' }}">Sumbang Dataset</a></li>
                     </ul>
                 </li>
+                <li><a class="nav-link {{ Request::is('artikel*') ? 'active' : '' }}" href="{{ url('/artikel') }}">Artikel</a>
+                </li>
                 <li><a class="nav-link {{ Request::is('tentang-kami') ? 'active' : '' }}"
                         href="{{ route('tentang-kami') }}">Tentang Kami</a></li>
+
                 @auth
                     <li class="dropdown"><a href="#"><span>{{ Auth::user()->full_name }}</span><i
                                 class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                            <li><a href="{{ url('logout') }}">Keluar</a></li>
+                            <li><a href="{{ route('logout') }}">Keluar</a></li>
                         </ul>
                     </li>
                 @endauth
+                
                 <li>
                     @guest
                         <a href="{{ url('login') }}"

@@ -5,7 +5,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="text-center">
-                            <h1 class="fw-bold mb-4" style="color: #38527E"><i class="fad fa-database"></i> Form Upload Dataset
+                            <h1 class="text-navy mb-4"><i class="fad fa-database"></i> Form Upload Dataset
                             </h1>
                             <h5 style="color: gray">Kami menawarkan kepada pengguna opsi untuk mengupload dataset mereka ke
                                 repositori kami.</h5>
@@ -18,7 +18,7 @@
                         <div class="col-md-6">
                             <div class="row justify-content-center mt-5">
                                 <div class="col-md-12">
-                                    <p class="card-title fs-5 mb-2 text-start" style="color: #38527E; ">Info Dasar</p>
+                                    <p class="card-title fs-5 mb-2 text-start text-navy">Info Dasar</p>
                                     <div class="card p-4 rounded-3">
                                         <div class="card-body">
                                             <div class="mb-3 position-relative">
@@ -75,7 +75,7 @@
                                     </div>
                                 </div> 
                                 <div class="col-md-12">
-                                    <p class="card-title fs-5 mt-4 mb-1 text-start" style="color: #38527E;">
+                                    <p class="card-title fs-5 mt-4 mb-1 text-start text-navy">
                                         Deskripsi Dataset</p>
                                     <textarea name="information" id="information" cols="30" class="form-control" rows="10"></textarea>
                                 </div>
@@ -85,7 +85,7 @@
                         <div class="col-md-6">
                             <div class="row justify-content-center mt-5">
                                 <div class="col-md-12">
-                                    <p class="card-title fs-5 text-start mb-2" style="color: #38527E;">Karakteristik
+                                    <p class="card-title fs-5 text-start mb-2 text-navy">Karakteristik
                                         Dataset</p>
                                     <div class="card p-1 rounded-3">
                                         <div class="card-body" id="characteristics">
@@ -103,7 +103,7 @@
                             </div>
                             <div class="row justify-content-center mt-3">
                                 <div class="col-md-12">
-                                    <p class="card-title fs-5 text-start mb-2" style="color: #38527E;">Bidang Studi</p>
+                                    <p class="card-title fs-5 text-start mb-2 text-navy">Bidang Studi</p>
                                     <div class="card p-1 rounded-3">
                                         <div class="card-body" id="subjectArea">
                                             @foreach ($subjectAreas as $subjectArea)
@@ -121,7 +121,7 @@
                             </div>
                             <div class="row justify-content-center mt-3">
                                 <div class="col-md-12">
-                                    <p class="card-title fs-5 text-start mb-2" style="color: #38527E;">Tugas Terkait
+                                    <p class="card-title fs-5 text-start mb-2 text-navy">Tugas Terkait
                                     </p>
                                     <div class="card p-1 rounded-3">
                                         <div class="card-body" id="associatedTasks">
@@ -140,7 +140,7 @@
                             </div>
                             <div class="row justify-content-center mt-3">
                                 <div class="col-md-12">
-                                    <p class="card-title fs-5 text-start mb-2" style="color: #38527E;">Jenis Fitur</p>
+                                    <p class="card-title fs-5 text-start mb-2 text-navy">Jenis Fitur</p>
                                     <div class="card p-1 rounded-3">
                                         <div class="card-body" id="featureTypes">
                                             @foreach ($featureTypes as $featureType)
