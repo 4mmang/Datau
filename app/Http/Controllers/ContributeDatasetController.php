@@ -64,25 +64,31 @@ class ContributeDatasetController extends Controller
                 $urlFiles->save();
             }
 
-            foreach ($request->characteristics as $characteristic) {
-                $newCharacteristic = new DatasetCharacteristic();
-                $newCharacteristic->id_dataset = $dataset->id;
-                $newCharacteristic->id_characteristic = $characteristic;
-                $newCharacteristic->save();
+            if ($request->characteristics) {
+                foreach ($request->characteristics as $characteristic) {
+                    $newCharacteristic = new DatasetCharacteristic();
+                    $newCharacteristic->id_dataset = $dataset->id;
+                    $newCharacteristic->id_characteristic = $characteristic;
+                    $newCharacteristic->save();
+                }
             }
 
-            foreach ($request->associatedTasks as $associatedTasks) {
-                $newAssociatedTasks = new DatasetAssociatedTask();
-                $newAssociatedTasks->id_dataset = $dataset->id;
-                $newAssociatedTasks->id_associated_task = $associatedTasks;
-                $newAssociatedTasks->save();
+            if ($request->associatedTasks) {
+                foreach ($request->associatedTasks as $associatedTasks) {
+                    $newAssociatedTasks = new DatasetAssociatedTask();
+                    $newAssociatedTasks->id_dataset = $dataset->id;
+                    $newAssociatedTasks->id_associated_task = $associatedTasks;
+                    $newAssociatedTasks->save();
+                }
             }
 
-            foreach ($request->featureTypes as $featureType) {
-                $newfeatureType = new DatasetFeatureType();
-                $newfeatureType->id_dataset = $dataset->id;
-                $newfeatureType->id_feature_type = $featureType;
-                $newfeatureType->save();
+            if ($request->featureTypes) {
+                foreach ($request->featureTypes as $featureType) {
+                    $newfeatureType = new DatasetFeatureType();
+                    $newfeatureType->id_dataset = $dataset->id;
+                    $newfeatureType->id_feature_type = $featureType;
+                    $newfeatureType->save();
+                }
             }
 
             DB::commit();
