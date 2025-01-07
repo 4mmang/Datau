@@ -188,7 +188,7 @@ class KelolaDatasetController extends Controller
     public function create()
     {
         $user = Auth::user();
-        if ($user->status != 'on' && $user->role  != 'admin') {
+        if ($user->status != 'on' && $user->role != 'admin') {
             return view('info.akun-off');
         }
         $myDataset = Dataset::where('id_user', Auth::user()->id)
@@ -298,6 +298,24 @@ class KelolaDatasetController extends Controller
                     $newfeatureType->id_dataset = $id;
                     $newfeatureType->id_feature_type = $featureType;
                     $newfeatureType->save();
+                }
+            }
+
+            if ($request->file('file')) {
+                if ($request->status === 'timpa') {
+                    $urlFiles = UrlFile::where('id_dataset', $id)->get();
+                    foreach ($urlFiles as $urlFile) {
+                        Storage::delete('public/' . $urlFile->url_file);
+                        $urlFile->delete();
+                    }
+                }
+
+                foreach ($request->file('file') as $file) {
+                    $urlFiles = new UrlFile();
+                    $urlFiles->id_dataset = $dataset->id;
+                    $path = $file->storeAs('public/datasets/' . $dataset->id, $file->getClientOriginalName());
+                    $urlFiles->url_file = str_replace('public/', '', $path);
+                    $urlFiles->save();
                 }
             }
 

@@ -7,7 +7,7 @@
             <p class="fs-2 mb-0" style="color: #38527E">Edit Dataset</p>
         </div>
 
-        <form action="{{ route('admin.dataset.update', $id) }}" method="post" id="form-update">
+        <form action="{{ route('admin.dataset.update', $id) }}" method="post" id="form-update" enctype="multipart/form-data">
             @csrf
             @method('put')
             <!-- Content Row -->
@@ -21,11 +21,22 @@
                         <label for="name">Nama Dataset <sup class="text-danger">*</sup></label>
                         <input type="text" name="name" id="name" value="{{ $dataset->name }}"
                             class="form-control">
+
+                        <label for="file" class="mt-3">File Dataset</label>
+                        <input type="file" value="{{ old('file') }}" multiple
+                            class="@error('file') is-invalid @enderror" id="file[]" name="file[]">
+                        <div class="custom-control custom-checkbox mt-2">
+                            <input type="checkbox" name="status" value="timpa" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Centang jika semua file sebelumnya ingin ditimpa</label>
+                        </div>
+
                         <label for="name" class="mt-3">Abstract (Garis besar mengenai dataset)</label>
                         <textarea name="abstract" id="abstract" class="form-control" cols="30" rows="5">{{ $dataset->abstract }}</textarea>
+
                         <label for="instances" class="mt-3">Jumlah Baris dalam Dataset</label>
                         <input type="number" name="instances" id="instances" value="{{ $dataset->instances }}"
                             class="form-control">
+
                         <label for="features" class="mt-3">Jumlah Fitur dalam Dataset</label>
                         <input type="number" name="features" id="features" value="{{ $dataset->features }}"
                             class="form-control">
