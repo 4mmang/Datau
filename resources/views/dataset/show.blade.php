@@ -20,7 +20,7 @@
                             </div>
                             <div class="col-md-12">
                                 <a href="{{ url('download/' . $id) }}" class="btn btn-sm mb-3 text-white p-2 ps-3 pe-3"
-                                    style="background-color: #38527E"><i class="bi bi-download me-1"></i> Download</a>
+                                    style="background-color: #38527E"><i class="fal fa-download me-1"></i> Download</a>
                                 <p>{{ $dataset->abstract }}</p>
                             </div>
                             <div class="col-md-3">
@@ -101,11 +101,13 @@
                             <p class="fs-2 mt-2" style="color: #38527E">Paper Yang Berhubungan</p>
                         </div>
                         <div class="card-body">
-                            @foreach ($papers as $paper)
+                            @forelse ($papers as $paper)
                                 <p class="fs-5"><a target="_blank" href="{{ url('' . $paper->url) }}"
                                         style="color: #38527E">{{ $paper->title }}</a></p>
                                 <p style="margin-top: -17px">{{ $paper->description ?? '-' }}</p>
-                            @endforeach
+                                @empty
+                                <p style="margin-bottom: -15px">Belum ada paper</p>
+                            @endforelse
                         </div>
                         <div class="card-body">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"

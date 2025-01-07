@@ -18,7 +18,7 @@
                             Temukan
                             Dataset</a>
                         <a href="{{ route('dataset.create') }}" class="btn-get-started scrollto ms-3"><i
-                                class="fal fa-database"></i> Sumbang Dataset</a>
+                                class="fal fa-upload"></i> Upload Dataset</a>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img mt-4 mb-3" data-aos="zoom-in" data-aos-delay="200">
@@ -72,7 +72,7 @@
                                     <p>{{ Str::limit(optional($popularDataset)->abstract, 40, '...') }}
                                     </p>
                                     <div class="input-group gap-5">
-                                        <a href="" class="nav-link"><i class="bi bi-download me-2"></i>
+                                        <a href="" class="nav-link"><i class="fal fa-download me-2"></i>
                                             {{ $count }}
                                         </a>
                                         <a href="#" class="nav-link"><i class="far fa-laptop-code me-2"></i>Bidang Studi : {{

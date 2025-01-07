@@ -11,7 +11,7 @@
                 <li class="dropdown"><a class="{{ Request::is('dataset*') ? 'active' : '' }}" href="#"><span>Pusat Data</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="{{ route('dataset.index') }}" class="{{ Request::is('dataset') ? 'text-primary' : '' }}">Temukan Dataset</a></li>
-                        <li><a href="{{ route('dataset.create') }}" class="{{ Request::is('dataset/create') ? 'text-primary' : '' }}">Sumbang Dataset</a></li>
+                        <li><a href="{{ route('dataset.create') }}" class="{{ Request::is('dataset/create') ? 'text-primary' : '' }}">Upload Dataset</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-link {{ Request::is('artikel*') ? 'active' : '' }}" href="{{ url('/artikel') }}">Artikel</a>

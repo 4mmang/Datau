@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 @empty
-                <p>Belum ada artikel yang tersedia...</p>
+                <p class="text-center">Belum ada artikel yang tersedia...</p>
                 @endforelse
             </div>
         </div>

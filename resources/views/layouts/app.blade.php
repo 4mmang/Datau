@@ -29,7 +29,9 @@
     <link href="{{ asset('/') }}assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
     <link href="{{ asset('/') }}assets/css/style.css" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
 
     <link rel="stylesheet"

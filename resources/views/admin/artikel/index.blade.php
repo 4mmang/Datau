@@ -7,7 +7,7 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <p class="fs-2 mb-0" style="color: #38527E">Kelola Artikel</p>
             <a href="{{ route('admin.artikel.create') }}" style="background-color: #38527E" class="btn mt-3 text-white"><i
-                    class="fas fa-plus"></i> Buat Artikel</a>
+                    class="fal fa-plus"></i> Buat Artikel</a>
         </div>
 
         <!-- Content Row -->
@@ -34,10 +34,10 @@
                                                 @csrf
                                                 @method('delete')
                                                 <a href="{{ route('admin.artikel.edit', $article->id) }}"
-                                                    class="btn btn-warning btn-sm mb-1"><i class="fas fa-pen"></i></a>
+                                                    class="btn btn-warning btn-sm mb-1"><i class="fal fa-pen"></i></a>
                                                 <button type="submit" onclick="disableDeleteButton({{ $article->id }})"
                                                     class="ml-1 btn btn-sm btn-danger mb-1 text-center"><i
-                                                        class="fas fa-trash"></i></button>
+                                                        class="fal fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>

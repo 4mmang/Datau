@@ -46,7 +46,7 @@
                                                 </p>
                                             @endif
                                             <div class="input-group gap-5">
-                                                <a href="" class="nav-link"><i class="far fa-download me-2"></i>
+                                                <a href="" class="nav-link"><i class="fal fa-download me-2"></i>
                                                     @php
                                                         $count = 0;
                                                     @endphp
@@ -168,7 +168,7 @@
                                                 <p>${element.abstract && element.abstract.length > 100 ? element.abstract.substring(0, 100) + '...' : element.abstract || ''}
                                                 </p>
                                                 <div class="input-group gap-5">
-                                                    <a href="" class="nav-link"><i class="bi bi-download me-2"></i>
+                                                    <a href="" class="nav-link"><i class="fal fa-download me-2"></i>
                                                         ${count}
                                                     </a>
                                                     <a href="#" class="nav-link"><i class="far fa-laptop-code me-2"></i>Bidang Studi : ${element.subject_area.name_subject_area}

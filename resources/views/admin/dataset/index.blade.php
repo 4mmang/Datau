@@ -6,6 +6,8 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <p class="fs-2 mb-0" style="color: #38527E">Kelola Dataset</p>
+            <a href="{{ route('admin.dataset.create') }}" style="background-color: #38527E" class="btn mt-3 text-white"><i
+                    class="fal fa-upload"></i> Upload Dataset</a>
         </div>
 
         <!-- Content Row -->
@@ -43,14 +45,14 @@
                                         <td class="align-middle">
                                             <a href="{{ route('admin.dataset.show', $dataset->id) }}"
                                                 class="ml-1 btn btn-primary btn-sm mb-1 text-center" style="width: 1cm"><i
-                                                class="fas fa-eye"></i></a>
+                                                class="fal fa-eye"></i></a>
                                                 @if (Auth::user()->role === 'admin' || $dataset->status != 'pending' && Auth::user()->status ==='on')
                                                 <a href="{{ route('admin.dataset.edit', $dataset->id) }}"
                                                     class="ml-1 btn btn-warning btn-sm mb-1 text-center" style="width: 1cm"><i
-                                                        class="fas fa-pen"></i></a>
+                                                        class="fal fa-pen"></i></a>
                                             <a href="#" onclick="deleteDataset({{ $dataset->id }})"
                                                 class="ml-1 btn btn-sm btn-danger mb-1 text-center" style="width: 1cm"><i
-                                                    class="fas fa-trash"></i></a>
+                                                    class="fal fa-trash"></i></a>
                                                 @endif
                                         </td>
                                     </tr>

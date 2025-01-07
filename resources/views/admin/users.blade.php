@@ -48,7 +48,7 @@
                                             </form>
                                             <a href="#" onclick="deleteUser({{ $user->id }})"
                                                 class="ml-1 btn btn-sm btn-danger mb-1 text-center" style="width: 1cm"><i
-                                                    class="fas fa-trash"></i></a>
+                                                    class="fal fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -59,16 +59,7 @@
             </div>
         </div>
     </div>
-    <!-- /.container-fluid -->
-    @if (session('message'))
-        <script>
-            Swal.fire({
-                title: "Berhasil",
-                text: "{{ session('message') }}",
-                icon: "success"
-            });
-        </script>
-    @endif
+    <!-- /.container-fluid --> 
 @endsection
 @section('scripts') 
     <script>
