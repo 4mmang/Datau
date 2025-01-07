@@ -46,7 +46,7 @@
                                             <a href="{{ route('admin.dataset.show', $dataset->id) }}"
                                                 class="ml-1 btn btn-primary btn-sm mb-1 text-center" style="width: 1cm"><i
                                                 class="fal fa-eye"></i></a>
-                                                @if (Auth::user()->role === 'admin' || $dataset->status != 'pending' && Auth::user()->status ==='on')
+                                                @if (Auth::user()->role === 'admin' || $status < 1 && Auth::user()->status ==='on')
                                                 <a href="{{ route('admin.dataset.edit', $dataset->id) }}"
                                                     class="ml-1 btn btn-warning btn-sm mb-1 text-center" style="width: 1cm"><i
                                                         class="fal fa-pen"></i></a>

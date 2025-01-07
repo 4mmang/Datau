@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card p-4">
-                    Dataset yang Anda upload sedang diproses, Anda dapat menyumbangkan dataset baru setelah dataset
+                    Dataset yang Anda upload sedang diproses, Anda dapat mengupload dataset baru setelah dataset
                     yang Anda upload
                     sebelumnya
                     telah disetujui.

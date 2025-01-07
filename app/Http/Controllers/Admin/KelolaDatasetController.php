@@ -24,11 +24,12 @@ class KelolaDatasetController extends Controller
     public function index()
     {
         $datasets = Dataset::all();
+        $status = Dataset::where('status', 'pending')->count();
         $user = Auth::user();
         if ($user->role != 'admin') {
             $datasets = Dataset::where('id_user', $user->id)->get();
         }
-        return view('admin.dataset.index', compact(['datasets']));
+        return view('admin.dataset.index', compact(['datasets', 'status']));
     }
 
     public function show($id)
@@ -47,6 +48,77 @@ class KelolaDatasetController extends Controller
         $files = Storage::files($folderPath);
 
         return view('admin.dataset.show', compact(['dataset', 'papers', 'id', 'files']));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'file' => 'required',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $dataset = new Dataset();
+            $dataset->id_user = Auth::user()->id;
+            $dataset->id_subject_area = $request->subjectArea ?? 11;
+            $dataset->name = $request->name;
+            $dataset->abstract = $request->abstract;
+            $dataset->instances = $request->instances;
+            $dataset->features = $request->features;
+            $dataset->information = $request->information;
+            if (Auth::user()->role === 'admin') {
+                $dataset->status = 'valid';
+            }
+            $dataset->save();
+
+            foreach ($request->file('file') as $file) {
+                $urlFiles = new UrlFile();
+                $urlFiles->id_dataset = $dataset->id;
+                $path = $file->storeAs('public/datasets/' . $dataset->id, $file->getClientOriginalName());
+                $urlFiles->url_file = str_replace('public/', '', $path);
+                $urlFiles->save();
+            }
+
+            if ($request->characteristics) {
+                foreach ($request->characteristics as $characteristic) {
+                    $newCharacteristic = new DatasetCharacteristic();
+                    $newCharacteristic->id_dataset = $dataset->id;
+                    $newCharacteristic->id_characteristic = $characteristic;
+                    $newCharacteristic->save();
+                }
+            }
+
+            if ($request->associatedTasks) {
+                foreach ($request->associatedTasks as $associatedTasks) {
+                    $newAssociatedTasks = new DatasetAssociatedTask();
+                    $newAssociatedTasks->id_dataset = $dataset->id;
+                    $newAssociatedTasks->id_associated_task = $associatedTasks;
+                    $newAssociatedTasks->save();
+                }
+            }
+
+            if ($request->featureTypes) {
+                foreach ($request->featureTypes as $featureType) {
+                    $newfeatureType = new DatasetFeatureType();
+                    $newfeatureType->id_dataset = $dataset->id;
+                    $newfeatureType->id_feature_type = $featureType;
+                    $newfeatureType->save();
+                }
+            }
+
+            DB::commit();
+
+            return back()->with([
+                'message' => 'Dataset berhasil ditambahkan',
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->withErrors([
+                // 'error' => 'Terjadi kesalahan'
+                'error' => $th->getMessage(),
+            ]);
+        }
     }
 
     public function destroy($id)
@@ -113,10 +185,37 @@ class KelolaDatasetController extends Controller
         }
     }
 
+    public function create()
+    {
+        $user = Auth::user();
+        if ($user->status != 'on' && $user->role  != 'admin') {
+            return view('info.akun-off');
+        }
+        $myDataset = Dataset::where('id_user', Auth::user()->id)
+            ->where('status', 'pending')
+            ->first();
+
+        if (optional($myDataset)->count() > 0 && $user->role != 'admin') {
+            return view('info.pending-dataset');
+        }
+        $characteristics = Characteristic::all();
+        $subjectAreas = SubjectArea::all();
+        $associatedTasks = AssociatedTask::all();
+        $featureTypes = FeatureType::all();
+        return view('admin.dataset.create', compact(['characteristics', 'subjectAreas', 'associatedTasks', 'featureTypes']));
+    }
+
     public function edit($id)
     {
         $user = Auth::user();
-        if ($user->status === 'off') {
+        $dataset = Dataset::findOrFail($id);
+        if ($user->role != 'admin') {
+            $dataset = Dataset::where('id', $id)
+                ->where('id_user', $user->id)
+                ->firstOrFail();
+        }
+        $status = Dataset::where('status', 'pending')->count();
+        if ($user->status === 'off' || ($status > 0 && $user->role != 'admin')) {
             return redirect()->route('admin.dataset.index');
         }
         $characteristics = Characteristic::all();
@@ -124,12 +223,6 @@ class KelolaDatasetController extends Controller
         $associatedTasks = AssociatedTask::all();
         $featureTypes = FeatureType::all();
 
-        $dataset = Dataset::findOrFail($id);
-        if ($user->role != 'admin') {
-            $dataset = Dataset::where('id', $id)
-                ->where('id_user', $user->id)
-                ->firstOrFail();
-        }
         // $dataset = Dataset::leftJoin('subject_areas', 'subject_areas.id', '=', 'datasets.id_subject_area')->select('datasets.id as id_dataset', 'datasets.*', 'subject_areas.*')->find($id);
         $datasetCharacteristics = DatasetCharacteristic::join('characteristics', 'characteristics.id', '=', 'dataset_characteristics.id_characteristic')->where('id_dataset', $id)->get();
         $datasetFeatureTypes = DatasetFeatureType::join('feature_types', 'feature_types.id', '=', 'dataset_feature_types.id_feature_type')->where('id_dataset', $id)->get();
@@ -151,13 +244,17 @@ class KelolaDatasetController extends Controller
                     ->where('id_user', $user->id)
                     ->firstOrFail();
             }
+
             $dataset->name = $request->name;
             $dataset->abstract = $request->abstract;
             $dataset->instances = $request->instances;
             $dataset->features = $request->features;
             $dataset->id_subject_area = $request->subjectArea;
             $dataset->information = $request->information;
-            $dataset->update();
+            if ($user->role != 'admin') {
+                $dataset->status = 'pending';
+            }
+            $dataset->save();
 
             $oldCharacteristic = DatasetCharacteristic::where('id_dataset', $id)->get();
             if ($oldCharacteristic) {
