@@ -4,16 +4,16 @@
     <section id="hero" class="d-flex align-items-center">
         <div class="container p-3" sty>
             <div class="row">
-                <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+                <div class="col-lg-6 d-flex flex-column justify-content-center pt-5 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
                     <h1>Selamat Datang</h1>
-                    <h2 class="fs-5">Platform pengumpulan data Pusat Studi Artificial Intelligence Universitas Sulawesi
+                    <h2 class="fs-5">Platform pengumpulan Data Research Center Artificial Intelligence Universitas Sulawesi
                         Barat, di mana setiap
                         kontribusi Anda berdampak positif
                         terhadap kemajuan
                         penelitian dan
                         pengembangan teknologi.</h2>
-                    <div class="d-flex justify-content-center justify-content-lg-start">
+                    <div class="d-flex justify-content-start">
                         <a href="{{ route('dataset.index') }}" class="btn-get-started scrollto"><i class="fal fa-search"></i>
                             Temukan
                             Dataset</a>
@@ -21,15 +21,15 @@
                                 class="fal fa-upload"></i> Upload Dataset</a>
                     </div>
                 </div>
-                <div class="col-lg-6 order-1 order-lg-2 hero-img mt-4 mb-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="col-lg-6 order-1 order-lg-2 hero-img mt-4" data-aos="zoom-in" data-aos-delay="200">
                     <div class="row justify-content-center">
-                        <div class="col-md-5 text-center">
-                            <div class="card p-4 animated">
-                                <center>
-                                    <img id="img-welcome" src="{{ asset('assets/img/Universitas_Sulawesi_Barat.jpg') }}"
-                                        class="img-fluid" alt="">
-                                </center>
-                            </div>
+                        <div class="col-md-10">
+                            <center>
+                                <img id="img-welcome" src="{{ asset('assets/img/Logo5.png') }}"
+                                    class="img-fluid animated" alt="">
+                            </center>
+                            {{-- <div class="card animated">
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -105,6 +105,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="mt-3">{{ Str::limit($article->title, 30, '...') }}</h5>
+                                        <p class="mt-3">by: Admin | 10 January 2024</p>
                                         {{-- <p class="small"
                                             style="overflow: hidden; text-overflow: ellipsis; white-space: normal;">
                                             {!! limitHtml($article->description, 100) !!}

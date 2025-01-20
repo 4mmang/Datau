@@ -1809,7 +1809,7 @@ transition: 0.3s;
 
 @media (max-width: 768px) {
   #img-welcome {
-    max-width: 30%;
+    max-width: 50%;
   }
 #footer .footer-bottom {
 padding-top: 20px;

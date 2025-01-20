@@ -57,7 +57,7 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })
-    ->middleware(['auth', 'throttle:6,1'])
+    ->middleware(['auth', 'throttle:1,1'])
     ->name('verification.send');
 
 // login with google
@@ -131,10 +131,6 @@ Route::get('search/dataset/{key}', function ($key) {
         ->get();
     return response()->json($datasets);
 });
-
-// profil admin
-
-
 
 // ganti password
 Route::post('reset-password', [ChangePasswordController::class, 'changePassword'])->middleware('auth');

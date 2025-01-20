@@ -6,12 +6,12 @@
                 <div class="col-lg-5 col-md-6 footer-contact">
                     <h3><i class="fad fa-database"></i> PUSDATA</h3>
                     <p>
-                        Pusat Studi Artificial Intelligence<br> Universitas Sulawesi Barat <br><br>
+                        Research Center Artificial Intelligence<br> Universitas Sulawesi Barat <br><br>
                         <p>
-                             <span class="fw-bold">Telepon</span>: +62822 9076 2799<br>
+                             <span class="fw-bold">Telepon</span>: +6285397638924<br>
                         </p>
                         <p>
-                             <span class="fw-bold">Email</span>: pusatstudiai@gmail.com<br>
+                             <span class="fw-bold">Email</span>: pusatstudiai@unsulbar.ac.id<br>
                         </p>
                     </p>
                 </div>
@@ -21,7 +21,7 @@
                     <ul>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{ route('beranda') }}">Beranda</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{ route('dataset.index') }}">Temukan Dataset</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('dataset.create') }}">Sumbang Dataset</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{ route('dataset.create') }}">Upload Dataset</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{ route('tentang-kami') }}">Tentang Kami</a></li>
                     </ul>
                 </div> 

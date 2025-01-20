@@ -3,7 +3,8 @@
     <section style="margin-top: 6rem">
         <div class="container">
             <div class="row mt-3 justify-content-center">
-                <p class="fs-2 text-navy text-center mb-5">Daftar Artikel</p>
+                <p class="fs-2 text-navy text-center">Daftar Artikel</p>
+                <p class="text-center mb-5">Ayo perluas wawasan dengan banyak membaca!</p>
                 @forelse ($artikel as $art)
                     <div class="col-md-4 mb-3">
                         <div class="card shadow">
@@ -14,6 +15,7 @@
                                 </div>
                                 <div class="card-body">
                                     <h5 class="mt-3">{{ Str::limit($art->title, 30, '...') }}</h5>
+                                    <p class="mt-3">by: Admin | 10 January 2024</p>
                                     {{-- <p class="small" style="overflow: hidden; text-overflow: ellipsis; white-space: normal;">
                                     {!! limitHtml($art->description, 100) !!}
                                 </p> --}}
