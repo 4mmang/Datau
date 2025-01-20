@@ -3,7 +3,7 @@
     <section style="margin-top: 6rem">
         <div class="container">
             <div class="row mt-3 justify-content-center">
-                <p class="fs-2 text-navy text-center">Daftar Artikel</p>
+                <p class="fs-2 text-navy text-center">Artikel</p>
                 <p class="text-center mb-5">Ayo perluas wawasan dengan banyak membaca!</p>
                 @forelse ($artikel as $art)
                     <div class="col-md-4 mb-3">

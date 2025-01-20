@@ -95,7 +95,7 @@
                 <div class="row mt-3 justify-content-center">
                     <p class="fs-3 text-center mb-5">Mungkin Anda tertarik membaca artikel berikut.</p>
                     @foreach ($newArticles as $article)
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="card shadow">
                                 <a href="{{ route('artikel.show' , $article->id) }}" target="_blank"
                                     style="text-decoration: none; color: #333;">
@@ -104,8 +104,8 @@
                                             class="img-fluid">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="mt-3">{{ Str::limit($article->title, 30, '...') }}</h5>
-                                        <p class="mt-3">by: Admin | 10 January 2024</p>
+                                        <h5 class="mt-2">{{ Str::limit($article->title, 30, '...') }}</h5>
+                                        <p class="mt-3">by: Admin | {{ $article->created_at->format('d F Y') }}</p>
                                         {{-- <p class="small"
                                             style="overflow: hidden; text-overflow: ellipsis; white-space: normal;">
                                             {!! limitHtml($article->description, 100) !!}
