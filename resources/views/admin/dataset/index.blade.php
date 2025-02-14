@@ -6,8 +6,8 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <p class="fs-2 mb-0" style="color: #38527E">Kelola Dataset</p>
-            <a href="{{ route('admin.dataset.create') }}" style="background-color: #38527E" class="btn mt-3 text-white"><i
-                    class="fal fa-upload"></i> Upload Dataset</a>
+            {{-- <a href="{{ route('admin.dataset.create') }}" style="background-color: #38527E" class="btn mt-3 text-white"><i
+                    class="fal fa-upload"></i> Upload Dataset</a> --}}
         </div>
 
         <!-- Content Row -->
@@ -20,7 +20,9 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th class="text-center">Nama Dataset</th>
-                                    <th class="text-center">Creator</th>
+                                    @if (Auth::user()->role == 'admin')
+                                        <th class="text-center">Creator</th>
+                                    @endif
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Catatan</th>
                                     <th class="text-center">Aksi</th>
@@ -31,7 +33,9 @@
                                     <tr>
                                         <td class="align-middle">{{ $loop->iteration }}</td>
                                         <td class="align-middle text-capitalize">{{ $dataset->name }}</td>
-                                        <td class="align-middle">{{ $dataset->user->full_name }}</td>
+                                        @if (Auth::user()->role == 'admin')
+                                            <td class="align-middle">{{ $dataset->user->full_name }}</td>
+                                        @endif
                                         <td class="align-middle"><span
                                                 class="badge bg-info text-white p-1">{{ $dataset->status }}</span>
                                         </td>
@@ -45,15 +49,15 @@
                                         <td class="align-middle">
                                             <a href="{{ route('admin.dataset.show', $dataset->id) }}"
                                                 class="ml-1 btn btn-primary btn-sm mb-1 text-center" style="width: 1cm"><i
-                                                class="fal fa-eye"></i></a>
-                                                @if (Auth::user()->role === 'admin' || $status < 1 && Auth::user()->status ==='on')
+                                                    class="fal fa-eye"></i></a>
+                                            @if (Auth::user()->role === 'admin' || ($status < 1 && Auth::user()->status === 'on'))
                                                 <a href="{{ route('admin.dataset.edit', $dataset->id) }}"
-                                                    class="ml-1 btn btn-warning btn-sm mb-1 text-center" style="width: 1cm"><i
-                                                        class="fal fa-pen"></i></a>
-                                            <a href="#" onclick="deleteDataset({{ $dataset->id }})"
-                                                class="ml-1 btn btn-sm btn-danger mb-1 text-center" style="width: 1cm"><i
-                                                    class="fal fa-trash"></i></a>
-                                                @endif
+                                                    class="ml-1 btn btn-warning btn-sm mb-1 text-center"
+                                                    style="width: 1cm"><i class="fal fa-pen"></i></a>
+                                                <a href="#" onclick="deleteDataset({{ $dataset->id }})"
+                                                    class="ml-1 btn btn-sm btn-danger mb-1 text-center"
+                                                    style="width: 1cm"><i class="fal fa-trash"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -66,7 +70,7 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
-@section('scripts') 
+@section('scripts')
     <script>
         $(document).ready(function() {
             $('#datasets').DataTable();
@@ -74,6 +78,8 @@
     </script>
     <script>
         function deleteDataset(id) {
+            let role = "{{ Auth::user()->role }}"
+            console.log(role);
             Swal.fire({
                 title: "Apakah Anda yakin?",
                 text: "Anda tidak dapat mengembalikannya!",
@@ -116,9 +122,21 @@
                                     class="fas fa-eye text-white fw-bold"></i></a>
                             <a href="#" onclick="deleteDataset(${dataset.id})" class="btn btn-sm btn-danger" style="width: 1cm"><i
                                     class="fas fa-trash text-white fw-bold"></i></a>`;
-                                table.row.add([no, dataset.name, dataset.user.full_name, dataset.status,
-                                    dataset.note, btn
-                                ]);
+                                let rowData = [
+                                    no,
+                                    dataset.name,
+                                    status,
+                                    dataset.note ?? '-',
+                                    btn
+                                ];
+
+                                // Tambahkan kolom "Creator" hanya jika role adalah admin
+                                if (role === 'admin') {
+                                    rowData.splice(2, 0, dataset.user
+                                        .full_name); // Menyisipkan di posisi ke-2
+                                }
+
+                                table.row.add(rowData);
                             });
                             table.draw();
                             Swal.fire({
@@ -132,26 +150,6 @@
                         });
                 }
             });
-        }
-
-        // function confirmReject() {
-        //     Swal.fire({
-        //         title: "Apakah Anda yakin?",
-        //         text: "Anda tidak dapat mengembalikannya!",
-        //         icon: "warning",
-        //         showCancelButton: true,
-        //         confirmButtonColor: "#3085d6",
-        //         cancelButtonColor: "#d33",
-        //         confirmButtonText: "Ya, tolak!"
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             Swal.fire({
-        //                 title: "Dotolak!",
-        //                 text: "Your file has been rejected.",
-        //                 icon: "success"
-        //             });
-        //         }
-        //     });
-        // }
+        } 
     </script>
 @endsection

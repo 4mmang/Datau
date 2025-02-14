@@ -37,9 +37,7 @@ class KelolaDatasetController extends Controller
         $user = Auth::user();
         $dataset = Dataset::with('featuresType.feature', 'characteristics.characteristic', 'associatedTask.associated')->findOrFail($id);
         if ($user->role != 'admin') {
-            $dataset = Dataset::where('id', $id)
-                ->where('id_user', $user->id)
-                ->firstOrFail();
+            $dataset = Dataset::where('id', $id)->where('id_user', $user->id)->firstOrFail();
         }
         $papers = Paper::where('id_dataset', $id)->get();
 
@@ -128,9 +126,7 @@ class KelolaDatasetController extends Controller
             $user = Auth::user();
             $dataset = Dataset::findOrFail($id);
             if ($user->role != 'admin') {
-                $dataset = Dataset::where('id', $id)
-                    ->where('id_user', $user->id)
-                    ->firstOrFail();
+                $dataset = Dataset::where('id', $id)->where('id_user', $user->id)->firstOrFail();
             }
 
             $id = $dataset->id;
@@ -170,6 +166,9 @@ class KelolaDatasetController extends Controller
 
             DB::commit();
             $datasets = Dataset::with('user')->get();
+            if ($user->role != 'admin') {
+                $datasets = Dataset::with('user')->where('id_user', $user->id)->get();
+            }
             // $datasets = Dataset::join('users', 'users.id', '=', 'datasets.id_user')->select('datasets.id', 'name', 'full_name', 'datasets.status', 'note')->get();
             return response()->json([
                 'status' => 200,
@@ -210,9 +209,7 @@ class KelolaDatasetController extends Controller
         $user = Auth::user();
         $dataset = Dataset::findOrFail($id);
         if ($user->role != 'admin') {
-            $dataset = Dataset::where('id', $id)
-                ->where('id_user', $user->id)
-                ->firstOrFail();
+            $dataset = Dataset::where('id', $id)->where('id_user', $user->id)->firstOrFail();
         }
         $status = Dataset::where('status', 'pending')->count();
         if ($user->status === 'off' || ($status > 0 && $user->role != 'admin')) {
@@ -240,9 +237,7 @@ class KelolaDatasetController extends Controller
             }
             $dataset = Dataset::findOrFail($id);
             if ($user->role != 'admin') {
-                $dataset = Dataset::where('id', $id)
-                    ->where('id_user', $user->id)
-                    ->firstOrFail();
+                $dataset = Dataset::where('id', $id)->where('id_user', $user->id)->firstOrFail();
             }
 
             $dataset->name = $request->name;
@@ -320,9 +315,11 @@ class KelolaDatasetController extends Controller
             }
 
             DB::commit();
-            return back()->with([
-                'message' => 'Dataset Anda berhasil diupdate.',
-            ]);
+            return redirect()
+                ->route('admin.dataset.index')
+                ->with([
+                    'message' => 'Dataset Anda berhasil diupdate, silahkan tunggu validasi dari Admin!',
+                ]);
         } catch (\Throwable $th) {
             DB::rollBack();
             dd($th->getMessage());

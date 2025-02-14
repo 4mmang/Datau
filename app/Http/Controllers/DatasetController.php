@@ -9,6 +9,7 @@ use App\Models\DatasetFeatureType;
 use App\Models\Download;
 use App\Models\Paper;
 use App\Models\SubjectArea;
+use Oefenweb\DamerauLevenshtein\DamerauLevenshtein;
 
 class DatasetController extends Controller
 {
