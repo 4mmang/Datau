@@ -4,7 +4,7 @@
     <section id="hero" class="d-flex align-items-center">
         <div class="container p-3" sty>
             <div class="row">
-                <div class="col-lg-6 d-flex flex-column justify-content-center pt-5 pt-lg-0 order-2 order-lg-1"
+                <div class="col-lg-6 d-flex flex-column justify-content-center pt-lg-2 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
                     <h1>Selamat Datang</h1>
                     <h2 class="fs-5">Platform pengumpulan Data Research Center Artificial Intelligence Universitas Sulawesi
@@ -25,7 +25,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-10">
                             <center>
-                                <img id="img-welcome" src="{{ asset('assets/img/Logo5.png') }}"
+                                <img id="img-welcome" src="{{ asset('assets/img/l5.png') }}"
                                     class="img-fluid animated" alt="">
                             </center>
                             {{-- <div class="card animated">
