@@ -113,8 +113,8 @@ class KelolaDatasetController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors([
-                // 'error' => 'Terjadi kesalahan'
-                'error' => $th->getMessage(),
+                'error' => 'Terjadi kesalahan',
+                // 'error' => $th->getMessage(),
             ]);
         }
     }
@@ -314,11 +314,17 @@ class KelolaDatasetController extends Controller
                 }
             }
 
+            $message = 'Dataset berhasil diupdate';
+            if ($user->role != 'admin') {
+                $message = 'Dataset Anda berhasil diupdate, silahkan tunggu validasi dari Admin!';
+            }
+
             DB::commit();
+
             return redirect()
                 ->route('admin.dataset.index')
                 ->with([
-                    'message' => 'Dataset Anda berhasil diupdate, silahkan tunggu validasi dari Admin!',
+                    'message' => $message,
                 ]);
         } catch (\Throwable $th) {
             DB::rollBack();

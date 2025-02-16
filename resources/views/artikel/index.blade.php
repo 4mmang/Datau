@@ -6,7 +6,7 @@
                 <p class="fs-2 text-navy text-center">Artikel</p>
                 <p class="text-center mb-5">Ayo perluas wawasan dengan banyak membaca!</p>
                 @forelse ($artikel as $art)
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3">
                         <div class="card shadow">
                             <a href="{{ route('artikel.show' , $art->id) }}" target="_blank"
                                 style="text-decoration: none; color: #333;">

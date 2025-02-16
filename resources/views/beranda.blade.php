@@ -4,8 +4,8 @@
     <section id="hero" class="d-flex align-items-center">
         <div class="container p-3" sty>
             <div class="row">
-                <div class="col-lg-6 d-flex flex-column justify-content-center pt-lg-2 order-2 order-lg-1"
-                    data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-6 d-flex flex-column justify-content-center pt-lg-2 order-2 order-lg-1" data-aos="fade-up"
+                    data-aos-delay="200">
                     <h1>Selamat Datang</h1>
                     <h2 class="fs-5">Platform pengumpulan Data Research Center Artificial Intelligence Universitas Sulawesi
                         Barat, di mana setiap
@@ -14,19 +14,19 @@
                         penelitian dan
                         pengembangan teknologi.</h2>
                     <div class="d-flex justify-content-start">
-                        <a href="{{ route('dataset.index') }}" class="btn-get-started scrollto"><i class="fal fa-search"></i>
+                        <a href="{{ route('dataset.index') }}" class="btn-get-started"><i class="fal fa-search"></i>
                             Temukan
                             Dataset</a>
-                        <a href="{{ route('dataset.create') }}" class="btn-get-started scrollto ms-3"><i
-                                class="fal fa-upload"></i> Upload Dataset</a>
+                        <a href="{{ route('dataset.create') }}" class="btn-get-started ms-3"><i class="fal fa-upload"></i>
+                            Upload Dataset</a>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img mt-4" data-aos="zoom-in" data-aos-delay="200">
                     <div class="row justify-content-center">
                         <div class="col-md-10">
                             <center>
-                                <img id="img-welcome" src="{{ asset('assets/img/l5.png') }}"
-                                    class="img-fluid animated" alt="">
+                                <img id="img-welcome" src="{{ asset('assets/img/l5.png') }}" class="img-fluid animated"
+                                    alt="">
                             </center>
                             {{-- <div class="card animated">
                             </div> --}}
@@ -75,8 +75,8 @@
                                         <a href="" class="nav-link"><i class="fal fa-download me-2"></i>
                                             {{ $count }}
                                         </a>
-                                        <a href="#" class="nav-link"><i class="far fa-laptop-code me-2"></i>Bidang Studi : {{
-                                            $popularDataset->subjectArea->name_subject_area }}
+                                        <a href="#" class="nav-link"><i class="far fa-laptop-code me-2"></i>Bidang
+                                            Studi : {{ $popularDataset->subjectArea->name_subject_area }}
                                         </a>
                                         {{-- <a href="#" class="nav-link"><i
                                                 class="bi bi-building me-2"></i>{{ optional($popularDataset)->instances }}
@@ -97,7 +97,7 @@
                     @foreach ($newArticles as $article)
                         <div class="col-md-3 mb-3">
                             <div class="card shadow">
-                                <a href="{{ route('artikel.show' , $article->id) }}" target="_blank"
+                                <a href="{{ route('artikel.show', $article->id) }}" target="_blank"
                                     style="text-decoration: none; color: #333;">
                                     <div class="d-flex justify-content-center align-items-center">
                                         <img src="{{ asset('storage/' . $article->cover) }}" alt=""
@@ -170,8 +170,11 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Statistik Total Dataset Berdasarkan Bidang Studi'
+                        text: 'Statistik Jumlah Dataset Berdasarkan Bidang Studi'
                     },
+                    legend: {
+                        // display: false
+                    }
                 },
                 scales: {
                     y: {
@@ -179,7 +182,7 @@
                         maintainAspectRatio: false,
                         beginAtZero: true,
                         ticks: {
-                            stepSize: 1, // Kenaikan 1 per langkah
+                            // stepSize: 1, // Kenaikan 1 per langkah
                             callback: function(value) {
                                 return Number.isInteger(value) ? value : null; // Hanya tampilkan bilangan bulat
                             }
